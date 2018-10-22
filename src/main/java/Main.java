@@ -9,8 +9,19 @@ public class Main {
         menu.mainMenu();
     }
 
+    public static void rechercheChallenger() {
+        System.out.println("RECHERCHE +/- : CHALLENGER");
+    }
 
-    public static void challenger() {
+    public static void rechercheDefenseur() {
+        System.out.println("RECHERCHE +/- : DÉFENSEUR");
+    }
+
+    public static void rechercheDuel() {
+        System.out.println("RECHERCHE +/- : DUEL");
+    }
+
+    public static void mastermindChallenger() {
 
         Scanner sc = new Scanner(System.in);
 
@@ -19,7 +30,7 @@ public class Main {
         int s;                  // SAISIE UTILISATEUR
         int i = 0;
 
-        System.out.println("Bienvenue dans Mastermind");
+        System.out.println("MASTERMIND : CHALLENGER");
         System.out.println("Trouvez le code secret !");
         System.out.println("Il vous reste " + essais + " essais.");
 
@@ -28,11 +39,12 @@ public class Main {
         System.out.println("TEST GENERATION CODE : " + randomCode());
     }
 
-    public static void defenseur() {
-
+    public static void mastermindDefenseur() {
+        System.out.println("MASTERMIND : DÉFENSEUR");
     }
 
-    public static void duel() {
+    public static void mastermindDuel() {
+        System.out.println("MASTERMIND : DUEL");
 
     }
 
