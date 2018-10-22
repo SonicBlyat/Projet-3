@@ -11,14 +11,14 @@ public class Menu {
         System.out.println("Entrez le numéro correspondant à votre choix");
         System.out.println("-------------------------------");
         System.out.println("1 - Mode challenger");
-        System.out.println("2 - Bientôt disponible");
-        System.out.println("3 - Bientôt disponible");
+        System.out.println("2 - Mode défenseur");
+        System.out.println("3 - Mode duel");
         System.out.println("4 - Quitter l'application");
 
         selection = choix.nextInt();
 
         if (selection == 1) {
-            Main.game();
+            Main.challenger();
         }
 
         if (selection == 2) {

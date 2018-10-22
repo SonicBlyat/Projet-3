@@ -10,7 +10,7 @@ public class Main {
     }
 
 
-    public static void game() {
+    public static void challenger() {
 
         Scanner sc = new Scanner(System.in);
 
@@ -26,6 +26,14 @@ public class Main {
         randomCode();           // GENERATION DU CODE SECRET
         System.out.printf("%n");
         System.out.println("TEST GENERATION CODE : " + randomCode());
+    }
+
+    public static void defenseur() {
+
+    }
+
+    public static void duel() {
+
     }
 
     public static int randomCode() {
