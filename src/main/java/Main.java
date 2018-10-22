@@ -4,7 +4,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        game();
+
+        Menu menu = new Menu();
+        menu.mainMenu();
     }
 
 
@@ -22,8 +24,8 @@ public class Main {
         System.out.println("Il vous reste " + essais + " essais.");
 
         randomCode();           // GENERATION DU CODE SECRET
-        System.out.println(randomCode());
-
+        System.out.printf("%n");
+        System.out.println("TEST GENERATION CODE : " + randomCode());
     }
 
     public static int randomCode() {
