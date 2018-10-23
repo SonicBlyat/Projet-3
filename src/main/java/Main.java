@@ -32,51 +32,47 @@ public class Main {
                 s = sc.nextInt();  // SAISIE UTILISATEUR
                 int chiffre1 = Integer.parseInt(Integer.toString(possibilites[code]).substring(0, 1));  // PREMIER CHIFFRE DU CODE
                 int saisie1 = Integer.parseInt(Integer.toString(s).substring(0, 1));                    // PREMIER CHIFFRE DE LA SAISIE
+                int chiffre2 = Integer.parseInt(Integer.toString(possibilites[code]).substring(1, 2));  // DEUXIEME CHIFFRE DU CODE
+                int saisie2 = Integer.parseInt(Integer.toString(s).substring(1, 2));                    // DEUXIEME CHIFFRE DE LA SAISIE
+                int chiffre3 = Integer.parseInt(Integer.toString(possibilites[code]).substring(2, 3));  // TROISIEME CHIFFRE DU CODE
+                int saisie3 = Integer.parseInt(Integer.toString(s).substring(2, 3));                    // TROISIEME CHIFFRE DE LA SAISIE
+                int chiffre4 = Integer.parseInt(Integer.toString(possibilites[code]).substring(3, 4));  // QUATRIEME CHIFFRE DU CODE
+                int saisie4 = Integer.parseInt(Integer.toString(s).substring(3, 4));                    // QUATRIEME CHIFFRE DE LA SAISIE
                 if (saisie1 == chiffre1) {
                     System.out.println("=");
+                }
                 if (saisie1 < chiffre1) {
                     System.out.println("+");
+                }
                 if (saisie1 > chiffre1) {
                     System.out.println("-");
                 }
-                }
-                }
-
-                int chiffre2 = Integer.parseInt(Integer.toString(possibilites[code]).substring(1, 2));  // DEUXIEME CHIFFRE DU CODE
-                int saisie2 = Integer.parseInt(Integer.toString(s).substring(1, 2));                    // DEUXIEME CHIFFRE DE LA SAISIE
                 if (saisie2 == chiffre2) {
                     System.out.println("=");
+                }
                 if (saisie2 < chiffre2) {
                     System.out.println("+");
+                }
                 if (saisie2 > chiffre2) {
                     System.out.println("-");
                 }
-                }
-                }
-
-                int chiffre3 = Integer.parseInt(Integer.toString(possibilites[code]).substring(2, 3));  // TROISIEME CHIFFRE DU CODE
-                int saisie3 = Integer.parseInt(Integer.toString(s).substring(2, 3));                    // TROISIEME CHIFFRE DE LA SAISIE
                 if (saisie3 == chiffre3) {
                     System.out.println("=");
+                }
                 if (saisie3 < chiffre3) {
                     System.out.println("+");
+                }
                 if (saisie3 > chiffre3) {
                     System.out.println("-");
                 }
-                }
-                }
-
-                int chiffre4 = Integer.parseInt(Integer.toString(possibilites[code]).substring(3, 4));  // QUATRIEME CHIFFRE DU CODE
-                int saisie4 = Integer.parseInt(Integer.toString(s).substring(3, 4));                    // QUATRIEME CHIFFRE DE LA SAISIE
                 if (saisie4 == chiffre4) {
                     System.out.println("=");
+                }
                 if (saisie4 < chiffre4) {
                     System.out.println("+");
+                }
                 if (saisie4 > chiffre4) {
                     System.out.println("-");
-                }
-                }
-
                 }
                 coups++;
                 if (coups == 10) {
@@ -88,7 +84,7 @@ public class Main {
                     System.out.println("3 - Quitter l'application");
                     selection3 = sc.nextInt();
                     if (selection3 == 1) {
-                        rechercheChallenger();
+                        mastermindChallenger();
                     }
                     if (selection3 == 2) {
                         Menu menu = new Menu();
