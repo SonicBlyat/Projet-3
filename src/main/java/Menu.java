@@ -63,11 +63,11 @@ public class Menu {
             }
 
             if (selection2 == 2) {
-                Main.mastermindDefenseur();
+                System.out.println("Ce mode n'est pas encore disponible");
             }
 
             if (selection2 == 3) {
-                Main.mastermindDuel();
+                System.out.println("Ce mode n'est pas encore disponible");
             }
 
             if (selection2 == 4) {
