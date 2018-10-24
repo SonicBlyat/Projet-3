@@ -39,7 +39,7 @@ public class Menu {
             }
 
             if (selection2 == 3) {
-                Main.rechercheDuel();
+                System.out.println("Ce mode n'est pas encore disponible");
             }
 
             if (selection2 == 4) {
@@ -63,7 +63,7 @@ public class Menu {
             }
 
             if (selection2 == 2) {
-                System.out.println("Ce mode n'est pas encore disponible");
+                Main.mastermindDefenseur();
             }
 
             if (selection2 == 3) {
