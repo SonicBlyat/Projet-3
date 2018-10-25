@@ -15,7 +15,6 @@ public class Main {
 
         int coups = 0;        // NOMBRE D'ESSAIS
         int s;                // SAISIE UTILISATEUR
-        int selection3 = 0;   // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL
 
         System.out.println("RECHERCHE +/- : CHALLENGER");
         System.out.println("Trouvez le code secret en 10 coups maximum !");
@@ -77,39 +76,13 @@ public class Main {
                 coups++;
                 if (coups == 10) {
                     System.out.println("Le code secret était " + possibilites[code]);
-                    System.out.printf("%n");
                     System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
-                    System.out.println("1 - Rejouer");
-                    System.out.println("2 - Retour au menu principal");
-                    System.out.println("3 - Quitter l'application");
-                    selection3 = sc.nextInt();
-                    if (selection3 == 1) {
-                        mastermindChallenger();
-                    }
-                    if (selection3 == 2) {
-                        Menu menu = new Menu();
-                        menu.mainMenu();
-                    }
-                    if (selection3 == 3) {
-                        System.exit(0);
-                    }
+                    Menu.endMenuRechercheChallenger();
+
                 }
                 if (saisie1 == chiffre1 && saisie2 == chiffre2 && saisie3 == chiffre3 && saisie4 == chiffre4) {
                     System.out.println("Victoire en seulement " + coups + " coups !");
-                    System.out.println("1 - Rejouer");
-                    System.out.println("2 - Retour au menu principal");
-                    System.out.println("3 - Quitter l'application");
-                    selection3 = sc.nextInt();
-                    if (selection3 == 1) {
-                        rechercheChallenger();
-                    }
-                    if (selection3 == 2) {
-                        Menu menu = new Menu();
-                        menu.mainMenu();
-                    }
-                    if (selection3 == 3) {
-                        System.exit(0);
-                    }
+                    Menu.endMenuRechercheChallenger();
                 }
             }
         } catch (StringIndexOutOfBoundsException e) {
@@ -132,7 +105,6 @@ public class Main {
 
         int coups = 0;        // NOMBRE D'ESSAIS
         int s;                // SAISIE UTILISATEUR
-        int selection3 = 0;   // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL
 
         System.out.println("MASTERMIND : CHALLENGER");
         System.out.println("Trouvez le code secret en 10 coups maximum !");
@@ -182,39 +154,12 @@ public class Main {
                 coups++;
                 if (coups == 10) {
                     System.out.println("Le code secret était " + possibilites[code]);
-                    System.out.printf("%n");
                     System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
-                    System.out.println("1 - Rejouer");
-                    System.out.println("2 - Retour au menu principal");
-                    System.out.println("3 - Quitter l'application");
-                    selection3 = sc.nextInt();
-                    if (selection3 == 1) {
-                        mastermindChallenger();
-                    }
-                    if (selection3 == 2) {
-                        Menu menu = new Menu();
-                        menu.mainMenu();
-                    }
-                    if (selection3 == 3) {
-                        System.exit(0);
-                    }
+                    Menu.endMenuMastermindChallenger();
                 }
                 if (saisie1 == chiffre1 && saisie2 == chiffre2 && saisie3 == chiffre3 && saisie4 == chiffre4) {
                     System.out.println("Victoire en seulement " + coups + " coups !");
-                    System.out.println("1 - Rejouer");
-                    System.out.println("2 - Retour au menu principal");
-                    System.out.println("3 - Quitter l'application");
-                    selection3 = sc.nextInt();
-                    if (selection3 == 1) {
-                        mastermindChallenger();
-                    }
-                    if (selection3 == 2) {
-                        Menu menu = new Menu();
-                        menu.mainMenu();
-                    }
-                    if (selection3 == 3) {
-                        System.exit(0);
-                    }
+                    Menu.endMenuMastermindChallenger();
                 }
             }
         } catch (StringIndexOutOfBoundsException e) {
@@ -229,7 +174,6 @@ public class Main {
 
         int coups = 0;        // NOMBRE D'ESSAIS
         int s;                // SAISIE UTILISATEUR
-        int selection3 = 0;   // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL
 
         System.out.println("MASTERMIND : DEFENSEUR");
         System.out.println("Entrez un code secret pour que l'ordinateur puisse jouer !");
@@ -280,39 +224,12 @@ public class Main {
                 }
                 coups++;
                 if (coups == 10) {
-                    System.out.printf("%n");
                     System.out.println("Victoire, l'ordinateur a utilisé ses 10 coups !");
-                    System.out.println("1 - Rejouer");
-                    System.out.println("2 - Retour au menu principal");
-                    System.out.println("3 - Quitter l'application");
-                    selection3 = sc.nextInt();
-                    if (selection3 == 1) {
-                        mastermindDefenseur();
-                    }
-                    if (selection3 == 2) {
-                        Menu menu = new Menu();
-                        menu.mainMenu();
-                    }
-                    if (selection3 == 3) {
-                        System.exit(0);
-                    }
+                    Menu.endMenuMastermindDefenseur();
                 }
                 if (saisie1 == chiffre1 && saisie2 == chiffre2 && saisie3 == chiffre3 && saisie4 == chiffre4) {
                     System.out.println("Défaite, l'ordinateur a trouvé votre code en " + coups + " coups !");
-                    System.out.println("1 - Rejouer");
-                    System.out.println("2 - Retour au menu principal");
-                    System.out.println("3 - Quitter l'application");
-                    selection3 = sc.nextInt();
-                    if (selection3 == 1) {
-                        mastermindDefenseur();
-                    }
-                    if (selection3 == 2) {
-                        Menu menu = new Menu();
-                        menu.mainMenu();
-                    }
-                    if (selection3 == 3) {
-                        System.exit(0);
-                    }
+                    Menu.endMenuMastermindDefenseur();
                 }
             }
     } catch (StringIndexOutOfBoundsException e) {}

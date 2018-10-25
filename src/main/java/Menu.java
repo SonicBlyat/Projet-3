@@ -81,4 +81,85 @@ public class Menu {
 
         return selection;
     }
+
+    public static void endMenuMastermindChallenger() {
+        Scanner sc = new Scanner(System.in);
+        int selection3 = 0;
+        System.out.printf("%n");
+        System.out.println("1 - Rejouer");
+        System.out.println("2 - Retour au menu principal");
+        System.out.println("3 - Quitter l'application");
+        selection3 = sc.nextInt();
+        if (selection3 == 1) {
+            Main.mastermindChallenger();
+        }
+        if (selection3 == 2) {
+            Menu menu = new Menu();
+            menu.mainMenu();
+        }
+        if (selection3 == 3) {
+            System.exit(0);
+        }
+    }
+
+    public static void endMenuMastermindDefenseur() {
+        Scanner sc = new Scanner(System.in);
+        int selection3 = 0;
+        System.out.printf("%n");
+        System.out.println("1 - Rejouer");
+        System.out.println("2 - Retour au menu principal");
+        System.out.println("3 - Quitter l'application");
+        selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
+        if (selection3 == 1) {
+            Main.mastermindDefenseur();
+        }
+        if (selection3 == 2) {
+            Menu menu = new Menu();
+            menu.mainMenu();
+        }
+        if (selection3 == 3) {
+            System.exit(0);
+        }
+    }
+
+    public static void endMenuRechercheChallenger() {
+        Scanner sc = new Scanner(System.in);
+        int selection3 = 0;
+        System.out.printf("%n");
+        System.out.println("1 - Rejouer");
+        System.out.println("2 - Retour au menu principal");
+        System.out.println("3 - Quitter l'application");
+        selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
+        if (selection3 == 1) {
+            Main.rechercheChallenger();
+        }
+        if (selection3 == 2) {
+            Menu menu = new Menu();
+            menu.mainMenu();
+        }
+        if (selection3 == 3) {
+            System.exit(0);
+        }
+    }
+
+    public static void endMenuRechercheDefenseur() {
+        Scanner sc = new Scanner(System.in);
+        int selection3 = 0;
+        System.out.printf("%n");
+        System.out.println("1 - Rejouer");
+        System.out.println("2 - Retour au menu principal");
+        System.out.println("3 - Quitter l'application");
+        selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
+        if (selection3 == 1) {
+            Main.rechercheDefenseur();
+        }
+        if (selection3 == 2) {
+            Menu menu = new Menu();
+            menu.mainMenu();
+        }
+        if (selection3 == 3) {
+            System.exit(0);
+        }
+
+    }
 }
