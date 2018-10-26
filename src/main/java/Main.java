@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -109,32 +110,27 @@ public class Main {
         Random r = new Random();
 
         int coups = 0;    // NOMBRE D'ESSAIS
-        int s = 0;        // SAISIE UTILISATEUR
 
         // GENERATION DU CODE SECRET
         int[] code = new int[4];
-        code [0] = r.nextInt(4) + 1;
-        code [1] = r.nextInt(4) + 1;
-        code [2] = r.nextInt(4) + 1;
-        code [3] = r.nextInt(4) + 1;
-
-        // TABLEAU SAISIE
-        int[] saisie = new int[5];
+        for (int j = 0; j < code.length; j++) {
+            code[j] = r.nextInt(4) + 1;
+        }
 
         System.out.println("MASTERMIND : CHALLENGER");
         System.out.println("Trouvez le code secret en 10 coups maximum !");
         System.out.println ("Test code : " + code[0] + code[1] + code[2] + code[3]);
         System.out.printf("%n");
 
-        try {
-
             while (coups < 10) {
 
-                if (saisie[0] == code[0]) {
-                    System.out.println(saisie[0]);
-                } else {
-                    System.out.println("X");
+                int[] saisie = new int[4];
+                for (int i = 0; i < saisie.length; i++) {
+                    saisie[i] = sc.nextInt();
                 }
+
+                if (saisie[0] == code[0] && saisie[1] != code[1] && saisie[2] != code[2] && saisie[3] != code[3])
+                    System.out.println(saisie[0] + "X" + "X" + "X");
 
                 if (saisie[1] == code[1]) {
                     System.out.println(saisie[1]);
@@ -165,10 +161,7 @@ public class Main {
                     Menu.endMenuMastermindChallenger();
                 }
             }
-        } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("VOTRE COMBINAISON DOIT FAIRE 4 CHIFFRES MAXIMUM");
-        } catch (InputMismatchException e) { System.out.println("VOTRE COMBINAISON DOIT FAIRE 4 CHIFFRES MAXIMUM"); }
-    }
+        }
 
     public static void mastermindDefenseur() {
 
