@@ -112,7 +112,7 @@ public class Main {
         int s = 0;        // SAISIE UTILISATEUR
 
         // GENERATION DU CODE SECRET
-        int[] code = new int[] {1,2,3,4};
+        int[] code = new int[4];
         code [0] = r.nextInt(4) + 1;
         code [1] = r.nextInt(4) + 1;
         code [2] = r.nextInt(4) + 1;
