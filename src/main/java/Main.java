@@ -110,59 +110,57 @@ public class Main {
 
         int coups = 0;    // NOMBRE D'ESSAIS
         int s = 0;        // SAISIE UTILISATEUR
-        int saisie1, chiffre1, saisie2, chiffre2, saisie3, chiffre3, saisie4, chiffre4;
 
-        int code = r.nextInt((9999 - 1000) + 1) + 1000;  // GENERATION DU CODE SECRET
+        // GENERATION DU CODE SECRET
+        int[] code = new int[] {1,2,3,4};
+        code [0] = r.nextInt(4) + 1;
+        code [1] = r.nextInt(4) + 1;
+        code [2] = r.nextInt(4) + 1;
+        code [3] = r.nextInt(4) + 1;
+
+        // TABLEAU SAISIE
+        int[] saisie = new int[5];
 
         System.out.println("MASTERMIND : CHALLENGER");
         System.out.println("Trouvez le code secret en 10 coups maximum !");
+        System.out.println ("Test code : " + code[0] + code[1] + code[2] + code[3]);
         System.out.printf("%n");
 
         try {
 
             while (coups < 10) {
 
-                s = sc.nextInt();  // SAISIE UTILISATEUR
-
-                saisie1 = Integer.parseInt(Integer.toString(s).substring(0, 1));     // CHIFFRE 1 DE LA SAISIE
-                chiffre1 = Integer.parseInt(Integer.toString(code).substring(0, 1)); // CHIFFRE 2 DE LA SAISIE
-                if (saisie1 == chiffre1) {
-                    System.out.println(saisie1);
+                if (saisie[0] == code[0]) {
+                    System.out.println(saisie[0]);
                 } else {
                     System.out.println("X");
                 }
 
-                saisie2 = Integer.parseInt(Integer.toString(s).substring(1, 2));
-                chiffre2 = Integer.parseInt(Integer.toString(code).substring(1, 2));
-                if (saisie2 == chiffre2) {
-                    System.out.println(saisie2);
+                if (saisie[1] == code[1]) {
+                    System.out.println(saisie[1]);
                 } else {
                     System.out.println("X");
                 }
 
-                saisie3 = Integer.parseInt(Integer.toString(s).substring(2, 3));
-                chiffre3 = Integer.parseInt(Integer.toString(code).substring(2, 3));
-                if (saisie3 == chiffre3) {
-                    System.out.println(saisie3);
+                if (saisie[2] == code[2]) {
+                    System.out.println(saisie[2]);
                 } else {
                     System.out.println("X");
                 }
 
-                saisie4 = Integer.parseInt(Integer.toString(s).substring(3, 4));
-                chiffre4 = Integer.parseInt(Integer.toString(code).substring(3, 4));
-                if (saisie4 == chiffre4) {
-                    System.out.println(saisie4);
+                if (saisie[3] == code[3]) {
+                    System.out.println(saisie[3]);
                 } else {
                     System.out.println("X");
 
                 }
                 coups++;
                 if (coups == 10) {
-                    System.out.println("Le code secret était " + code);
+                    System.out.println("Le code secret était " + code[0] + code[1] + code[2] + code[3]);
                     System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
                     Menu.endMenuMastermindChallenger();
                 }
-                if (saisie1 == chiffre1 && saisie2 == chiffre2 && saisie3 == chiffre3 && saisie4 == chiffre4) {
+                if (saisie[0] == code[0] && saisie[1] == code[1] && saisie[2] == code[2] && saisie[3] == code[3]) {
                     System.out.println("Victoire en seulement " + coups + " coups !");
                     Menu.endMenuMastermindChallenger();
                 }
