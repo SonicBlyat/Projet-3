@@ -110,46 +110,71 @@ public class Main {
         Random r = new Random();
 
         int coups = 0;    // NOMBRE D'ESSAIS
+        int max = 4;      // TAILLE DU TABLEAU
 
         // GENERATION DU CODE SECRET
-        int[] code = new int[4];
-        for (int j = 0; j < code.length; j++) {
+        int[] code = new int[max];
+        for (int j = 0; j < max; j++) {
             code[j] = r.nextInt(4) + 1;
         }
 
         System.out.println("MASTERMIND : CHALLENGER");
         System.out.println("Trouvez le code secret en 10 coups maximum !");
-        System.out.println ("Test code : " + code[0] + code[1] + code[2] + code[3]);
         System.out.printf("%n");
 
             while (coups < 10) {
 
-                int[] saisie = new int[4];
-                for (int i = 0; i < saisie.length; i++) {
+                int[] saisie = new int[max];
+                for (int i = 0; i < max; i++) {   // TANT QUE LA TAILLE MAX DU TABLEAU SAISIE N'EST PAS ATTEINTE
                     saisie[i] = sc.nextInt();
                 }
 
-                if (saisie[0] == code[0] && saisie[1] != code[1] && saisie[2] != code[2] && saisie[3] != code[3])
-                    System.out.println(saisie[0] + "X" + "X" + "X");
-
-                if (saisie[1] == code[1]) {
-                    System.out.println(saisie[1]);
-                } else {
-                    System.out.println("X");
+                if(saisie[0] != code[0] && saisie[1] != code[1] && saisie[2] != code[2] && saisie[3] != code[3]) {
+                    System.out.println("* * * *");
+                }
+                else if(saisie[0] != code[0] && saisie[1] != code[1] && saisie[2] != code[2]) {
+                    System.out.println("* * * " + saisie[3]);
+                }
+                else if(saisie[0] != code[0] && saisie[1] != code[1] && saisie[3] != code[3]) {
+                    System.out.println("* * " + saisie[2] + " *");
+                }
+                else if (saisie[0] != code[0] && saisie[1] != code[1]) {
+                    System.out.println("* * " + saisie[2] + saisie[3]);
+                }
+                else if(saisie[0] != code[0] && saisie[2] != code[2] && saisie[3] != code[3]) {
+                    System.out.println("* " + saisie[1] + " * *");
+                }
+                else if(saisie[0] != code[0] && saisie[2] != code[2]) {
+                    System.out.println("* " + saisie[1] + " * " + saisie[3]);
+                }
+                else if(saisie[0] != code[0] && saisie[3] != code[3]) {
+                    System.out.println("* " + saisie[1] + saisie[2] + " *");
+                }
+                else if(saisie[0] != code[0]) {
+                    System.out.println("* " + saisie[1] + saisie[2] + saisie[3]);
+                }
+                else if(saisie[1] != code[1] && saisie[2] != code[2] && saisie[3] != code[3]) {
+                    System.out.println(saisie[0] + " * * *");
+                }
+                else if(saisie[1] != code[1] && saisie[2] != code[2]) {
+                    System.out.println(saisie[0] + " * * " + saisie[3]);
+                }
+                else if(saisie[1] != code[1] && saisie[3] != code[3]) {
+                    System.out.println(saisie[0] + " * " + saisie[2] + " *");
+                }
+                else if(saisie[1] != code[1]) {
+                    System.out.println(saisie[0] + " * " + saisie[2] + saisie[3]);
+                }
+                else if(saisie[2] != code[2] && saisie[3] != code[3]) {
+                    System.out.println(saisie[0] + saisie[1] + " * *");
+                }
+                else if(saisie[2] != code[2]) {
+                    System.out.println(saisie[0] + saisie[1] + " * " + saisie[3]);
+                }
+                else if(saisie[3] != code[3]) {
+                    System.out.println(saisie[0] + saisie[1] + saisie[2] + " *");
                 }
 
-                if (saisie[2] == code[2]) {
-                    System.out.println(saisie[2]);
-                } else {
-                    System.out.println("X");
-                }
-
-                if (saisie[3] == code[3]) {
-                    System.out.println(saisie[3]);
-                } else {
-                    System.out.println("X");
-
-                }
                 coups++;
                 if (coups == 10) {
                     System.out.println("Le code secret était " + code[0] + code[1] + code[2] + code[3]);
