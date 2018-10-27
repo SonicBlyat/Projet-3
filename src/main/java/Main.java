@@ -18,9 +18,9 @@ public class Main {
         Random r = new Random();
 
         int coups = 0;
-        int coupsMax;  // NOMBRE DE COUPS   (CONFIGURABLE)
-        int fourchette;
-        int max;       // TAILLE DU TABLEAU (CONFIGURABLE)
+        int coupsMax;   // NOMBRE DE COUPS   (CONFIGURABLE)
+        int fourchette; // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
+        int max;        // TAILLE DU TABLEAU (CONFIGURABLE)
 
         System.out.println("Avant de commencer, combien de chiffres souhaitez-vous pour le code secret ?");
         max = sc.nextInt();
@@ -95,9 +95,9 @@ public class Main {
         Random r = new Random();
 
         int coups = 0;
-        int coupsMax;  // NOMBRE DE COUPS   (CONFIGURABLE)
-        int fourchette;
-        int max;       // TAILLE DU TABLEAU (CONFIGURABLE)
+        int coupsMax;   // NOMBRE DE COUPS   (CONFIGURABLE)
+        int fourchette; // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
+        int max;        // TAILLE DU TABLEAU (CONFIGURABLE)
 
         System.out.println("Avant de commencer, combien de chiffres souhaitez-vous pour le code secret ?");
         max = sc.nextInt();
