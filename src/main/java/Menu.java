@@ -1,8 +1,9 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Menu {
 
-    public int mainMenu() {
+    public int mainMenu() throws FileNotFoundException {
 
         Scanner choix = new Scanner(System.in);
         int selection = 0;
@@ -14,9 +15,9 @@ public class Menu {
         System.out.println("1 - Recherche +/-");
         System.out.println("2 - Mastermind");
         System.out.println("3 - Quitter l'application");
-
         System.out.printf("%n");
         selection = choix.nextInt();
+        System.out.printf("%n");
 
         if (selection == 1) {
             System.out.println("BIENVENUE DANS RECHERCHE +/-");
@@ -26,9 +27,9 @@ public class Menu {
             System.out.println("2 - Mode défenseur");
             System.out.println("3 - Mode duel");
             System.out.println("4 - Retour au menu principal");
-
             System.out.printf("%n");
             selection2 = choix.nextInt();
+            System.out.printf("%n");
 
             if (selection2 == 1) {
                 Main.rechercheChallenger();
@@ -55,8 +56,9 @@ public class Menu {
             System.out.println("2 - Mode défenseur");
             System.out.println("3 - Mode duel");
             System.out.println("4 - Retour au menu principal");
-
+            System.out.printf("%n");
             selection2 = choix.nextInt();
+            System.out.printf("%n");
 
             if (selection2 == 1) {
                 Main.mastermindChallenger();
@@ -82,14 +84,16 @@ public class Menu {
         return selection;
     }
 
-    public static void endMenuMastermindChallenger() {
+    public static void endMenuMastermindChallenger() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
         System.out.println("1 - Rejouer");
         System.out.println("2 - Retour au menu principal");
         System.out.println("3 - Quitter l'application");
+        System.out.printf("%n");
         selection3 = sc.nextInt();
+        System.out.printf("%n");
         if (selection3 == 1) {
             Main.mastermindChallenger();
         }
@@ -102,14 +106,16 @@ public class Menu {
         }
     }
 
-    public static void endMenuMastermindDefenseur() {
+    public static void endMenuMastermindDefenseur() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
         System.out.println("1 - Rejouer");
         System.out.println("2 - Retour au menu principal");
         System.out.println("3 - Quitter l'application");
+        System.out.printf("%n");
         selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
+        System.out.printf("%n");
         if (selection3 == 1) {
             Main.mastermindDefenseur();
         }
@@ -122,14 +128,16 @@ public class Menu {
         }
     }
 
-    public static void endMenuRechercheChallenger() {
+    public static void endMenuRechercheChallenger() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
         System.out.println("1 - Rejouer");
         System.out.println("2 - Retour au menu principal");
         System.out.println("3 - Quitter l'application");
+        System.out.printf("%n");
         selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
+        System.out.printf("%n");
         if (selection3 == 1) {
             Main.rechercheChallenger();
         }
@@ -142,14 +150,16 @@ public class Menu {
         }
     }
 
-    public static void endMenuRechercheDefenseur() {
+    public static void endMenuRechercheDefenseur() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
         System.out.println("1 - Rejouer");
         System.out.println("2 - Retour au menu principal");
         System.out.println("3 - Quitter l'application");
+        System.out.printf("%n");
         selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
+        System.out.printf("%n");
         if (selection3 == 1) {
             Main.rechercheDefenseur();
         }

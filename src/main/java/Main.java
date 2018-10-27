@@ -1,99 +1,81 @@
-import java.util.Arrays;
-import java.util.InputMismatchException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws FileNotFoundException {
         Menu menu = new Menu();
         menu.mainMenu();
     }
 
-    public static void rechercheChallenger() {
+    public static void rechercheChallenger() throws FileNotFoundException {
 
         Scanner sc = new Scanner(System.in);
         Random r = new Random();
 
-        int coups = 0;    // NOMBRE D'ESSAIS
-        int s = 0;        // SAISIE UTILISATEUR
-        int saisie1, chiffre1, saisie2, chiffre2, saisie3, chiffre3, saisie4, chiffre4;
+        int coups = 0;
+        int coupsMax;  // NOMBRE DE COUPS   (CONFIGURABLE)
+        int fourchette;
+        int max;       // TAILLE DU TABLEAU (CONFIGURABLE)
 
-        int code = r.nextInt((9999 - 1000) + 1) + 1000;  // GENERATION DU CODE SECRET
-
+        System.out.println("Avant de commencer, combien de chiffres souhaitez-vous pour le code secret ?");
+        max = sc.nextInt();
+        System.out.println("Le code secret sera composé de " + max + " chiffres.");
+        System.out.println("---------------------------------------------------");
+        System.out.println("Ces chiffres sont compris entre 1 et ... (Entrez le chiffre de votre choix)");
+        fourchette = sc.nextInt();
+        System.out.println("Les chiffres seront compris entre 1 et " + fourchette + ".");
+        System.out.println("----------------------------------------");
+        System.out.println("Combien d'essais souhaitez-vous pour trouver le code secret ?");
+        coupsMax = sc.nextInt();
+        System.out.println("Vous avez " + coupsMax + " essais pour trouver le code secret, à vous de jouer !");
+        System.out.println("------------------------------------------------------------------------");
+        System.out.printf("%n");
         System.out.println("RECHERCHE +/- : CHALLENGER");
         System.out.println("Trouvez le code secret en 10 coups maximum !");
         System.out.printf("%n");
 
-        try {
+        // GENERATION DU CODE SECRET
+        int[] code = new int[max];
+        for (int i = 0; i < max; i++) {
+            code[i] = r.nextInt(fourchette) + 1;
+        }
 
-            while (coups < 10) {
+        while (coups < coupsMax) {
 
-                s = sc.nextInt();  // SAISIE UTILISATEUR
-
-                saisie1 = Integer.parseInt(Integer.toString(s).substring(0, 1));     // CHIFFRE 1 DE LA SAISIE
-                chiffre1 = Integer.parseInt(Integer.toString(code).substring(0, 1)); // CHIFFRE 2 DE LA SAISIE
-                if (saisie1 == chiffre1) {
-                    System.out.println("=");
-                }
-                if (saisie1 < chiffre1) {
-                    System.out.println("+");
-                }
-                if (saisie1 > chiffre1) {
-                    System.out.println("-");
-                }
-
-                saisie2 = Integer.parseInt(Integer.toString(s).substring(1, 2));
-                chiffre2 = Integer.parseInt(Integer.toString(code).substring(1, 2));
-                if (saisie2 == chiffre2) {
-                    System.out.println("=");
-                }
-                if (saisie2 < chiffre2) {
-                    System.out.println("+");
-                }
-                if (saisie2 > chiffre2) {
-                    System.out.println("-");
-                }
-
-                saisie3 = Integer.parseInt(Integer.toString(s).substring(2, 3));
-                chiffre3 = Integer.parseInt(Integer.toString(code).substring(2, 3));
-                if (saisie3 == chiffre3) {
-                    System.out.println("=");
-                }
-                if (saisie3 < chiffre3) {
-                    System.out.println("+");
-                }
-                if (saisie3 > chiffre3) {
-                    System.out.println("-");
-                }
-
-                saisie4 = Integer.parseInt(Integer.toString(s).substring(3, 4));
-                chiffre4 = Integer.parseInt(Integer.toString(code).substring(3, 4));
-                if (saisie4 == chiffre4) {
-                    System.out.println("=");
-                }
-                if (saisie4 < chiffre4) {
-                    System.out.println("+");
-                }
-                if (saisie4 > chiffre4) {
-                    System.out.println("-");
-                }
-                coups++;
-                if (coups == 10) {
-                    System.out.println("Le code secret était " + code);
-                    System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
-                    Menu.endMenuRechercheChallenger();
-
-                }
-                if (saisie1 == chiffre1 && saisie2 == chiffre2 && saisie3 == chiffre3 && saisie4 == chiffre4) {
-                    System.out.println("Victoire en seulement " + coups + " coups !");
-                    Menu.endMenuRechercheChallenger();
-                }
+            int[] saisie = new int[max];
+            System.out.printf("%n");
+            int inputSaisie = sc.nextInt();
+            for(int i = 0; i < max; i++) {
+                saisie[i] = (int) (inputSaisie / (Math.pow(10, (max - i - 1)))) % 10;
             }
-        } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("N'UTILISEZ QUE DES CHIFFRES ENTRE 1 ET 4 [EXEMPLE : 1234, 2341, 4444]");
-        } catch (InputMismatchException e) { System.out.println("VOTRE COMBINAISON DOIT FAIRE 4 CHIFFRES MAXIMUM"); }
+
+            for(int i = 0; i < max; i++) {
+                boolean bonChiffre = saisie[i] == code[i];
+                boolean inferieurChiffre = saisie[i] < code[i];
+                boolean superieurChiffre = saisie[i] > code[i];
+                if (bonChiffre) { System.out.println("="); }
+                if (inferieurChiffre) { System.out.println(">"); }
+                if (superieurChiffre) { System.out.println("<"); }
+            }
+
+            coups++;
+            if (coups == coupsMax) {
+                System.out.println("Le code secret était " + code[0] + code[1] + code[2] + code[3]);
+                System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
+                Menu.endMenuMastermindChallenger();
+            }
+            if (saisie[0] == code[0] && saisie[1] == code[1] && saisie[2] == code[2] && saisie[3] == code[3]) {
+                System.out.printf("%n");
+                System.out.printf("%n");
+                System.out.println("Victoire en seulement " + coups + " coups !");
+                Menu.endMenuMastermindChallenger();
+            }
+        }
     }
 
     public static void rechercheDefenseur() {
@@ -104,91 +86,72 @@ public class Main {
         System.out.println("RECHERCHE +/- : DUEL");
     }
 
-    public static void mastermindChallenger() {
+    public static void mastermindChallenger() throws FileNotFoundException {
+
+        Properties p = new Properties();
+        OutputStream os = new FileOutputStream("config.properties");
 
         Scanner sc = new Scanner(System.in);
         Random r = new Random();
 
-        int coups = 0;    // NOMBRE D'ESSAIS
-        int max = 4;      // TAILLE DU TABLEAU
+        int coups = 0;
+        int coupsMax;  // NOMBRE DE COUPS   (CONFIGURABLE)
+        int fourchette;
+        int max;       // TAILLE DU TABLEAU (CONFIGURABLE)
 
-        // GENERATION DU CODE SECRET
-        int[] code = new int[max];
-        for (int j = 0; j < max; j++) {
-            code[j] = r.nextInt(4) + 1;
-        }
-
+        System.out.println("Avant de commencer, combien de chiffres souhaitez-vous pour le code secret ?");
+        max = sc.nextInt();
+        System.out.println("Le code secret sera composé de " + max + " chiffres.");
+        System.out.println("---------------------------------------------------");
+        System.out.println("Ces chiffres sont compris entre 1 et ... (Entrez le chiffre de votre choix)");
+        fourchette = sc.nextInt();
+        System.out.println("Les chiffres seront compris entre 1 et " + fourchette + ".");
+        System.out.println("----------------------------------------");
+        System.out.println("Combien d'essais souhaitez-vous pour trouver le code secret ?");
+        coupsMax = sc.nextInt();
+        System.out.println("Vous avez " + coupsMax + " essais pour trouver le code secret, à vous de jouer !");
+        System.out.println("------------------------------------------------------------------------");
+        System.out.printf("%n");
         System.out.println("MASTERMIND : CHALLENGER");
         System.out.println("Trouvez le code secret en 10 coups maximum !");
         System.out.printf("%n");
 
-            while (coups < 10) {
+        // GENERATION DU CODE SECRET
+        int[] code = new int[max];
+        for (int i = 0; i < max; i++) {
+            code[i] = r.nextInt(fourchette) + 1;
+        }
+
+            while (coups < coupsMax) {
 
                 int[] saisie = new int[max];
-                for (int i = 0; i < max; i++) {   // TANT QUE LA TAILLE MAX DU TABLEAU SAISIE N'EST PAS ATTEINTE
-                    saisie[i] = sc.nextInt();
+                System.out.printf("%n");
+                int inputSaisie = sc.nextInt();
+                for(int i = 0; i < max; i++) {
+                    saisie[i] = (int) (inputSaisie / (Math.pow(10, (max - i - 1)))) % 10;
                 }
 
-                if(saisie[0] != code[0] && saisie[1] != code[1] && saisie[2] != code[2] && saisie[3] != code[3]) {
-                    System.out.println("* * * *");
-                }
-                else if(saisie[0] != code[0] && saisie[1] != code[1] && saisie[2] != code[2]) {
-                    System.out.println("* * * " + saisie[3]);
-                }
-                else if(saisie[0] != code[0] && saisie[1] != code[1] && saisie[3] != code[3]) {
-                    System.out.println("* * " + saisie[2] + " *");
-                }
-                else if (saisie[0] != code[0] && saisie[1] != code[1]) {
-                    System.out.println("* * " + saisie[2] + saisie[3]);
-                }
-                else if(saisie[0] != code[0] && saisie[2] != code[2] && saisie[3] != code[3]) {
-                    System.out.println("* " + saisie[1] + " * *");
-                }
-                else if(saisie[0] != code[0] && saisie[2] != code[2]) {
-                    System.out.println("* " + saisie[1] + " * " + saisie[3]);
-                }
-                else if(saisie[0] != code[0] && saisie[3] != code[3]) {
-                    System.out.println("* " + saisie[1] + saisie[2] + " *");
-                }
-                else if(saisie[0] != code[0]) {
-                    System.out.println("* " + saisie[1] + saisie[2] + saisie[3]);
-                }
-                else if(saisie[1] != code[1] && saisie[2] != code[2] && saisie[3] != code[3]) {
-                    System.out.println(saisie[0] + " * * *");
-                }
-                else if(saisie[1] != code[1] && saisie[2] != code[2]) {
-                    System.out.println(saisie[0] + " * * " + saisie[3]);
-                }
-                else if(saisie[1] != code[1] && saisie[3] != code[3]) {
-                    System.out.println(saisie[0] + " * " + saisie[2] + " *");
-                }
-                else if(saisie[1] != code[1]) {
-                    System.out.println(saisie[0] + " * " + saisie[2] + saisie[3]);
-                }
-                else if(saisie[2] != code[2] && saisie[3] != code[3]) {
-                    System.out.println(saisie[0] + saisie[1] + " * *");
-                }
-                else if(saisie[2] != code[2]) {
-                    System.out.println(saisie[0] + saisie[1] + " * " + saisie[3]);
-                }
-                else if(saisie[3] != code[3]) {
-                    System.out.println(saisie[0] + saisie[1] + saisie[2] + " *");
-                }
+                for(int i = 0; i < max; i++) {
+                    boolean bonChiffre = saisie[i] == code[i];
+                    System.out.print((bonChiffre ? saisie[i] : "*") + " "); // BON CHIFFRE ? SI OUI AFFICHE SAISIE[i]
+                }                                                           // SINON AFFICHE "*"
 
                 coups++;
-                if (coups == 10) {
+                if (coups == coupsMax) {
                     System.out.println("Le code secret était " + code[0] + code[1] + code[2] + code[3]);
                     System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
                     Menu.endMenuMastermindChallenger();
                 }
                 if (saisie[0] == code[0] && saisie[1] == code[1] && saisie[2] == code[2] && saisie[3] == code[3]) {
+                    System.out.printf("%n");
+                    System.out.printf("%n");
                     System.out.println("Victoire en seulement " + coups + " coups !");
                     Menu.endMenuMastermindChallenger();
                 }
             }
         }
 
-    public static void mastermindDefenseur() {
+    public static void mastermindDefenseur() throws FileNotFoundException {
 
         Scanner sc = new Scanner(System.in);
 
@@ -254,10 +217,3 @@ public class Main {
             }
     } catch (StringIndexOutOfBoundsException e) {}
     }}
-
-
-
-
-
-
-
