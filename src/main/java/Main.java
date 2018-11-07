@@ -1,10 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.Arrays;
-import java.util.Properties;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -126,28 +123,26 @@ public class Main {
         System.out.printf("%n");
 
         // GENERATION DU CODE SECRET
-        int[] code = new int[max];
+        ArrayList<Integer> code = new ArrayList<Integer>();
         for (int i = 0; i < max; i++) {
-            code[i] = r.nextInt(fourchette) + 1;
+            code.add(r.nextInt(fourchette) + 1);
         }
-        System.out.println(Arrays.toString(code));
 
         while (coups < coupsMax) {
 
-            int[] saisie = new int[max];
-            System.out.printf("%n");
+            ArrayList saisie = new ArrayList();
             String inputSaisie = sc.next();
             for (int i = 0; i < max; i++) {
-                saisie[i] = Integer.parseInt(inputSaisie.charAt(i) + "");
+                saisie.add(Integer.parseInt(inputSaisie.charAt(i) + ""));
             }
 
                 int numberOfCorrect = 0;
                 int numberOfPresent = 0;
 
-                for (int i = 0; i < code.length; i++) {
-                    if (code[i] == (saisie[i])) {
+                for (int i = 0; i < code.size(); i++) {
+                    if (code.get(i) == saisie.get(i)) {
                         numberOfCorrect += 1;
-                    } else if (Arrays.asList(code).contains(saisie[i])) {
+                    } else if (Arrays.asList(code).contains(saisie.get(i))) {
                         numberOfPresent += 1;
                     }
 
@@ -159,11 +154,11 @@ public class Main {
                 coups++;
                 if (coups == coupsMax) {
                     System.out.printf("%n");
-                    System.out.println("Le code secret était " + code[0] + code[1] + code[2] + code[3]);
+                    System.out.println("Le code secret était " + code.get(0) + code.get(1) + code.get(2) + code.get(3));
                     System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
                     Menu.endMenuMastermindChallenger();
                 }
-                if (saisie[0] == code[0] && saisie[1] == code[1] && saisie[2] == code[2] && saisie[3] == code[3]) {
+                if (saisie.get(0) == code.get(0) && saisie.get(1) == code.get(1) && saisie.get(2) == code.get(2) && saisie.get(3) == code.get(3)) {
                     System.out.printf("%n");
                     System.out.println("Victoire en seulement " + coups + " coups !");
                     Menu.endMenuMastermindChallenger();
