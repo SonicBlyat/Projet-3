@@ -140,24 +140,24 @@ public class Main {
                 saisie[i] = Integer.parseInt(inputSaisie.charAt(i) + "");
             }
 
-                int numberOfPresent = 0;
-
-                for (int i = 0; i < code.length; i++) {
-                    if (code[i] == (saisie[i])) {
-                        numberOfPresent += 1;
-                    }
-                }
-
                 int numberOfCorrect = 0;
 
                 for (int i = 0; i < code.length; i++) {
-                    if (Arrays.asList(code[i]).contains(saisie[i])) {
+                    if (code[i] == (saisie[i])) {
                         numberOfCorrect += 1;
                     }
                 }
 
-                System.out.println(numberOfPresent + " Présent(s)");
+                int numberOfPresent = 0;
+
+                for (int i = 0; i < code.length; i++) {
+                    if (Arrays.asList(code[i]).contains(saisie[i])) {
+                        numberOfPresent += 1;
+                    }
+                }
+
                 System.out.println(numberOfCorrect + " Bien placé(s)");
+                System.out.println(numberOfPresent + " Présent(s)");
 
                 coups++;
                 if (coups == coupsMax) {
