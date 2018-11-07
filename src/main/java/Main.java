@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
@@ -139,25 +140,40 @@ public class Main {
                 saisie[i] = Integer.parseInt(inputSaisie.charAt(i) + "");
             }
 
-            for (int i = 0; i < max; i++) {
-                boolean bonChiffre = saisie[i] == code[i];
-                System.out.print((bonChiffre ? saisie[i] : "*") + " "); // BON CHIFFRE ? SI OUI AFFICHE SAISIE[i]
-            }                                                           // SINON AFFICHE "*"
+                int numberOfPresent = 0;
 
-            coups++;
-            if (coups == coupsMax) {
-                System.out.println("Le code secret était " + code[0] + code[1] + code[2] + code[3]);
-                System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
-                Menu.endMenuMastermindChallenger();
-            }
-            if (saisie[0] == code[0] && saisie[1] == code[1] && saisie[2] == code[2] && saisie[3] == code[3]) {
-                System.out.printf("%n");
-                System.out.printf("%n");
-                System.out.println("Victoire en seulement " + coups + " coups !");
-                Menu.endMenuMastermindChallenger();
+                for (int i = 0; i < code.length; i++) {
+                    if (code[i] == (saisie[i])) {
+                        numberOfPresent += 1;
+                    }
+                }
+
+                int numberOfCorrect = 0;
+
+                for (int i = 0; i < code.length; i++) {
+                    if (Arrays.asList(code[i]).contains(saisie[i])) {
+                        numberOfCorrect += 1;
+                    }
+                }
+
+                System.out.println(numberOfPresent + " Présent(s)");
+                System.out.println(numberOfCorrect + " Bien placé(s)");
+
+
+                coups++;
+                if (coups == coupsMax) {
+                    System.out.println("Le code secret était " + code[0] + code[1] + code[2] + code[3]);
+                    System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
+                    Menu.endMenuMastermindChallenger();
+                }
+                if (saisie[0] == code[0] && saisie[1] == code[1] && saisie[2] == code[2] && saisie[3] == code[3]) {
+                    System.out.printf("%n");
+                    System.out.printf("%n");
+                    System.out.println("Victoire en seulement " + coups + " coups !");
+                    Menu.endMenuMastermindChallenger();
+                }
             }
         }
-    }
 
     public static void mastermindDefenseur() throws FileNotFoundException {
 
