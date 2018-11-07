@@ -159,15 +159,14 @@ public class Main {
                 System.out.println(numberOfPresent + " Présent(s)");
                 System.out.println(numberOfCorrect + " Bien placé(s)");
 
-
                 coups++;
                 if (coups == coupsMax) {
+                    System.out.printf("%n");
                     System.out.println("Le code secret était " + code[0] + code[1] + code[2] + code[3]);
                     System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
                     Menu.endMenuMastermindChallenger();
                 }
                 if (saisie[0] == code[0] && saisie[1] == code[1] && saisie[2] == code[2] && saisie[3] == code[3]) {
-                    System.out.printf("%n");
                     System.out.printf("%n");
                     System.out.println("Victoire en seulement " + coups + " coups !");
                     Menu.endMenuMastermindChallenger();
