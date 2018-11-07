@@ -142,7 +142,7 @@ public class Main {
                 for (int i = 0; i < code.size(); i++) {
                     if (code.get(i) == saisie.get(i)) {
                         numberOfCorrect += 1;
-                    } else if (Arrays.asList(code).contains(saisie.get(i))) {
+                    } else if (saisie.contains(code)) {
                         numberOfPresent += 1;
                     }
 
