@@ -152,7 +152,7 @@ public class Main {
                 }
 
                 System.out.println(numberOfCorrect + " Bien placé(s)");
-                System.out.println(numberOfPresent + " Présent(s)");
+                System.out.println(numberOfPresent + " Présent(s) mais mal placé(s)");
 
                 coups++;
                 if (coups == coupsMax) {
