@@ -1,3 +1,6 @@
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -142,7 +145,7 @@ public class Main {
                 for (int i = 0; i < code.size(); i++) {
                     if (code.get(i) == saisie.get(i)) {
                         numberOfCorrect += 1;
-                    } else if (saisie.contains(code.get(i))) {
+                    } else if (code.contains(saisie.get(i))) {
                         numberOfPresent += 1;
                     }
 
@@ -158,7 +161,7 @@ public class Main {
                     System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
                     Menu.endMenuMastermindChallenger();
                 }
-                if (saisie.get(0) == code.get(0) && saisie.get(1) == code.get(1) && saisie.get(2) == code.get(2) && saisie.get(3) == code.get(3)) {
+                if (numberOfCorrect == max) {
                     System.out.printf("%n");
                     System.out.println("Victoire en seulement " + coups + " coups !");
                     Menu.endMenuMastermindChallenger();
