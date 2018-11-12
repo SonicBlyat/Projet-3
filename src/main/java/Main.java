@@ -130,7 +130,7 @@ public class Main {
         for (int i = 0; i < max; i++) {
             code.add(r.nextInt(fourchette) + 1);
         }
-        System.out.println(code);
+
         while (coups < coupsMax) {
 
             ArrayList saisie = new ArrayList();
@@ -193,7 +193,7 @@ public class Main {
         System.out.println("------------------------------------------------------------------------");
         System.out.printf("%n");
         System.out.println("MASTERMIND : DEFENSEUR");
-        System.out.println("Trouvez le code secret en 10 coups maximum !");
+        System.out.println("Choisissez une combinaison !");
         System.out.printf("%n");
 
         // GENERATION DU CODE PAR L'UTILISATEUR
@@ -237,7 +237,7 @@ public class Main {
             coups++;
             if (coups == coupsMax) {
                 System.out.printf("%n");
-                System.out.println("Victoire, l'ordinateur a atteint les 10 coups autorisés");
+                System.out.println("Victoire, l'ordinateur a atteint les " + coupsMax + " coups autorisés");
                 Menu.endMenuMastermindDefenseur();
             }
             if (numberOfCorrect == max) {
