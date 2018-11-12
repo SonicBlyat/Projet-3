@@ -196,45 +196,53 @@ public class Main {
         System.out.println("Trouvez le code secret en 10 coups maximum !");
         System.out.printf("%n");
 
-        // GENERATION DU CODE SECRET
-        ArrayList<Integer> code = new ArrayList<Integer>();
+        // GENERATION DU CODE PAR L'UTILISATEUR
+        ArrayList code = new ArrayList();
+        String inputCode = sc.next();
         for (int i = 0; i < max; i++) {
-            code.add(r.nextInt(fourchette) + 1);
+            code.add(Integer.parseInt(inputCode.charAt(i) + ""));
         }
-        System.out.println(code);
-        while (coups < coupsMax) {
 
-            ArrayList saisie = new ArrayList();
-            String inputSaisie = sc.next();
-            for (int i = 0; i < max; i++) {
-                saisie.add(Integer.parseInt(inputSaisie.charAt(i) + ""));
-            }
+        // PREMIERE SAISIE DE L'ORDINATEUR
+        ArrayList<Integer> saisieBot = new ArrayList<Integer>();
+        for (int i = 0; i < max; i++) {
+            saisieBot.add(r.nextInt(fourchette) + 1);
+        }
+
+        while (coups < coupsMax) {
 
             int numberOfCorrect = 0;
             int numberOfPresent = 0;
 
+            // VERIFICATION
             for (int i = 0; i < code.size(); i++) {
-                if (code.get(i) == saisie.get(i)) {
+                boolean Correct = saisieBot.get(i) == code.get(i);
+                boolean Present = code.contains(saisieBot.get(i));
+                if (Correct) {
                     numberOfCorrect += 1;
-                } else if (saisie.containsAll(code)) {
+                    saisieBot.get(i);
+                } else if (Present && !Correct) {
                     numberOfPresent += 1;
+                    saisieBot.set(i, r.nextInt(fourchette) + 1);
+                } else if (!Present) {
+                    saisieBot.set(i, r.nextInt(fourchette) + 1);
                 }
-
             }
 
+            System.out.println(saisieBot);
+
             System.out.println(numberOfCorrect + " Bien placé(s)");
-            System.out.println(numberOfPresent + " Présent(s)");
+            System.out.println(numberOfPresent + " Présent(s) mais mal placé(s)");
 
             coups++;
             if (coups == coupsMax) {
                 System.out.printf("%n");
-                System.out.println("Le code secret était " + code.get(0) + code.get(1) + code.get(2) + code.get(3));
-                System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
+                System.out.println("Victoire, l'ordinateur a atteint les 10 coups autorisés");
                 Menu.endMenuMastermindDefenseur();
             }
-            if (saisie.get(0) == code.get(0) && saisie.get(1) == code.get(1) && saisie.get(2) == code.get(2) && saisie.get(3) == code.get(3)) {
+            if (numberOfCorrect == max) {
                 System.out.printf("%n");
-                System.out.println("Victoire en seulement " + coups + " coups !");
+                System.out.println("Défaite, l'ordinateur a trouvé le code en seulement " + coups + " coups !");
                 Menu.endMenuMastermindDefenseur();
             }
         }
