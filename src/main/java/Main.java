@@ -130,6 +130,7 @@ public class Main {
         for (int i = 0; i < max; i++) {
             code.add(r.nextInt(fourchette) + 1);
         }
+        System.out.println(code);
 
         while (coups < coupsMax) {
 
@@ -143,12 +144,13 @@ public class Main {
                 int numberOfPresent = 0;
 
                 for (int i = 0; i < code.size(); i++) {
-                    if (code.get(i) == saisie.get(i)) {
+                    boolean Correct = saisie.get(i) == code.get(i);
+                    boolean Present = code.contains(saisie.get(i)+"");
+                    if (Correct) {
                         numberOfCorrect += 1;
-                    } else if (code.contains(saisie.get(i))) {
+                    } else if (Present) {
                         numberOfPresent += 1;
                     }
-
                 }
 
                 System.out.println(numberOfCorrect + " Bien placé(s)");
@@ -220,13 +222,16 @@ public class Main {
                 boolean Present = code.contains(saisieBot.get(i));
                 if (Correct) {
                     numberOfCorrect += 1;
-                    saisieBot.get(i);
-                } else if (Present && !Correct) {
+                    saisieBot.get(i);      // SI CORRECT ON GARDE LA VALEUR
+                } else if (Present) {
                     numberOfPresent += 1;
-                    saisieBot.set(i, r.nextInt(fourchette) + 1);
+                    saisieBot.set(i, r.nextInt(fourchette) + 1);  // SI PRESENT ON REMPLACE LA VALEUR PAR UNE NOUVELLE ALEATOIRE
                 } else if (!Present) {
-                    saisieBot.set(i, r.nextInt(fourchette) + 1);
-                }
+                    saisieBot.set(i, i + 1);  // SI NON PRESENT ON AJOUTE +1 A LA VALEUR
+                    if (saisieBot.get(i) > max) {
+                        saisieBot.set(i, r.nextInt(fourchette) + 1); // SI LA VALEUR ATTEINT 4, LA PROCHAINE SERA ALEATOIRE
+                    }
+                } else { saisieBot.set(i, r.nextInt(fourchette) + 1); } // SI NON CORRECT OU NON PRESENT, REMPLACE PAR NOUVELLE ALEATOIRE
             }
 
             System.out.println(saisieBot);
