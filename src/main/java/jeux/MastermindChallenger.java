@@ -10,9 +10,6 @@ public class MastermindChallenger {
 
     public static void mastermindChallenger() throws FileNotFoundException {
 
-        Properties p = new Properties();
-        OutputStream os = new FileOutputStream("config.properties");
-
         Scanner sc = new Scanner(System.in);
         Random r = new Random();
 
@@ -47,38 +44,27 @@ public class MastermindChallenger {
 
         while (coups < coupsMax) {
 
-            ArrayList<Integer> saisie = new ArrayList<Integer>();
+            ArrayList saisie = new ArrayList();
             String inputSaisie = sc.next();
             for (int i = 0; i < max; i++) {
                 saisie.add(Integer.parseInt(inputSaisie.charAt(i) + ""));
             }
 
-            // boolean combi = true;
-            int mal = 0, bien = 0;
-            // Première boucle parcourant la combinaison à deviner
-            for (int i = 0; i < max; i++) {
-                boolean bienPlace = false;
-                boolean malPlace = false;
-                // Deuxième boucle parcourant la proposition
-                for (int j = 0; j < max; j++) {
+            int numberOfCorrect = 0;
+            int numberOfPresent = 0;
 
-                    int cmb = saisie.get(i);
-                    // Comparaison de la proposition par rapport à la combinaison
-                    if (cmb == code.get(i)) {
-                        if (i == j) {
-                            bienPlace = true;
-                            if (code.contains(saisie.get(i))){
-                                malPlace = true;
-                            }
-                        }
-                    }
+            for (int i = 0; i < code.size(); i++) {
+                boolean Correct = saisie.get(i) == code.get(i);
+                boolean Present = code.contains(saisie.get(i));
+                if (Correct) {
+                    numberOfCorrect += 1;
+                } else if (Present) {
+                    numberOfPresent += 1;
+                }
+            }
 
-                    if (bienPlace == true)
-                        bien++;
-                    else if (malPlace == true)
-                        mal++;
-                }}
-            System.out.println(mal + " chiffres présents et " + bien + " bien placés");
+            System.out.println(numberOfCorrect + " Bien placé(s)");
+            System.out.println(numberOfPresent + " Présent(s) mais mal placé(s)");
 
             coups++;
             if (coups == coupsMax) {
@@ -87,7 +73,7 @@ public class MastermindChallenger {
                 System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
                 Menu.endMenuMastermindChallenger();
             }
-            if (bien == max) {
+            if (numberOfCorrect == max) {
                 System.out.printf("%n");
                 System.out.println("Victoire en seulement " + coups + " coups !");
                 Menu.endMenuMastermindChallenger();
