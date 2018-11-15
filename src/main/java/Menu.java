@@ -32,11 +32,11 @@ public class Menu {
             System.out.printf("%n");
 
             if (selection2 == 1) {
-                Main.rechercheChallenger();
+                RechercheChallenger.rechercheChallenger();
             }
 
             if (selection2 == 2) {
-                Main.rechercheDefenseur();
+                RechercheDefenseur.rechercheDefenseur();
             }
 
             if (selection2 == 3) {
@@ -61,11 +61,11 @@ public class Menu {
             System.out.printf("%n");
 
             if (selection2 == 1) {
-                Main.mastermindChallenger();
+                MastermindChallenger.mastermindChallenger();
             }
 
             if (selection2 == 2) {
-                Main.mastermindDefenseur();
+                MastermindDefenseur.mastermindDefenseur();
             }
 
             if (selection2 == 3) {
@@ -95,7 +95,7 @@ public class Menu {
         selection3 = sc.nextInt();
         System.out.printf("%n");
         if (selection3 == 1) {
-            Main.mastermindChallenger();
+            MastermindChallenger.mastermindChallenger();
         }
         if (selection3 == 2) {
             Menu menu = new Menu();
@@ -117,7 +117,7 @@ public class Menu {
         selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
         System.out.printf("%n");
         if (selection3 == 1) {
-            Main.mastermindDefenseur();
+            MastermindDefenseur.mastermindDefenseur();
         }
         if (selection3 == 2) {
             Menu menu = new Menu();
@@ -139,7 +139,7 @@ public class Menu {
         selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
         System.out.printf("%n");
         if (selection3 == 1) {
-            Main.rechercheChallenger();
+            RechercheChallenger.rechercheChallenger();
         }
         if (selection3 == 2) {
             Menu menu = new Menu();
@@ -161,7 +161,7 @@ public class Menu {
         selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
         System.out.printf("%n");
         if (selection3 == 1) {
-            Main.rechercheDefenseur();
+            RechercheDefenseur.rechercheDefenseur();
         }
         if (selection3 == 2) {
             Menu menu = new Menu();
