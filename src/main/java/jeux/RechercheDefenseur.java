@@ -28,6 +28,7 @@ public class RechercheDefenseur {
         System.out.println("Vous avez " + coupsMax + " essais pour trouver le code secret, à vous de jouer !");
         System.out.println("------------------------------------------------------------------------");
         System.out.printf("%n");
+
         System.out.println("RECHERCHE : DEFENSEUR");
         System.out.println("Choisissez une combinaison !");
         System.out.printf("%n");
@@ -46,30 +47,24 @@ public class RechercheDefenseur {
         }
 
         while (coups < coupsMax) {
-
-            for (int i = 0; i < code.length; i++) {
-                boolean egal = TryBot.get(i) == code[i];
-                boolean inferieur = TryBot.get(i) < code[i];
-                boolean superieur = TryBot.get(i) > code[i];
-
-                if (superieur) {
-                    TryBot.set(i, r.nextInt(fourchette));
-                    break;
-                }
-
-                if (inferieur) {
-                    TryBot.set(i, r.nextInt(fourchette));
-                    break;
-                }
-
-                if (egal) {
+            for (int i = 0; i < max; i++) {
+                if (code[i] == TryBot.get(i)) {
                     TryBot.get(i);
-                    break;
                 }
-            }
-
-            System.out.println(TryBot);
-
+                if (TryBot.get(i) > code[i] && code[i] != TryBot.get(i)) {
+                    TryBot.set(i, r.nextInt(max - 1) + 1);
+                }
+                if (TryBot.get(i) < code[i] && code[i] != TryBot.get(i)) {
+                    TryBot.set(i, r.nextInt(max - 1) + 1);
+                }
+                if (TryBot.get(i) == 1 && code[i] != TryBot.get(i)) {
+                    TryBot.set(i, + r.nextInt(max - 1) + 1);
+                }
+                if (TryBot.get(i) == max && code[i] != TryBot.get(i)) {
+                    TryBot.set(i, i - r.nextInt(max - 1) + 1);
+                }
+                // FULL RANDOM JUSQU'A CE QUE LE CHIFFRE SOIT BON, PLUS QU'A AJUSTER
+                System.out.println(TryBot);
 
             coups++;
             if (coups == coupsMax) {
@@ -84,4 +79,4 @@ public class RechercheDefenseur {
             }
         }
     }
-}
+}}

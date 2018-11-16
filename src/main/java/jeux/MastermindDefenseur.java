@@ -55,8 +55,7 @@ public class MastermindDefenseur {
                 boolean Correct = saisieBot.get(i) == code.get(i);
                 boolean Present = code.contains(saisieBot.get(i));
                 if (Correct) {
-                    numberOfCorrect += 1;
-                    saisieBot.get(i);      // SI CORRECT ON GARDE LA VALEUR
+                    numberOfCorrect += 1; // SI CORRECT ON GARDE LA VALEUR DANS LE PROCHAIN ESSAI
                 } else if (Present) {
                     numberOfPresent += 1;
                     saisieBot.set(i, r.nextInt(fourchette) + 1);  // SI PRESENT ON REMPLACE LA VALEUR PAR UNE NOUVELLE ALEATOIRE
@@ -65,7 +64,7 @@ public class MastermindDefenseur {
                     if (saisieBot.get(i) > max) {
                         saisieBot.set(i, r.nextInt(fourchette) + 1); // SI LA VALEUR ATTEINT 4, LA PROCHAINE SERA ALEATOIRE
                     }
-                } else { saisieBot.set(i, r.nextInt(fourchette) + 1); } // SI NON CORRECT OU NON PRESENT, REMPLACE PAR NOUVELLE ALEATOIRE
+                } else { saisieBot.set(i, r.nextInt(fourchette) + 1); } // SI NON CORRECT OU NON PRESENT, NOUVELLE VALEUR
             }
 
             System.out.println(saisieBot);

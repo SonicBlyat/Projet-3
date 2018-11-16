@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Menu {
@@ -171,5 +172,29 @@ public class Menu {
             System.exit(0);
         }
 
+    }
+
+    public static void choixParametres() {
+        Scanner sc = new Scanner(System.in);
+        Random r = new Random();
+
+        int coups = 0;
+        int coupsMax;   // NOMBRE DE COUPS   (CONFIGURABLE)
+        int fourchette; // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
+        int max;        // TAILLE DU TABLEAU (CONFIGURABLE)
+
+        System.out.println("Avant de commencer, combien de chiffres souhaitez-vous pour le code secret ?");
+        max = sc.nextInt();
+        System.out.println("Le code secret sera composé de " + max + " chiffres.");
+        System.out.println("---------------------------------------------------");
+        System.out.println("Ces chiffres sont compris entre 1 et ... (Entrez le chiffre de votre choix)");
+        fourchette = sc.nextInt();
+        System.out.println("Les chiffres seront compris entre 1 et " + fourchette + ".");
+        System.out.println("----------------------------------------");
+        System.out.println("Combien d'essais souhaitez-vous pour trouver le code secret ?");
+        coupsMax = sc.nextInt();
+        System.out.println("Vous avez " + coupsMax + " essais pour trouver le code secret, à vous de jouer !");
+        System.out.println("------------------------------------------------------------------------");
+        System.out.printf("%n");
     }
 }
