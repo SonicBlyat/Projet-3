@@ -46,37 +46,39 @@ public class RechercheDefenseur {
             TryBot.add(r.nextInt(fourchette) + 1);
         }
 
+
         while (coups < coupsMax) {
             for (int i = 0; i < max; i++) {
-                if (code[i] == TryBot.get(i)) {
-                    TryBot.get(i);
-                }
-                if (TryBot.get(i) > code[i] && code[i] != TryBot.get(i)) {
-                    TryBot.set(i, r.nextInt(max - 1) + 1);
-                }
-                if (TryBot.get(i) < code[i] && code[i] != TryBot.get(i)) {
-                    TryBot.set(i, r.nextInt(max - 1) + 1);
-                }
-                if (TryBot.get(i) == 1 && code[i] != TryBot.get(i)) {
-                    TryBot.set(i, + r.nextInt(max - 1) + 1);
-                }
-                if (TryBot.get(i) == max && code[i] != TryBot.get(i)) {
-                    TryBot.set(i, i - r.nextInt(max - 1) + 1);
-                }
-                // FULL RANDOM JUSQU'A CE QUE LE CHIFFRE SOIT BON, PLUS QU'A AJUSTER
                 System.out.println(TryBot);
+                System.out.println("Donnez des indices : ");
+                String[] reponse = new String[max];
+                String inputReponse = sc.next();
+                for (i = 0; i < max; i++) {
+                    reponse[i] = (inputReponse.charAt(i) + "");
+                }
 
-            coups++;
-            if (coups == coupsMax) {
-                System.out.printf("%n");
-                System.out.println("Victoire, l'ordinateur a atteint les " + coupsMax + " coups autorisés");
-                Menu.endMenuRechercheDefenseur();
-            }
-            if (TryBot.get(0) == code[0] && TryBot.get(1) == code[1] && TryBot.get(2) == code[2] && TryBot.get(3) == code[3]) {
-                System.out.printf("%n");
-                System.out.println("Défaite, l'ordinateur a trouvé le code en seulement " + coups + " coups !");
-                Menu.endMenuRechercheDefenseur();
+                for (i = 0; i < reponse.length; i++) {
+                    if (reponse[i].equals("=")) {
+                        TryBot.get(i);
+                    } else if (reponse[i].equals("+")) {
+                        TryBot.set(i, TryBot.get(i) + 1);
+                    } else if (reponse[i].equals("-")) {
+                        TryBot.set(i, TryBot.get(i) - 1);
+                    }
+                }
+
+                coups++;
+                if (coups == coupsMax) {
+                    System.out.printf("%n");
+                    System.out.println("Victoire, l'ordinateur a atteint les " + coupsMax + " coups autorisés");
+                    Menu.endMenuRechercheDefenseur();
+                }
+                if (reponse[0].equals("=") && reponse[1].equals("=") && reponse[2].equals("=") && reponse[3].equals("=")) {
+                    System.out.printf("%n");
+                    System.out.println("Défaite, l'ordinateur a trouvé le code en seulement " + coups + " coups !");
+                    Menu.endMenuRechercheDefenseur();
+                }
             }
         }
     }
-}}
+}
