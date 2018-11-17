@@ -50,16 +50,25 @@ public class MastermindChallenger {
                 saisie.add(Integer.parseInt(inputSaisie.charAt(i) + ""));
             }
 
+            boolean[] codeUsed = new boolean[code.size()];
+            boolean[] saisieUsed = new boolean[saisie.size()];
             int numberOfCorrect = 0;
             int numberOfPresent = 0;
 
             for (int i = 0; i < code.size(); i++) {
-                boolean Correct = saisie.get(i) == code.get(i);
-                boolean Present = code.contains(saisie.get(i));
-                if (Correct) {
-                    numberOfCorrect += 1;
-                } else if (Present) {
-                    numberOfPresent += 1;
+                if (code.get(i) == saisie.get(i)) {
+                    numberOfCorrect++;
+                    codeUsed[i] = saisieUsed[i] = true;
+                }
+            }
+
+            for (int i = 0; i < code.size(); i++) {
+                for (int j = 0; j < saisie.size(); j++) {
+                    if (!codeUsed[i] && !saisieUsed[j] && code.get(i) == saisie.get(j)) {
+                        numberOfPresent++;
+                        codeUsed[i] = saisieUsed[j] = true;
+                        break;
+                    }
                 }
             }
 
