@@ -1,3 +1,8 @@
+package jeux;
+
+import launcher.Menu;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -49,8 +54,10 @@ public class RechercheDefenseur {
 
         while (coups < coupsMax) {
             for (int i = 0; i < max; i++) {
-                System.out.println(TryBot);
-                System.out.println("Donnez des indices : ");
+                System.out.printf("%n");
+                System.out.println("Ordinateur : " + StringUtils.join(TryBot, ""));
+                System.out.printf("%n");
+                System.out.print("Donnez des indices : ");
                 String[] reponse = new String[max];
                 String inputReponse = sc.next();
                 for (i = 0; i < max; i++) {

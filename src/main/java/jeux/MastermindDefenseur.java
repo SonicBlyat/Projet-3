@@ -1,3 +1,6 @@
+package jeux;
+
+import launcher.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -47,27 +50,50 @@ public class MastermindDefenseur {
 
         while (coups < coupsMax) {
 
+            boolean[] codeUsed = new boolean[code.size()];
+            boolean[] saisieUsed = new boolean[saisieBot.size()];
             int numberOfCorrect = 0;
             int numberOfPresent = 0;
+            System.out.println(saisieBot);
 
-            // VERIFICATION
             for (int i = 0; i < code.size(); i++) {
-                boolean Correct = saisieBot.get(i) == code.get(i);
-                boolean Present = code.contains(saisieBot.get(i));
-                if (Correct) {
-                    numberOfCorrect += 1; // SI CORRECT ON GARDE LA VALEUR DANS LE PROCHAIN ESSAI
-                } else if (Present) {
-                    numberOfPresent += 1;
-                    saisieBot.set(i, r.nextInt(fourchette) + 1);  // SI PRESENT ON REMPLACE LA VALEUR PAR UNE NOUVELLE ALEATOIRE
-                } else if (!Present) {
-                    saisieBot.set(i, i + 1);  // SI NON PRESENT ON AJOUTE +1 A LA VALEUR
-                    if (saisieBot.get(i) > max) {
-                        saisieBot.set(i, r.nextInt(fourchette) + 1); // SI LA VALEUR ATTEINT 4, LA PROCHAINE SERA ALEATOIRE
-                    }
-                } else { saisieBot.set(i, r.nextInt(fourchette) + 1); } // SI NON CORRECT OU NON PRESENT, NOUVELLE VALEUR
+                if (code.get(i) == saisieBot.get(i)) {
+                    numberOfCorrect++;
+                    codeUsed[i] = saisieUsed[i] = true;
+                }
             }
 
-            System.out.println(saisieBot);
+            for (int i = 0; i < code.size(); i++) {
+                for (int j = 0; j < saisieBot.size(); j++) {
+                    if (!codeUsed[i] && !saisieUsed[j] && code.get(i) == saisieBot.get(j)) {
+                        numberOfPresent++;
+                        codeUsed[i] = saisieUsed[j] = true;
+                        break;
+                    }
+                }
+            }
+
+            for (int i = 0; i < code.size(); i++) {
+                for (int j = 0; j < saisieBot.size(); j++) {
+                    boolean test = code.get(i) != saisieBot.get(i);
+                    if (code.get(i) == saisieBot.get(i)) {
+                        saisieBot.get(i);
+                    } else if (!codeUsed[i] && !saisieUsed[j] && code.get(i) == saisieBot.get(j)) {
+                        if (saisieBot.indexOf(test) == 0) { // SI i EST PRESENT ET PAS DE BIEN PLACE SUR INDEX 0
+                            saisieBot.set(0, i); // DEPLACE i SUR INDEX 0 POUR TESTER SI IL PASSE EN BIEN PLACE ICI
+                        }
+                        if (saisieBot.indexOf(test) == 1) {
+                            saisieBot.set(1, i);
+                        }
+                        if (saisieBot.indexOf(test) == 2) {
+                            saisieBot.set(2, i);
+                        }
+                        if (saisieBot.indexOf(test) == 3) {
+                            saisieBot.set(3, i);
+                        }
+                    } else { saisieBot.set(i, r.nextInt(fourchette) + 1); } // SI NI CORRECT NI PRESENT, NOUVELLE VALEUR
+                }
+            }
 
             System.out.println(numberOfCorrect + " Bien placé(s)");
             System.out.println(numberOfPresent + " Présent(s) mais mal placé(s)");

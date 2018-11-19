@@ -1,3 +1,6 @@
+package launcher;
+
+import jeux.*;
 import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;

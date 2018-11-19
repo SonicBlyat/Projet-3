@@ -1,8 +1,8 @@
+package jeux;
+
+import launcher.*;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -40,7 +40,6 @@ public class MastermindChallenger {
         for (int i = 0; i < max; i++) {
             code.add(r.nextInt(fourchette) + 1);
         }
-        System.out.println(code);
 
         while (coups < coupsMax) {
 
@@ -48,6 +47,10 @@ public class MastermindChallenger {
             String inputSaisie = sc.next();
             for (int i = 0; i < max; i++) {
                 saisie.add(Integer.parseInt(inputSaisie.charAt(i) + ""));
+            }
+
+            if (inputSaisie == "" || inputSaisie.length() > max) {
+                System.out.println("Veuillez entrer une proposition à " + max + " chiffres");
             }
 
             boolean[] codeUsed = new boolean[code.size()];
