@@ -44,7 +44,7 @@ public class Menu {
             }
 
             if (selection2 == 3) {
-                System.out.println("Ce mode n'est pas encore disponible");
+                RechercheDuel.rechercheDuel();
             }
 
             if (selection2 == 4) {
@@ -73,7 +73,7 @@ public class Menu {
             }
 
             if (selection2 == 3) {
-                System.out.println("Ce mode n'est pas encore disponible");
+                MastermindDuel.mastermindDuel();
             }
 
             if (selection2 == 4) {
@@ -175,6 +175,50 @@ public class Menu {
             System.exit(0);
         }
 
+    }
+
+    public static void endMenuRechercheDuel() throws FileNotFoundException {
+        Scanner sc = new Scanner(System.in);
+        int selection3 = 0;
+        System.out.printf("%n");
+        System.out.println("1 - Rejouer");
+        System.out.println("2 - Retour au menu principal");
+        System.out.println("3 - Quitter l'application");
+        System.out.printf("%n");
+        selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
+        System.out.printf("%n");
+        if (selection3 == 1) {
+            RechercheDuel.rechercheDuel();
+        }
+        if (selection3 == 2) {
+            Menu menu = new Menu();
+            menu.mainMenu();
+        }
+        if (selection3 == 3) {
+            System.exit(0);
+        }
+    }
+
+    public static void endMenuMastermindDuel() throws FileNotFoundException {
+        Scanner sc = new Scanner(System.in);
+        int selection3 = 0;
+        System.out.printf("%n");
+        System.out.println("1 - Rejouer");
+        System.out.println("2 - Retour au menu principal");
+        System.out.println("3 - Quitter l'application");
+        System.out.printf("%n");
+        selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
+        System.out.printf("%n");
+        if (selection3 == 1) {
+            MastermindDuel.mastermindDuel();
+        }
+        if (selection3 == 2) {
+            Menu menu = new Menu();
+            menu.mainMenu();
+        }
+        if (selection3 == 3) {
+            System.exit(0);
+        }
     }
 
     public static void choixParametres() {

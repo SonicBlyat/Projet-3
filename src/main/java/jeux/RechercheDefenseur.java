@@ -73,14 +73,15 @@ public class RechercheDefenseur {
                         TryBot.set(i, TryBot.get(i) - 1);
                     }
                 }
-
+                int numberOfCorrectBot = StringUtils.countMatches(inputReponse, "="); // COMPTE LE NOMBRE DE "="
                 coups++;
+
                 if (coups == coupsMax) {
                     System.out.printf("%n");
                     System.out.println("Victoire, l'ordinateur a atteint les " + coupsMax + " coups autorisés");
                     Menu.endMenuRechercheDefenseur();
                 }
-                if (reponse[0].equals("=") && reponse[1].equals("=") && reponse[2].equals("=") && reponse[3].equals("=")) {
+                if (numberOfCorrectBot == max) {
                     System.out.printf("%n");
                     System.out.println("Défaite, l'ordinateur a trouvé le code en seulement " + coups + " coups !");
                     Menu.endMenuRechercheDefenseur();

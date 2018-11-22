@@ -1,6 +1,8 @@
 package jeux;
 
 import launcher.*;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -54,7 +56,7 @@ public class MastermindDefenseur {
             boolean[] saisieUsed = new boolean[saisieBot.size()];
             int numberOfCorrect = 0;
             int numberOfPresent = 0;
-            System.out.println(saisieBot);
+            System.out.println("Proposition de l'ordinateur : " + StringUtils.join(saisieBot, ""));
 
             for (int i = 0; i < code.size(); i++) {
                 if (code.get(i) == saisieBot.get(i)) {
@@ -97,6 +99,7 @@ public class MastermindDefenseur {
 
             System.out.println(numberOfCorrect + " Bien placé(s)");
             System.out.println(numberOfPresent + " Présent(s) mais mal placé(s)");
+            System.out.printf("%n");
 
             coups++;
             if (coups == coupsMax) {

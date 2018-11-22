@@ -1,6 +1,8 @@
 package jeux;
 
 import launcher.*;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -77,11 +79,11 @@ public class MastermindChallenger {
 
             System.out.println(numberOfCorrect + " Bien placé(s)");
             System.out.println(numberOfPresent + " Présent(s) mais mal placé(s)");
-
+            System.out.printf("%n");
             coups++;
             if (coups == coupsMax) {
                 System.out.printf("%n");
-                System.out.println("Le code secret était " + code);
+                System.out.println("Le code secret était " + StringUtils.join(code, ""));
                 System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
                 Menu.endMenuMastermindChallenger();
             }
