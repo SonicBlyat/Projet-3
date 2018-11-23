@@ -4,7 +4,9 @@ import launcher.Menu;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class RechercheChallenger {
@@ -14,23 +16,14 @@ public class RechercheChallenger {
         Scanner sc = new Scanner(System.in);
         Random r = new Random();
 
-        int coups = 0;
-        int coupsMax;   // NOMBRE DE COUPS   (CONFIGURABLE)
-        int fourchette; // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
-        int max;        // TAILLE DU TABLEAU (CONFIGURABLE)
+        ResourceBundle bundle = ResourceBundle.getBundle("config");
 
-        System.out.println("Avant de commencer, combien de chiffres souhaitez-vous pour le code secret ?");
-        max = sc.nextInt();
-        System.out.println("Le code secret sera composé de " + max + " chiffres.");
-        System.out.println("---------------------------------------------------");
-        System.out.println("Ces chiffres sont compris entre 1 et ... (Entrez le chiffre de votre choix)");
-        fourchette = sc.nextInt();
-        System.out.println("Les chiffres seront compris entre 1 et " + fourchette + ".");
-        System.out.println("----------------------------------------");
-        System.out.println("Combien d'essais souhaitez-vous pour trouver le code secret ?");
-        coupsMax = sc.nextInt();
-        System.out.println("Vous avez " + coupsMax + " essais pour trouver le code secret, à vous de jouer !");
-        System.out.println("------------------------------------------------------------------------");
+        int coups = 0;
+        int coupsMax = Integer.parseInt(bundle.getString("coupsMaxChallenger")); // NOMBRE DE COUPS (CONFIGURABLE)
+        int fourchette = Integer.parseInt(bundle.getString("chiffreMax"));       // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
+        int max = Integer.parseInt(bundle.getString("tailleCode"));              // TAILLE DU CODE (CONFIGURABLE)
+        boolean modeDev = Boolean.parseBoolean(bundle.getString("modeDev"));
+
         System.out.printf("%n");
         System.out.println("RECHERCHE +/- : CHALLENGER");
         System.out.println("Trouvez le code secret en 10 coups maximum !");
@@ -40,6 +33,10 @@ public class RechercheChallenger {
         int[] code = new int[max];
         for (int i = 0; i < max; i++) {
             code[i] = r.nextInt(fourchette) + 1;
+        }
+
+        if (modeDev == true) {
+            System.out.println("SOLUTION : " + Arrays.toString(code));
         }
 
         while (coups < coupsMax) {
@@ -72,11 +69,11 @@ public class RechercheChallenger {
 
             if (coups == coupsMax) {
                 System.out.printf("%n");
-                System.out.println("Le code secret était " + StringUtils.join(code, ""));
+                System.out.println("Le code secret était " + Arrays.toString(code));
                 System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
                 Menu.endMenuRechercheChallenger();
             }
-            if (numberOfCorrectUser == max) { // A MODIFIER
+            if (numberOfCorrectUser == max) {
                 System.out.printf("%n");
                 System.out.println("Victoire en seulement " + coups + " coups !");
                 Menu.endMenuRechercheChallenger();

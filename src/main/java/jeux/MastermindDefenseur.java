@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class MastermindDefenseur {
@@ -15,23 +16,13 @@ public class MastermindDefenseur {
         Scanner sc = new Scanner(System.in);
         Random r = new Random();
 
-        int coups = 0;
-        int coupsMax;   // NOMBRE DE COUPS   (CONFIGURABLE)
-        int fourchette; // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
-        int max;        // TAILLE DU TABLEAU (CONFIGURABLE)
+        ResourceBundle bundle = ResourceBundle.getBundle("config");
 
-        System.out.println("Avant de commencer, combien de chiffres souhaitez-vous pour le code secret ?");
-        max = sc.nextInt();
-        System.out.println("Le code secret sera composé de " + max + " chiffres.");
-        System.out.println("---------------------------------------------------");
-        System.out.println("Ces chiffres sont compris entre 1 et ... (Entrez le chiffre de votre choix)");
-        fourchette = sc.nextInt();
-        System.out.println("Les chiffres seront compris entre 1 et " + fourchette + ".");
-        System.out.println("----------------------------------------");
-        System.out.println("Combien d'essais souhaitez-vous pour trouver le code secret ?");
-        coupsMax = sc.nextInt();
-        System.out.println("Vous avez " + coupsMax + " essais pour trouver le code secret, à vous de jouer !");
-        System.out.println("------------------------------------------------------------------------");
+        int coups = 0;
+        int coupsMax = Integer.parseInt(bundle.getString("coupsMaxDefenseur")); // NOMBRE DE COUPS (CONFIGURABLE)
+        int fourchette = Integer.parseInt(bundle.getString("chiffreMax"));       // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
+        int max = Integer.parseInt(bundle.getString("tailleCode"));              // TAILLE DU CODE (CONFIGURABLE)
+
         System.out.printf("%n");
         System.out.println("MASTERMIND : DEFENSEUR");
         System.out.println("Choisissez une combinaison !");

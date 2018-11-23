@@ -4,10 +4,7 @@ import launcher.Menu;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class MastermindDuel {
 
@@ -16,29 +13,17 @@ public class MastermindDuel {
         Scanner sc = new Scanner(System.in);
         Random r = new Random();
 
+        ResourceBundle bundle = ResourceBundle.getBundle("config");
+
         int coupsUser = 0;
         int coupsBot = 0;
-        int coupsMaxUser;   // NOMBRE DE COUPS   (CONFIGURABLE)
-        int coupsMaxBot;
-        int fourchette; // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
-        int max;        // TAILLE DU TABLEAU (CONFIGURABLE)
+        int coupsMaxUser = Integer.parseInt(bundle.getString("coupsMaxDuel")); // NOMBRE DE COUPS   (CONFIGURABLE)
+        int coupsMaxBot = Integer.parseInt(bundle.getString("coupsMaxDuel"));
+        int fourchette = Integer.parseInt(bundle.getString("chiffreMax")); // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
+        int max = Integer.parseInt(bundle.getString("tailleCode"));        // TAILLE DU TABLEAU (CONFIGURABLE)
+        boolean modeDev = Boolean.parseBoolean(bundle.getString("modeDev"));
 
-        System.out.println("Avant de commencer, combien de chiffres souhaitez-vous pour le code secret ?");
-        max = sc.nextInt();
-        System.out.println("Le code secret sera composé de " + max + " chiffres.");
-        System.out.println("---------------------------------------------------");
-        System.out.println("Ces chiffres sont compris entre 1 et ... (Entrez le chiffre de votre choix)");
-        fourchette = sc.nextInt();
-        System.out.println("Les chiffres seront compris entre 1 et " + fourchette + ".");
-        System.out.println("----------------------------------------");
-        System.out.println("Combien d'essais souhaitez-vous pour trouver le code secret de l'ordinateur ?");
-        coupsMaxUser = sc.nextInt();
-        System.out.println("Combien d'essais souhaitez-vous donner à l'ordinateur pour trouver votre code secret ?");
-        coupsMaxBot = sc.nextInt();
-        System.out.println("Vous avez " + coupsMaxUser + " essais pour trouver le code secret de l'ordinateur, à vous de jouer !");
-        System.out.println("------------------------------------------------------------------------");
         System.out.printf("%n");
-
         System.out.println("MASTERMIND : DUEL");
         System.out.println("Choisissez un code pour que l'ordinateur puisse choisir le sien");
         System.out.printf("%n");
@@ -58,6 +43,10 @@ public class MastermindDuel {
 
         System.out.printf("%n");
         System.out.println("L'ordinateur a généré son code, il joue en premier !");
+
+        if (modeDev == true) {
+            System.out.println("SOLUTION : " + Arrays.toString(botCode));
+        }
 
         // GENERATION DE LA PREMIERE SAISIE ALEATOIRE DE L'ORDINATEUR
         ArrayList<Integer> inputBot = new ArrayList<Integer>();
@@ -174,6 +163,7 @@ public class MastermindDuel {
                 Menu.endMenuMastermindDuel();
             }
             if (coupsBot == coupsMaxBot) {
+                System.out.printf("%n");
                 System.out.println("Victoire, l'ordinateur a utilisé ses " + coupsMaxBot + " coups autorisés !");
                 Menu.endMenuMastermindDuel();
             }
