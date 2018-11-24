@@ -4,10 +4,7 @@ import launcher.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 public class MastermindDefenseur {
 
@@ -29,80 +26,102 @@ public class MastermindDefenseur {
         System.out.printf("%n");
 
         // GENERATION DU CODE PAR L'UTILISATEUR
-        ArrayList code = new ArrayList();
-        String inputCode = sc.next();
-        for (int i = 0; i < max; i++) {
-            code.add(Integer.parseInt(inputCode.charAt(i) + ""));
-        }
-
-        // PREMIERE SAISIE DE L'ORDINATEUR
-        ArrayList<Integer> saisieBot = new ArrayList<Integer>();
-        for (int i = 0; i < max; i++) {
-            saisieBot.add(r.nextInt(fourchette) + 1);
-        }
-
-        while (coups < coupsMax) {
-
-            boolean[] codeUsed = new boolean[code.size()];
-            boolean[] saisieUsed = new boolean[saisieBot.size()];
-            int numberOfCorrect = 0;
-            int numberOfPresent = 0;
-            System.out.println("Proposition de l'ordinateur : " + StringUtils.join(saisieBot, ""));
-
-            for (int i = 0; i < code.size(); i++) {
-                if (code.get(i) == saisieBot.get(i)) {
-                    numberOfCorrect++;
-                    codeUsed[i] = saisieUsed[i] = true;
+        try {
+            int[] code = new int[max];
+            int inputCode = sc.nextInt();
+            for (int i = 0; i < max; i++) {
+                code[i] = (int) (inputCode / (Math.pow(10, (max - i - 1)))) % 10;
+                if (code[i] < 1) {
+                    System.out.printf("%n");
+                    System.out.println("Saisie incorrect : " + max + " chiffres maximum composés de chiffres entre 1 et " + fourchette);
+                    System.out.println("Veuillez entrer une nouvelle saisie ci-dessous :");
+                    inputCode = sc.nextInt();
+                }
+                if (code[i] > fourchette) {
+                    System.out.printf("%n");
+                    System.out.println("Saisie incorrect : " + max + " chiffres maximum composés de chiffres entre 1 et " + fourchette);
+                    System.out.println("Veuillez entrer une nouvelle saisie ci-dessous :");
+                    inputCode = sc.nextInt();
                 }
             }
 
-            for (int i = 0; i < code.size(); i++) {
-                for (int j = 0; j < saisieBot.size(); j++) {
-                    if (!codeUsed[i] && !saisieUsed[j] && code.get(i) == saisieBot.get(j)) {
-                        numberOfPresent++;
-                        codeUsed[i] = saisieUsed[j] = true;
-                        break;
+            // PREMIERE SAISIE DE L'ORDINATEUR
+            ArrayList<Integer> saisieBot = new ArrayList<Integer>();
+            for (int i = 0; i < max; i++) {
+                saisieBot.add(r.nextInt(fourchette) + 1);
+            }
+
+            while (coups < coupsMax) {
+
+                boolean[] codeUsed = new boolean[code.length];
+                boolean[] saisieUsed = new boolean[saisieBot.size()];
+                int numberOfCorrect = 0;
+                int numberOfPresent = 0;
+                System.out.println("Proposition de l'ordinateur : " + StringUtils.join(saisieBot, ""));
+
+                // RESULTAT DE LA SAISIE ORDINATEUR
+                for (int i = 0; i < code.length; i++) {
+                    if (code[i] == saisieBot.get(i)) {
+                        numberOfCorrect++;
+                        codeUsed[i] = saisieUsed[i] = true;
                     }
                 }
-            }
 
-            for (int i = 0; i < code.size(); i++) {
-                for (int j = 0; j < saisieBot.size(); j++) {
-                    boolean test = code.get(i) != saisieBot.get(i);
-                    if (code.get(i) == saisieBot.get(i)) {
-                        saisieBot.get(i);
-                    } else if (!codeUsed[i] && !saisieUsed[j] && code.get(i) == saisieBot.get(j)) {
-                        if (saisieBot.indexOf(test) == 0) { // SI i EST PRESENT ET PAS DE BIEN PLACE SUR INDEX 0
-                            saisieBot.set(0, i); // DEPLACE i SUR INDEX 0 POUR TESTER SI IL PASSE EN BIEN PLACE ICI
+                for (int i = 0; i < code.length; i++) {
+                    for (int j = 0; j < saisieBot.size(); j++) {
+                        if (!codeUsed[i] && !saisieUsed[j] && code[i] == saisieBot.get(j)) {
+                            numberOfPresent++;
+                            codeUsed[i] = saisieUsed[j] = true;
+                            break;
                         }
-                        if (saisieBot.indexOf(test) == 1) {
-                            saisieBot.set(1, i);
-                        }
-                        if (saisieBot.indexOf(test) == 2) {
-                            saisieBot.set(2, i);
-                        }
-                        if (saisieBot.indexOf(test) == 3) {
-                            saisieBot.set(3, i);
-                        }
-                    } else { saisieBot.set(i, r.nextInt(fourchette) + 1); } // SI NI CORRECT NI PRESENT, NOUVELLE VALEUR
+                    }
+                }
+
+                for (int i = 0; i < code.length; i++) {
+                    for (int j = 0; j < saisieBot.size(); j++) {
+                        boolean test = code[i] != saisieBot.get(i);
+                        if (code[i] == saisieBot.get(i)) {
+                            saisieBot.get(i);
+                        } else if (!codeUsed[i] && !saisieUsed[j] && code[i] == saisieBot.get(j)) {
+                            if (saisieBot.indexOf(test) == 0) { // SI i EST PRESENT ET PAS DE BIEN PLACE SUR INDEX 0
+                                saisieBot.set(0, i); // DEPLACE i SUR INDEX 0 POUR TESTER SI IL PASSE EN BIEN PLACE ICI
+                            }
+                            if (saisieBot.indexOf(test) == 1) {
+                                saisieBot.set(1, i);
+                            }
+                            if (saisieBot.indexOf(test) == 2) {
+                                saisieBot.set(2, i);
+                            }
+                            if (saisieBot.indexOf(test) == 3) {
+                                saisieBot.set(3, i);
+                            }
+                        } else {
+                            saisieBot.set(i, r.nextInt(fourchette) + 1);
+                        } // SI NI CORRECT NI PRESENT, NOUVELLE VALEUR
+                    }
+                }
+
+                // INDICES
+                System.out.println(numberOfCorrect + " Bien placé(s)");
+                System.out.println(numberOfPresent + " Présent(s) mais mal placé(s)");
+                System.out.printf("%n");
+                coups++;
+
+                if (coups == coupsMax) {
+                    System.out.printf("%n");
+                    System.out.println("Victoire, l'ordinateur a atteint les " + coupsMax + " coups autorisés");
+                    Menu.endMenuMastermindDefenseur();
+                }
+                if (numberOfCorrect == max) {
+                    System.out.printf("%n");
+                    System.out.println("Défaite, l'ordinateur a trouvé le code en seulement " + coups + " coups !");
+                    Menu.endMenuMastermindDefenseur();
                 }
             }
-
-            System.out.println(numberOfCorrect + " Bien placé(s)");
-            System.out.println(numberOfPresent + " Présent(s) mais mal placé(s)");
+        } catch (InputMismatchException e) {
             System.out.printf("%n");
-
-            coups++;
-            if (coups == coupsMax) {
-                System.out.printf("%n");
-                System.out.println("Victoire, l'ordinateur a atteint les " + coupsMax + " coups autorisés");
-                Menu.endMenuMastermindDefenseur();
-            }
-            if (numberOfCorrect == max) {
-                System.out.printf("%n");
-                System.out.println("Défaite, l'ordinateur a trouvé le code en seulement " + coups + " coups !");
-                Menu.endMenuMastermindDefenseur();
-            }
+            System.out.println("Saisie incorrecte, les lettres et les chiffres inférieurs à 1 sont interdits !");
+            MastermindDefenseur.mastermindDefenseur();
         }
     }
 }

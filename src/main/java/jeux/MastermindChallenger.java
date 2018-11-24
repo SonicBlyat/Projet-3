@@ -4,10 +4,7 @@ import launcher.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 public class MastermindChallenger {
 
@@ -41,52 +38,71 @@ public class MastermindChallenger {
 
         while (coups < coupsMax) {
 
-            ArrayList saisie = new ArrayList();
-            String inputSaisie = sc.next();
-            for (int i = 0; i < max; i++) {
-                saisie.add(Integer.parseInt(inputSaisie.charAt(i) + ""));
-            }
-
-            if (inputSaisie == "" || inputSaisie.length() > max) {
-                System.out.println("Veuillez entrer une proposition à " + max + " chiffres");
-            }
-
-            boolean[] codeUsed = new boolean[code.size()];
-            boolean[] saisieUsed = new boolean[saisie.size()];
-            int numberOfCorrect = 0;
-            int numberOfPresent = 0;
-
-            for (int i = 0; i < code.size(); i++) {
-                if (code.get(i) == saisie.get(i)) {
-                    numberOfCorrect++;
-                    codeUsed[i] = saisieUsed[i] = true;
-                }
-            }
-
-            for (int i = 0; i < code.size(); i++) {
-                for (int j = 0; j < saisie.size(); j++) {
-                    if (!codeUsed[i] && !saisieUsed[j] && code.get(i) == saisie.get(j)) {
-                        numberOfPresent++;
-                        codeUsed[i] = saisieUsed[j] = true;
-                        break;
+            try {
+                // SAISIE UTILISATEUR
+                int[] saisie = new int[max];
+                int inputSaisie = sc.nextInt();
+                for (int i = 0; i < max; i++) {
+                    saisie[i] = (int) (inputSaisie / (Math.pow(10, (max - i - 1)))) % 10;
+                    if (saisie[i] < 1) {
+                        System.out.printf("%n");
+                        System.out.println("Saisie incorrect : " + max + " chiffres maximum composés de chiffres entre 1 et " + fourchette);
+                        System.out.println("Veuillez entrer une nouvelle saisie ci-dessous :");
+                        inputSaisie = sc.nextInt();
+                    }
+                    if (saisie[i] > fourchette) {
+                        System.out.printf("%n");
+                        System.out.println("Saisie incorrect : " + max + " chiffres maximum composés de chiffres entre 1 et " + fourchette);
+                        System.out.println("Veuillez entrer une nouvelle saisie ci-dessous :");
+                        inputSaisie = sc.nextInt();
                     }
                 }
-            }
 
-            System.out.println(numberOfCorrect + " Bien placé(s)");
-            System.out.println(numberOfPresent + " Présent(s) mais mal placé(s)");
-            System.out.printf("%n");
-            coups++;
-            if (coups == coupsMax) {
+                // RESULTAT DE LA SAISIE UTILISATEUR
+                boolean[] codeUsed = new boolean[code.size()];
+                boolean[] saisieUsed = new boolean[saisie.length];
+                int numberOfCorrect = 0;
+                int numberOfPresent = 0;
+
+                for (int i = 0; i < code.size(); i++) {
+                    if (code.get(i) == saisie[i]) {
+                        numberOfCorrect++;
+                        codeUsed[i] = saisieUsed[i] = true;
+                    }
+                }
+
+                for (int i = 0; i < code.size(); i++) {
+                    for (int j = 0; j < saisie.length; j++) {
+                        if (!codeUsed[i] && !saisieUsed[j] && code.get(i) == saisie[j]) {
+                            numberOfPresent++;
+                            codeUsed[i] = saisieUsed[j] = true;
+                            break;
+                        }
+                    }
+                }
+
+                // INDICES
+                System.out.println(numberOfCorrect + " Bien placé(s)");
+                System.out.println(numberOfPresent + " Présent(s) mais mal placé(s)");
                 System.out.printf("%n");
-                System.out.println("Le code secret était " + StringUtils.join(code, ""));
-                System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
-                Menu.endMenuMastermindChallenger();
-            }
-            if (numberOfCorrect == max) {
+                coups++;
+
+                if (coups == coupsMax) {
+                    System.out.printf("%n");
+                    System.out.println("Le code secret était " + StringUtils.join(code, ""));
+                    System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
+                    Menu.endMenuMastermindChallenger();
+                }
+                if (numberOfCorrect == max) {
+                    System.out.printf("%n");
+                    System.out.println("Victoire en seulement " + coups + " coups !");
+                    Menu.endMenuMastermindChallenger();
+                }
+            } catch (InputMismatchException e) {
                 System.out.printf("%n");
-                System.out.println("Victoire en seulement " + coups + " coups !");
-                Menu.endMenuMastermindChallenger();
+                System.out.println("Saisie incorrecte, les lettres et les chiffres inférieurs à 1 sont interdits !");
+                System.out.println("Un nouveau code a été généré..");
+                MastermindChallenger.mastermindChallenger();
             }
         }
     }
