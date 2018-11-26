@@ -16,7 +16,7 @@ public class RechercheDefenseur {
         ResourceBundle bundle = ResourceBundle.getBundle("config");
 
         int coups = 0;
-        int coupsMax = Integer.parseInt(bundle.getString("coupsMaxDefenseur")); // NOMBRE DE COUPS (CONFIGURABLE)
+        int coupsMax = Integer.parseInt(bundle.getString("coupsMaxRechercheDefenseur")); // NOMBRE DE COUPS (CONFIGURABLE)
         int fourchette = Integer.parseInt(bundle.getString("chiffreMax"));       // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
         int max = Integer.parseInt(bundle.getString("tailleCode"));              // TAILLE DU CODE (CONFIGURABLE)
 

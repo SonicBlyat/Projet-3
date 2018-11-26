@@ -16,7 +16,7 @@ public class MastermindChallenger {
         ResourceBundle bundle = ResourceBundle.getBundle("config");
 
         int coups = 0;
-        int coupsMax = Integer.parseInt(bundle.getString("coupsMaxChallenger")); // NOMBRE DE COUPS (CONFIGURABLE)
+        int coupsMax = Integer.parseInt(bundle.getString("coupsMaxMastermindChallenger")); // NOMBRE DE COUPS (CONFIGURABLE)
         int fourchette = Integer.parseInt(bundle.getString("chiffreMax"));       // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
         int max = Integer.parseInt(bundle.getString("tailleCode"));              // TAILLE DU CODE (CONFIGURABLE)
         boolean modeDev = Boolean.parseBoolean(bundle.getString("modeDev"));
@@ -33,7 +33,8 @@ public class MastermindChallenger {
         }
 
         if (modeDev == true) {
-            System.out.println("SOLUTION : " + StringUtils.join(code, ""));
+            System.out.println("SOLUTION : " + code);
+            System.out.printf("%n");
         }
 
         while (coups < coupsMax) {
@@ -88,13 +89,11 @@ public class MastermindChallenger {
                 coups++;
 
                 if (coups == coupsMax) {
-                    System.out.printf("%n");
                     System.out.println("Le code secret était " + StringUtils.join(code, ""));
                     System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
                     Menu.endMenuMastermindChallenger();
                 }
                 if (numberOfCorrect == max) {
-                    System.out.printf("%n");
                     System.out.println("Victoire en seulement " + coups + " coups !");
                     Menu.endMenuMastermindChallenger();
                 }

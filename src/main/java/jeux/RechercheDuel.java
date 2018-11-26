@@ -17,8 +17,8 @@ public class RechercheDuel {
 
         int coupsUser = 0;
         int coupsBot = 0;
-        int coupsMaxUser = Integer.parseInt(bundle.getString("coupsMaxDuel")); // NOMBRE DE COUPS   (CONFIGURABLE)
-        int coupsMaxBot = Integer.parseInt(bundle.getString("coupsMaxDuel"));
+        int coupsMaxUser = Integer.parseInt(bundle.getString("coupsMaxRechercheDuel")); // NOMBRE DE COUPS   (CONFIGURABLE)
+        int coupsMaxBot = Integer.parseInt(bundle.getString("coupsMaxRechercheDuel"));
         int fourchette = Integer.parseInt(bundle.getString("chiffreMax")); // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
         int max = Integer.parseInt(bundle.getString("tailleCode"));        // TAILLE DU TABLEAU (CONFIGURABLE)
         boolean modeDev = Boolean.parseBoolean(bundle.getString("modeDev"));
@@ -59,6 +59,7 @@ public class RechercheDuel {
             System.out.println("L'ordinateur a généré son code, il joue en premier !");
 
             if (modeDev == true) {
+                System.out.printf("%n");
                 System.out.println("SOLUTION : " + Arrays.toString(botCode));
             }
 
@@ -130,10 +131,10 @@ public class RechercheDuel {
                         resultatUser = resultatUser + "=";
                     }
                     if (inferieurChiffreUser) {
-                        resultatUser += ">";
+                        resultatUser += "+";
                     }
                     if (superieurChiffreUser) {
-                        resultatUser = resultatUser + "<";
+                        resultatUser = resultatUser + "-";
                     }
                 }
                 System.out.println(resultatUser); // INDICES POUR L'UTILISATEUR
