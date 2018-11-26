@@ -18,17 +18,20 @@ public class RechercheChallenger {
         ResourceBundle bundle = ResourceBundle.getBundle("config");
 
         Logger logger = LogManager.getLogger();
-        logger.info("Lancement du jeu Recherche : Challenger");
 
         int coups = 0;
         int coupsMax = Integer.parseInt(bundle.getString("coupsMaxRechercheChallenger")); // NOMBRE DE COUPS (CONFIGURABLE)
         int fourchette = Integer.parseInt(bundle.getString("chiffreMax"));       // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
         int max = Integer.parseInt(bundle.getString("tailleCode"));              // TAILLE DU CODE (CONFIGURABLE)
         boolean modeDev = Boolean.parseBoolean(bundle.getString("modeDev"));
-        logger.trace(coupsMax + " coups maximum");
-        logger.trace("Chiffres entre 1 et " + fourchette);
-        logger.trace("Taille du code : " + max + " chiffres");
-        logger.trace("Mode développeur : " + modeDev);
+
+        if (modeDev == true) {
+            logger.info("Lancement du jeu Recherche : Challenger");
+            logger.trace(coupsMax + " coups maximum");
+            logger.trace("Chiffres entre 1 et " + fourchette);
+            logger.trace("Taille du code : " + max + " chiffres");
+            logger.trace("Mode développeur : " + modeDev);
+        }
 
         System.out.printf("%n");
         System.out.println("RECHERCHE +/- : CHALLENGER");
@@ -39,7 +42,9 @@ public class RechercheChallenger {
         for (int i = 0; i < max; i++) {
             code[i] = r.nextInt(fourchette) + 1;
         }
-        logger.info("Code secret généré");
+        if (modeDev == true) {
+            logger.info("Code secret généré");
+        }
 
         if (modeDev == true) {
             System.out.printf("%n");
@@ -68,7 +73,9 @@ public class RechercheChallenger {
                         inputSaisie = sc.nextInt();
                     }
                 }
-                logger.info("L'utilisateur vient d'entrer sa saisie");
+                if (modeDev == true) {
+                    logger.info("L'utilisateur vient d'entrer sa saisie");
+                }
 
                 // RESULTAT DE LA SAISIE UTILISATEUR
                 String resultat = "";
@@ -86,30 +93,40 @@ public class RechercheChallenger {
                         resultat = resultat + "-";
                     }
                 }
-                logger.info("Traitement de la saisie utilisateur..");
+                if (modeDev == true) {
+                    logger.info("Traitement de la saisie utilisateur..");
+                }
 
                 // INDICES
                 System.out.println(resultat);
                 int numberOfCorrectUser = StringUtils.countMatches(resultat, "="); // COMPTE LE NOMBRE DE "="
                 coups++;
-                logger.info("Les indices ont été envoyés à l'utilisateur");
+                if (modeDev == true) {
+                    logger.info("Les indices ont été envoyés à l'utilisateur");
+                }
 
                 if (coups == coupsMax) {
                     System.out.printf("%n");
-                    logger.info("La partie est terminée (Défaite)");
+                    if (modeDev == true) {
+                        logger.info("La partie est terminée (Défaite)");
+                    }
                     System.out.println("Le code secret était " + Arrays.toString(code));
                     System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
                     Menu.endMenuRechercheChallenger();
                 }
                 if (numberOfCorrectUser == max) {
                     System.out.printf("%n");
-                    logger.info("La partie est terminée (Victoire)");
+                    if (modeDev == true) {
+                        logger.info("La partie est terminée (Victoire)");
+                    }
                     System.out.println("Victoire en seulement " + coups + " coups !");
                     Menu.endMenuRechercheChallenger();
                 }
             } catch (InputMismatchException e) {
                 System.out.printf("%n");
-                logger.error("InputMismatchException catchée : Saisie incorrect, redémarrage du jeu");
+                if (modeDev == true) {
+                    logger.error("InputMismatchException catchée : Saisie incorrect, redémarrage du jeu");
+                }
                 System.out.println("Saisie incorrecte, les lettres et les chiffres inférieurs à 1 sont interdits !");
                 System.out.println("Un nouveau code a été généré..");
                 RechercheChallenger.rechercheChallenger();
