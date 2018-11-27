@@ -4,15 +4,20 @@ import jeux.*;
 import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Menu {
 
     public int mainMenu() throws FileNotFoundException {
 
+        Logger logger = LogManager.getLogger();
+
         Scanner choix = new Scanner(System.in);
         int selection = 0;
         int selection2 = 0;
 
+        logger.trace("Affichage du menu principal");
         System.out.println("MENU PRINCIPAL");
         System.out.println("Entrez le numéro correspondant à votre jeu");
         System.out.println("------------------------------------------");
@@ -24,6 +29,7 @@ public class Menu {
         System.out.printf("%n");
 
         if (selection == 1) {
+            logger.trace("Sélection du jeu : RECHERCHE +/-");
             System.out.println("BIENVENUE DANS RECHERCHE +/-");
             System.out.println("Veuillez sélectionner un mode de jeu");
             System.out.println("------------------------------------");
@@ -36,23 +42,28 @@ public class Menu {
             System.out.printf("%n");
 
             if (selection2 == 1) {
+                logger.trace("Sélection du mode : CHALLENGER");
                 RechercheChallenger.rechercheChallenger();
             }
 
             if (selection2 == 2) {
+                logger.trace("Sélection du mode : DEFENSEUR");
                 RechercheDefenseur.rechercheDefenseur();
             }
 
             if (selection2 == 3) {
+                logger.trace("Sélection du mode : DUEL");
                 RechercheDuel.rechercheDuel();
             }
 
             if (selection2 == 4) {
+                logger.trace("Retour au menu principal");
                 mainMenu();
             }
         }
 
         if (selection == 2) {
+            logger.trace("Sélection du jeu : MASTERMIND");
             System.out.println("BIENVENUE DANS MASTERMIND");
             System.out.println("Veuillez sélectionner un mode de jeu");
             System.out.println("------------------------------------");
@@ -65,23 +76,28 @@ public class Menu {
             System.out.printf("%n");
 
             if (selection2 == 1) {
+                logger.trace("Sélection du mode : CHALLENGER");
                 MastermindChallenger.mastermindChallenger();
             }
 
             if (selection2 == 2) {
+                logger.trace("Sélection du mode : DEFENSEUR");
                 MastermindDefenseur.mastermindDefenseur();
             }
 
             if (selection2 == 3) {
+                logger.trace("Sélection du mode : DUEL");
                 MastermindDuel.mastermindDuel();
             }
 
             if (selection2 == 4) {
+                logger.trace("Retour au menu principal");
                 mainMenu();
             }
         }
 
         if (selection == 3) {
+            logger.trace("ARRÊT DE L'APPLICATION");
             System.exit(0);
         }
 
@@ -89,6 +105,8 @@ public class Menu {
     }
 
     public static void endMenuMastermindChallenger() throws FileNotFoundException {
+        Logger logger = LogManager.getLogger();
+        logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
@@ -99,18 +117,23 @@ public class Menu {
         selection3 = sc.nextInt();
         System.out.printf("%n");
         if (selection3 == 1) {
+            logger.trace("L'utilisateur souhaite rejouer");
             MastermindChallenger.mastermindChallenger();
         }
         if (selection3 == 2) {
+            logger.trace("L'utilisateur souhaite retourner au menu principal");
             Menu menu = new Menu();
             menu.mainMenu();
         }
         if (selection3 == 3) {
+            logger.trace("ARRÊT DE L'APPLICATION");
             System.exit(0);
         }
     }
 
     public static void endMenuMastermindDefenseur() throws FileNotFoundException {
+        Logger logger = LogManager.getLogger();
+        logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
@@ -121,18 +144,23 @@ public class Menu {
         selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
         System.out.printf("%n");
         if (selection3 == 1) {
+            logger.trace("L'utilisateur souhaite rejouer");
             MastermindDefenseur.mastermindDefenseur();
         }
         if (selection3 == 2) {
+            logger.trace("L'utilisateur souhaite retourner au menu principal");
             Menu menu = new Menu();
             menu.mainMenu();
         }
         if (selection3 == 3) {
+            logger.trace("ARRÊT DE L'APPLICATION");
             System.exit(0);
         }
     }
 
     public static void endMenuRechercheChallenger() throws FileNotFoundException {
+        Logger logger = LogManager.getLogger();
+        logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
@@ -143,18 +171,23 @@ public class Menu {
         selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
         System.out.printf("%n");
         if (selection3 == 1) {
+            logger.trace("L'utilisateur souhaite rejouer");
             RechercheChallenger.rechercheChallenger();
         }
         if (selection3 == 2) {
+            logger.trace("L'utilisateur souhaite retourner au menu principal");
             Menu menu = new Menu();
             menu.mainMenu();
         }
         if (selection3 == 3) {
+            logger.trace("ARRÊT DE L'APPLICATION");
             System.exit(0);
         }
     }
 
     public static void endMenuRechercheDefenseur() throws FileNotFoundException {
+        Logger logger = LogManager.getLogger();
+        logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
@@ -165,19 +198,24 @@ public class Menu {
         selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
         System.out.printf("%n");
         if (selection3 == 1) {
+            logger.trace("L'utilisateur souhaite rejouer");
             RechercheDefenseur.rechercheDefenseur();
         }
         if (selection3 == 2) {
+            logger.trace("L'utilisateur souhaite retourner au menu principal");
             Menu menu = new Menu();
             menu.mainMenu();
         }
         if (selection3 == 3) {
+            logger.trace("ARRÊT DE L'APPLICATION");
             System.exit(0);
         }
 
     }
 
     public static void endMenuRechercheDuel() throws FileNotFoundException {
+        Logger logger = LogManager.getLogger();
+        logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
@@ -188,18 +226,23 @@ public class Menu {
         selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
         System.out.printf("%n");
         if (selection3 == 1) {
+            logger.trace("L'utilisateur souhaite rejouer");
             RechercheDuel.rechercheDuel();
         }
         if (selection3 == 2) {
+            logger.trace("L'utilisateur souhaite retourner au menu principal");
             Menu menu = new Menu();
             menu.mainMenu();
         }
         if (selection3 == 3) {
+            logger.trace("ARRÊT DE L'APPLICATION");
             System.exit(0);
         }
     }
 
     public static void endMenuMastermindDuel() throws FileNotFoundException {
+        Logger logger = LogManager.getLogger();
+        logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
@@ -210,38 +253,17 @@ public class Menu {
         selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
         System.out.printf("%n");
         if (selection3 == 1) {
+            logger.trace("L'utilisateur souhaite rejouer");
             MastermindDuel.mastermindDuel();
         }
         if (selection3 == 2) {
+            logger.trace("L'utilisateur souhaite retourner au menu principal");
             Menu menu = new Menu();
             menu.mainMenu();
         }
         if (selection3 == 3) {
+            logger.trace("ARRÊT DE L'APPLICATION");
             System.exit(0);
         }
-    }
-
-    public static void choixParametres() {
-        Scanner sc = new Scanner(System.in);
-        Random r = new Random();
-
-        int coups = 0;
-        int coupsMax;   // NOMBRE DE COUPS   (CONFIGURABLE)
-        int fourchette; // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
-        int max;        // TAILLE DU TABLEAU (CONFIGURABLE)
-
-        System.out.println("Avant de commencer, combien de chiffres souhaitez-vous pour le code secret ?");
-        max = sc.nextInt();
-        System.out.println("Le code secret sera composé de " + max + " chiffres.");
-        System.out.println("---------------------------------------------------");
-        System.out.println("Ces chiffres sont compris entre 1 et ... (Entrez le chiffre de votre choix)");
-        fourchette = sc.nextInt();
-        System.out.println("Les chiffres seront compris entre 1 et " + fourchette + ".");
-        System.out.println("----------------------------------------");
-        System.out.println("Combien d'essais souhaitez-vous pour trouver le code secret ?");
-        coupsMax = sc.nextInt();
-        System.out.println("Vous avez " + coupsMax + " essais pour trouver le code secret, à vous de jouer !");
-        System.out.println("------------------------------------------------------------------------");
-        System.out.printf("%n");
     }
 }

@@ -25,13 +25,11 @@ public class RechercheChallenger {
         int max = Integer.parseInt(bundle.getString("tailleCode"));              // TAILLE DU CODE (CONFIGURABLE)
         boolean modeDev = Boolean.parseBoolean(bundle.getString("modeDev"));
 
-        if (modeDev == true) {
-            logger.info("Lancement du jeu Recherche : Challenger");
-            logger.trace(coupsMax + " coups maximum");
-            logger.trace("Chiffres entre 1 et " + fourchette);
-            logger.trace("Taille du code : " + max + " chiffres");
-            logger.trace("Mode développeur : " + modeDev);
-        }
+        logger.info("LANCEMENT DU JEU : RECHERCHE CHALLENGER");
+        logger.trace(coupsMax + " coups maximum");
+        logger.trace("Chiffres entre 1 et " + fourchette);
+        logger.trace("Taille du code : " + max + " chiffres");
+        logger.trace("Mode développeur : " + modeDev);
 
         System.out.printf("%n");
         System.out.println("RECHERCHE +/- : CHALLENGER");
@@ -42,9 +40,7 @@ public class RechercheChallenger {
         for (int i = 0; i < max; i++) {
             code[i] = r.nextInt(fourchette) + 1;
         }
-        if (modeDev == true) {
-            logger.info("Code secret généré");
-        }
+        logger.info("Code secret généré par l'ordinateur");
 
         if (modeDev == true) {
             System.out.printf("%n");
@@ -64,18 +60,18 @@ public class RechercheChallenger {
                         System.out.printf("%n");
                         System.out.println("Saisie incorrect : " + max + " chiffres maximum composés de chiffres entre 1 et " + fourchette);
                         System.out.println("Veuillez entrer une nouvelle saisie ci-dessous :");
+                        logger.error("Saisie incorrect");
                         inputSaisie = sc.nextInt();
                     }
                     if (saisie[i] > fourchette) {
                         System.out.printf("%n");
                         System.out.println("Saisie incorrect : " + max + " chiffres maximum composés de chiffres entre 1 et " + fourchette);
                         System.out.println("Veuillez entrer une nouvelle saisie ci-dessous :");
+                        logger.error("Saisie incorrect");
                         inputSaisie = sc.nextInt();
                     }
                 }
-                if (modeDev == true) {
-                    logger.info("L'utilisateur vient d'entrer sa saisie");
-                }
+                logger.info("L'utilisateur vient d'entrer sa saisie");
 
                 // RESULTAT DE LA SAISIE UTILISATEUR
                 String resultat = "";
@@ -93,40 +89,31 @@ public class RechercheChallenger {
                         resultat = resultat + "-";
                     }
                 }
-                if (modeDev == true) {
-                    logger.info("Traitement de la saisie utilisateur..");
-                }
+                logger.info("Traitement de la saisie utilisateur..");
 
                 // INDICES
                 System.out.println(resultat);
                 int numberOfCorrectUser = StringUtils.countMatches(resultat, "="); // COMPTE LE NOMBRE DE "="
                 coups++;
-                if (modeDev == true) {
-                    logger.info("Les indices ont été envoyés à l'utilisateur");
-                }
+                logger.info("Les indices ont été envoyés à l'utilisateur");
+                logger.trace("Coups : " + coups);
 
                 if (coups == coupsMax) {
                     System.out.printf("%n");
-                    if (modeDev == true) {
-                        logger.info("La partie est terminée (Défaite)");
-                    }
+                    logger.info("La partie est terminée (Défaite, coups maximum atteint)");
                     System.out.println("Le code secret était " + Arrays.toString(code));
                     System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
                     Menu.endMenuRechercheChallenger();
                 }
                 if (numberOfCorrectUser == max) {
                     System.out.printf("%n");
-                    if (modeDev == true) {
-                        logger.info("La partie est terminée (Victoire)");
-                    }
+                    logger.info("La partie est terminée (Victoire, code trouvé)");
                     System.out.println("Victoire en seulement " + coups + " coups !");
                     Menu.endMenuRechercheChallenger();
                 }
             } catch (InputMismatchException e) {
                 System.out.printf("%n");
-                if (modeDev == true) {
-                    logger.error("InputMismatchException catchée : Saisie incorrect, redémarrage du jeu");
-                }
+                logger.fatal("InputMismatchException catchée : Saisie incorrect, redémarrage du jeu");
                 System.out.println("Saisie incorrecte, les lettres et les chiffres inférieurs à 1 sont interdits !");
                 System.out.println("Un nouveau code a été généré..");
                 RechercheChallenger.rechercheChallenger();

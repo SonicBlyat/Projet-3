@@ -1,0 +1,20 @@
+2018-11-27 12:32:20.683 [main] INFO  jeux.RechercheChallenger - LANCEMENT DU JEU : RECHERCHE CHALLENGER
+2018-11-27 12:32:20.685 [main] TRACE jeux.RechercheChallenger - 10 coups maximum
+2018-11-27 12:32:20.685 [main] TRACE jeux.RechercheChallenger - Chiffres entre 1 et 4
+2018-11-27 12:32:20.685 [main] TRACE jeux.RechercheChallenger - Taille du code : 4 chiffres
+2018-11-27 12:32:20.685 [main] TRACE jeux.RechercheChallenger - Mode développeur : false
+2018-11-27 12:32:20.685 [main] INFO  jeux.RechercheChallenger - Code secret généré
+2018-11-27 12:32:22.474 [main] FATAL jeux.RechercheChallenger - InputMismatchException catchée : Saisie incorrect, redémarrage du jeu
+2018-11-27 12:32:22.474 [main] INFO  jeux.RechercheChallenger - LANCEMENT DU JEU : RECHERCHE CHALLENGER
+2018-11-27 12:32:22.474 [main] TRACE jeux.RechercheChallenger - 10 coups maximum
+2018-11-27 12:32:22.474 [main] TRACE jeux.RechercheChallenger - Chiffres entre 1 et 4
+2018-11-27 12:32:22.474 [main] TRACE jeux.RechercheChallenger - Taille du code : 4 chiffres
+2018-11-27 12:32:22.474 [main] TRACE jeux.RechercheChallenger - Mode développeur : false
+2018-11-27 12:32:22.474 [main] INFO  jeux.RechercheChallenger - Code secret généré
+2018-11-27 12:32:24.217 [main] INFO  jeux.RechercheChallenger - L'utilisateur vient d'entrer sa saisie
+2018-11-27 12:32:24.217 [main] INFO  jeux.RechercheChallenger - Traitement de la saisie utilisateur..
+2018-11-27 12:32:24.220 [main] INFO  jeux.RechercheChallenger - Les indices ont été envoyés à l'utilisateur
+2018-11-27 12:32:26.834 [main] INFO  jeux.RechercheChallenger - L'utilisateur vient d'entrer sa saisie
+2018-11-27 12:32:26.834 [main] INFO  jeux.RechercheChallenger - Traitement de la saisie utilisateur..
+2018-11-27 12:32:26.834 [main] INFO  jeux.RechercheChallenger - Les indices ont été envoyés à l'utilisateur
+2018-11-27 12:32:26.834 [main] INFO  jeux.RechercheChallenger - La partie est terminée (Victoire)
