@@ -97,21 +97,14 @@ public class MastermindDefenseur {
                         if (code[i] == saisieBot.get(i)) {
                             saisieBot.get(i);
                         } else if (!codeUsed[i] && !saisieUsed[j] && code[i] == saisieBot.get(j)) {
-                            if (saisieBot.indexOf(test) == 0) { // SI i EST PRESENT ET PAS DE BIEN PLACE SUR INDEX 0
-                                saisieBot.set(0, i); // DEPLACE i SUR INDEX 0 POUR TESTER SI IL PASSE EN BIEN PLACE ICI
-                            }
-                            if (saisieBot.indexOf(test) == 1) {
-                                saisieBot.set(1, i);
-                            }
-                            if (saisieBot.indexOf(test) == 2) {
-                                saisieBot.set(2, i);
-                            }
-                            if (saisieBot.indexOf(test) == 3) {
-                                saisieBot.set(3, i);
+                            for (j = 0; j < saisieBot.size(); j++) {
+                                if (saisieBot.indexOf(test) == j) { // SI i EST PRESENT ET PAS DE BIEN PLACE SUR INDEX j
+                                    saisieBot.set(j, i); // DEPLACE i SUR INDEX j POUR TESTER SI IL PASSE EN BIEN PLACE ICI
+                                }
                             }
                         } else {
-                            saisieBot.set(i, r.nextInt(fourchette) + 1);
-                        } // SI NI CORRECT NI PRESENT, NOUVELLE VALEUR
+                            saisieBot.set(i, r.nextInt(fourchette) + 1); // SI NI CORRECT NI PRESENT, NOUVELLE VALEUR
+                        }
                     }
                 }
                 logger.info("Traitement des indices par l'ordinateur");

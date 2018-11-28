@@ -120,21 +120,14 @@ public class MastermindDuel {
                         if (userCode[i] == inputBot.get(i)) {
                             inputBot.get(i);
                         } else if (!codeUsed[i] && !saisieUsed[j] && userCode[i] == inputBot.get(j)) {
-                            if (inputBot.indexOf(test) == 0) { // SI i EST PRESENT ET PAS DE BIEN PLACE SUR INDEX 0
-                                inputBot.set(0, i); // DEPLACE i SUR INDEX 0 POUR TESTER SI IL PASSE EN BIEN PLACE ICI
-                            }
-                            if (inputBot.indexOf(test) == 1) {
-                                inputBot.set(1, i);
-                            }
-                            if (inputBot.indexOf(test) == 2) {
-                                inputBot.set(2, i);
-                            }
-                            if (inputBot.indexOf(test) == 3) {
-                                inputBot.set(3, i);
+                            for (j = 0; j < inputBot.size(); j++) {
+                                if (inputBot.indexOf(test) == j) { // SI i EST PRESENT ET PAS DE BIEN PLACE SUR INDEX j
+                                    inputBot.set(j, i); // DEPLACE i SUR INDEX j POUR TESTER SI IL PASSE EN BIEN PLACE ICI
+                                }
                             }
                         } else {
-                            inputBot.set(i, r.nextInt(fourchette) + 1);
-                        } // SI NI CORRECT NI PRESENT, NOUVELLE VALEUR
+                            inputBot.set(i, r.nextInt(fourchette) + 1); // SI NI CORRECT NI PRESENT, NOUVELLE VALEUR
+                        }
                     }
                 }
                 logger.info("Traitement des indices par l'ordinateur");
