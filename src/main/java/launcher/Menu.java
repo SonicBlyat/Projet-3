@@ -2,7 +2,6 @@ package launcher;
 
 import jeux.*;
 import java.io.FileNotFoundException;
-import java.util.Random;
 import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,42 +17,42 @@ public class Menu {
         int selection2 = 0;
 
         logger.trace("Affichage du menu principal");
-        System.out.println("MENU PRINCIPAL");
-        System.out.println("Entrez le numéro correspondant à votre jeu");
+        System.out.println("MAIN MENU");
+        System.out.println("Enter a number to choose a game");
         System.out.println("------------------------------------------");
-        System.out.println("1 - Recherche +/-");
+        System.out.println("1 - Research +/-");
         System.out.println("2 - Mastermind");
-        System.out.println("3 - Quitter l'application");
+        System.out.println("3 - Quit the application");
         System.out.printf("%n");
         selection = choix.nextInt();
         System.out.printf("%n");
 
         if (selection == 1) {
             logger.trace("Sélection du jeu : RECHERCHE +/-");
-            System.out.println("BIENVENUE DANS RECHERCHE +/-");
-            System.out.println("Veuillez sélectionner un mode de jeu");
+            System.out.println("WELCOME TO RESEARCH +/-");
+            System.out.println("Please select a game mode");
             System.out.println("------------------------------------");
-            System.out.println("1 - Mode challenger");
-            System.out.println("2 - Mode défenseur");
-            System.out.println("3 - Mode duel");
-            System.out.println("4 - Retour au menu principal");
+            System.out.println("1 - Challenger mode");
+            System.out.println("2 - Defender mode");
+            System.out.println("3 - Duel mode");
+            System.out.println("4 - Back to main menu");
             System.out.printf("%n");
             selection2 = choix.nextInt();
             System.out.printf("%n");
 
             if (selection2 == 1) {
                 logger.trace("Sélection du mode : CHALLENGER");
-                RechercheChallenger.rechercheChallenger();
+                ResearchChallenger.researchChallenger();
             }
 
             if (selection2 == 2) {
                 logger.trace("Sélection du mode : DEFENSEUR");
-                RechercheDefenseur.rechercheDefenseur();
+                ResearchDefender.researchDefender();
             }
 
             if (selection2 == 3) {
                 logger.trace("Sélection du mode : DUEL");
-                RechercheDuel.rechercheDuel();
+                ResearchDuel.researchDuel();
             }
 
             if (selection2 == 4) {
@@ -64,13 +63,13 @@ public class Menu {
 
         if (selection == 2) {
             logger.trace("Sélection du jeu : MASTERMIND");
-            System.out.println("BIENVENUE DANS MASTERMIND");
-            System.out.println("Veuillez sélectionner un mode de jeu");
+            System.out.println("WELCOME TO MASTERMIND");
+            System.out.println("Please select a game mode");
             System.out.println("------------------------------------");
-            System.out.println("1 - Mode challenger");
-            System.out.println("2 - Mode défenseur");
-            System.out.println("3 - Mode duel");
-            System.out.println("4 - Retour au menu principal");
+            System.out.println("1 - Challenger mode");
+            System.out.println("2 - Defender mode");
+            System.out.println("3 - Duel mode");
+            System.out.println("4 - Back to main menu");
             System.out.printf("%n");
             selection2 = choix.nextInt();
             System.out.printf("%n");
@@ -82,7 +81,7 @@ public class Menu {
 
             if (selection2 == 2) {
                 logger.trace("Sélection du mode : DEFENSEUR");
-                MastermindDefenseur.mastermindDefenseur();
+                MastermindDefender.mastermindDefender();
             }
 
             if (selection2 == 3) {
@@ -110,9 +109,9 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
-        System.out.println("1 - Rejouer");
-        System.out.println("2 - Retour au menu principal");
-        System.out.println("3 - Quitter l'application");
+        System.out.println("1 - Play again");
+        System.out.println("2 - Back to main menu");
+        System.out.println("3 - Quit the application");
         System.out.printf("%n");
         selection3 = sc.nextInt();
         System.out.printf("%n");
@@ -131,21 +130,21 @@ public class Menu {
         }
     }
 
-    public static void endMenuMastermindDefenseur() throws FileNotFoundException {
+    public static void endMenuMastermindDefender() throws FileNotFoundException {
         Logger logger = LogManager.getLogger();
         logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
-        System.out.println("1 - Rejouer");
-        System.out.println("2 - Retour au menu principal");
-        System.out.println("3 - Quitter l'application");
+        System.out.println("1 - Play again");
+        System.out.println("2 - Back to main menu");
+        System.out.println("3 - Quit the application");
         System.out.printf("%n");
-        selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
+        selection3 = sc.nextInt();
         System.out.printf("%n");
         if (selection3 == 1) {
             logger.trace("L'utilisateur souhaite rejouer");
-            MastermindDefenseur.mastermindDefenseur();
+            MastermindDefender.mastermindDefender();
         }
         if (selection3 == 2) {
             logger.trace("L'utilisateur souhaite retourner au menu principal");
@@ -158,21 +157,21 @@ public class Menu {
         }
     }
 
-    public static void endMenuRechercheChallenger() throws FileNotFoundException {
+    public static void endMenuResearchChallenger() throws FileNotFoundException {
         Logger logger = LogManager.getLogger();
         logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
-        System.out.println("1 - Rejouer");
-        System.out.println("2 - Retour au menu principal");
-        System.out.println("3 - Quitter l'application");
+        System.out.println("1 - Play again");
+        System.out.println("2 - Back to main menu");
+        System.out.println("3 - Quit the application");
         System.out.printf("%n");
-        selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
+        selection3 = sc.nextInt();
         System.out.printf("%n");
         if (selection3 == 1) {
             logger.trace("L'utilisateur souhaite rejouer");
-            RechercheChallenger.rechercheChallenger();
+            ResearchChallenger.researchChallenger();
         }
         if (selection3 == 2) {
             logger.trace("L'utilisateur souhaite retourner au menu principal");
@@ -185,21 +184,21 @@ public class Menu {
         }
     }
 
-    public static void endMenuRechercheDefenseur() throws FileNotFoundException {
+    public static void endMenuResearchDefender() throws FileNotFoundException {
         Logger logger = LogManager.getLogger();
         logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
-        System.out.println("1 - Rejouer");
-        System.out.println("2 - Retour au menu principal");
-        System.out.println("3 - Quitter l'application");
+        System.out.println("1 - Play again");
+        System.out.println("2 - Back to main menu");
+        System.out.println("3 - Quit the application");
         System.out.printf("%n");
-        selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
+        selection3 = sc.nextInt();
         System.out.printf("%n");
         if (selection3 == 1) {
             logger.trace("L'utilisateur souhaite rejouer");
-            RechercheDefenseur.rechercheDefenseur();
+            ResearchDefender.researchDefender();
         }
         if (selection3 == 2) {
             logger.trace("L'utilisateur souhaite retourner au menu principal");
@@ -213,21 +212,21 @@ public class Menu {
 
     }
 
-    public static void endMenuRechercheDuel() throws FileNotFoundException {
+    public static void endMenuResearchDuel() throws FileNotFoundException {
         Logger logger = LogManager.getLogger();
         logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
-        System.out.println("1 - Rejouer");
-        System.out.println("2 - Retour au menu principal");
-        System.out.println("3 - Quitter l'application");
+        System.out.println("1 - Play again");
+        System.out.println("2 - Back to main menu");
+        System.out.println("3 - Quit the application");
         System.out.printf("%n");
-        selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
+        selection3 = sc.nextInt();
         System.out.printf("%n");
         if (selection3 == 1) {
             logger.trace("L'utilisateur souhaite rejouer");
-            RechercheDuel.rechercheDuel();
+            ResearchDuel.researchDuel();
         }
         if (selection3 == 2) {
             logger.trace("L'utilisateur souhaite retourner au menu principal");
@@ -246,11 +245,11 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
         int selection3 = 0;
         System.out.printf("%n");
-        System.out.println("1 - Rejouer");
-        System.out.println("2 - Retour au menu principal");
-        System.out.println("3 - Quitter l'application");
+        System.out.println("1 - Play again");
+        System.out.println("2 - Back to main menu");
+        System.out.println("3 - Quit the application");
         System.out.printf("%n");
-        selection3 = sc.nextInt(); // SAISIE POUR REJOUER / RETOUR AU MENU PRINCIPAL / QUITTER
+        selection3 = sc.nextInt();
         System.out.printf("%n");
         if (selection3 == 1) {
             logger.trace("L'utilisateur souhaite rejouer");

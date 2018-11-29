@@ -8,15 +8,13 @@ import org.apache.logging.log4j.Logger;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class RechercheChallenger {
+public class ResearchChallenger {
 
-    public static void rechercheChallenger() throws FileNotFoundException {
+    public static void researchChallenger() throws FileNotFoundException {
 
         Scanner sc = new Scanner(System.in);
         Random r = new Random();
-
         ResourceBundle bundle = ResourceBundle.getBundle("config");
-
         Logger logger = LogManager.getLogger();
 
         int coups = 0;
@@ -103,20 +101,20 @@ public class RechercheChallenger {
                     logger.info("La partie est terminée (Défaite, coups maximum atteint)");
                     System.out.println("Le code secret était " + Arrays.toString(code));
                     System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
-                    Menu.endMenuRechercheChallenger();
+                    Menu.endMenuResearchChallenger();
                 }
                 if (numberOfCorrectUser == max) {
                     System.out.printf("%n");
                     logger.info("La partie est terminée (Victoire, code trouvé)");
                     System.out.println("Victoire en seulement " + coups + " coups !");
-                    Menu.endMenuRechercheChallenger();
+                    Menu.endMenuResearchChallenger();
                 }
             } catch (InputMismatchException e) {
                 System.out.printf("%n");
                 logger.fatal("InputMismatchException catchée : Saisie incorrect, redémarrage du jeu");
                 System.out.println("Saisie incorrecte, les lettres et les chiffres inférieurs à 1 sont interdits !");
                 System.out.println("Un nouveau code a été généré..");
-                RechercheChallenger.rechercheChallenger();
+                ResearchChallenger.researchChallenger();
             }
         }
     }

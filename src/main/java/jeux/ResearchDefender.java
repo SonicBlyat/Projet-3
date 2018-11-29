@@ -8,15 +8,13 @@ import org.apache.logging.log4j.Logger;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class RechercheDefenseur {
+public class ResearchDefender {
 
-    public static void rechercheDefenseur() throws FileNotFoundException {
+    public static void researchDefender() throws FileNotFoundException {
 
         Scanner sc = new Scanner(System.in);
         Random r = new Random();
-
         ResourceBundle bundle = ResourceBundle.getBundle("config");
-
         Logger logger = LogManager.getLogger();
 
         int coups = 0;
@@ -102,13 +100,13 @@ public class RechercheDefenseur {
                         System.out.printf("%n");
                         logger.info("La partie est terminée (Victoire, l'ordinateur n'a pas trouvé le code)");
                         System.out.println("Victoire, l'ordinateur a atteint les " + coupsMax + " coups autorisés");
-                        Menu.endMenuRechercheDefenseur();
+                        Menu.endMenuResearchDefender();
                     }
                     if (numberOfCorrectBot == max) {
                         System.out.printf("%n");
                         logger.info("La partie est terminée (Défaite, l'ordinateur a trouvé le code)");
                         System.out.println("Défaite, l'ordinateur a trouvé le code en seulement " + coups + " coups !");
-                        Menu.endMenuRechercheDefenseur();
+                        Menu.endMenuResearchDefender();
                     }
                 }
             }
@@ -116,7 +114,7 @@ public class RechercheDefenseur {
             System.out.printf("%n");
             logger.fatal("InputMismatchException catchée : Saisie incorrect, redémarrage du jeu");
             System.out.println("Saisie incorrecte, les lettres et les chiffres inférieurs à 1 sont interdits !");
-            RechercheDefenseur.rechercheDefenseur();
+            ResearchDefender.researchDefender();
         }
     }
 }

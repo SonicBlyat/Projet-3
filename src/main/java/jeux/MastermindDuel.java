@@ -138,6 +138,20 @@ public class MastermindDuel {
                 coupsBot++;
                 logger.trace("Coups ordinateur : " + coupsBot);
 
+                if (coupsBot == coupsMaxBot) {
+                    System.out.printf("%n");
+                    logger.info("La partie est terminée (Victoire, l'ordinateur a utilisé ses coups)");
+                    System.out.println("Victoire, l'ordinateur a utilisé ses " + coupsMaxBot + " coups autorisés !");
+                    Menu.endMenuMastermindDuel();
+                }
+                if (numberOfCorrectBot == max) {
+                    System.out.printf("%n");
+                    logger.info("La partie est terminée (Défaite, l'ordinateur a trouvé le code)");
+                    System.out.println("Le code secret adverse était " + Arrays.toString(botCode));
+                    System.out.println("Défaite, l'ordinateur a trouvé votre code en " + coupsBot + " coups");
+                    Menu.endMenuMastermindDuel();
+                }
+
                 // SAISIE DE L'UTILISATEUR
                 int[] inputUser = new int[max];
                 System.out.printf("%n");
@@ -191,12 +205,6 @@ public class MastermindDuel {
                 coupsUser++;
                 logger.trace("Coups utilisateur : " + coupsUser);
 
-                if (numberOfCorrectUser == max && numberOfCorrectBot == max) {
-                    System.out.printf("%n");
-                    logger.info("La partie est terminée (Egalité, codes trouvés en même temps)");
-                    System.out.println("Egalité ! Les deux codes ont été trouvés en même temps !");
-                    Menu.endMenuMastermindDuel();
-                }
                 if (coupsUser == coupsMaxUser) {
                     System.out.printf("%n");
                     logger.info("La partie est terminée (Défaite, coups maximum atteint)");
@@ -208,19 +216,6 @@ public class MastermindDuel {
                     System.out.printf("%n");
                     logger.info("La partie est terminée (Victoire, code trouvé)");
                     System.out.println("Victoire en seulement " + coupsUser + " coups !");
-                    Menu.endMenuMastermindDuel();
-                }
-                if (coupsBot == coupsMaxBot) {
-                    System.out.printf("%n");
-                    logger.info("La partie est terminée (Victoire, l'ordinateur a utilisé ses coups)");
-                    System.out.println("Victoire, l'ordinateur a utilisé ses " + coupsMaxBot + " coups autorisés !");
-                    Menu.endMenuMastermindDuel();
-                }
-                if (numberOfCorrectBot == max) {
-                    System.out.printf("%n");
-                    logger.info("La partie est terminée (Défaite, l'ordinateur a trouvé le code)");
-                    System.out.println("Le code secret adverse était " + Arrays.toString(botCode));
-                    System.out.println("Défaite, l'ordinateur a trouvé votre code en " + coupsBot + " coups");
                     Menu.endMenuMastermindDuel();
                 }
             }

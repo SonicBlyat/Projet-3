@@ -8,15 +8,13 @@ import org.apache.logging.log4j.Logger;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class RechercheDuel {
+public class ResearchDuel {
 
-    public static void rechercheDuel() throws FileNotFoundException {
+    public static void researchDuel() throws FileNotFoundException {
 
         Scanner sc = new Scanner(System.in);
         Random r = new Random();
-
         ResourceBundle bundle = ResourceBundle.getBundle("config");
-
         Logger logger = LogManager.getLogger();
 
         int coupsUser = 0;
@@ -120,6 +118,20 @@ public class RechercheDuel {
                 coupsBot++;
                 logger.trace("Coups ordinateur : " + coupsBot);
 
+                if (coupsBot == coupsMaxBot) {
+                    System.out.printf("%n");
+                    logger.info("La partie est terminée (Victoire, l'ordinateur a utilisé ses coups)");
+                    System.out.println("Victoire, l'ordinateur a utilisé ses " + coupsMaxBot + " coups autorisés !");
+                    Menu.endMenuResearchDuel();
+                }
+                if (numberOfCorrectBot == max) {
+                    System.out.printf("%n");
+                    logger.info("La partie est terminée (Défaite, l'ordinateur a trouvé le code)");
+                    System.out.println("Le code secret adverse était " + Arrays.toString(botCode));
+                    System.out.println("Défaite, l'ordinateur a trouvé votre code en " + coupsBot + " coups !");
+                    Menu.endMenuResearchDuel();
+                }
+
                 // SAISIE DE L'UTILISATEUR
                 int[] inputUser = new int[max];
                 System.out.printf("%n");
@@ -165,44 +177,25 @@ public class RechercheDuel {
                 coupsUser++;
                 logger.trace("Coups utilisateur : " + coupsUser);
 
-                if (numberOfCorrectUser == max && numberOfCorrectBot == max) {
-                    System.out.printf("%n");
-                    logger.info("La partie est terminée (Egalité, codes trouvés en même temps)");
-                    System.out.println("Egalité ! Les deux codes ont été trouvés en même temps !");
-                    Menu.endMenuRechercheDuel();
-                }
                 if (coupsUser == coupsMaxUser) {
                     System.out.printf("%n");
                     logger.info("La partie est terminée (Défaite, coups maximum atteint)");
                     System.out.println("Le code secret était " + Arrays.toString(botCode));
                     System.out.println("Défaite, vous avez atteint les " + coupsMaxUser + " coups autorisés");
-                    Menu.endMenuRechercheDuel();
+                    Menu.endMenuResearchDuel();
                 }
                 if (numberOfCorrectUser == max) {
                     System.out.printf("%n");
                     logger.info("La partie est terminée (Victoire, code trouvé)");
                     System.out.println("Victoire en seulement " + coupsUser + " coups !");
-                    Menu.endMenuRechercheDuel();
-                }
-                if (coupsBot == coupsMaxBot) {
-                    System.out.printf("%n");
-                    logger.info("La partie est terminée (Victoire, l'ordinateur a utilisé ses coups)");
-                    System.out.println("Victoire, l'ordinateur a utilisé ses " + coupsMaxBot + " coups autorisés !");
-                    Menu.endMenuRechercheDuel();
-                }
-                if (numberOfCorrectBot == max) {
-                    System.out.printf("%n");
-                    logger.info("La partie est terminée (Défaite, l'ordinateur a trouvé le code)");
-                    System.out.println("Le code secret adverse était " + Arrays.toString(botCode));
-                    System.out.println("Défaite, l'ordinateur a trouvé votre code en " + coupsBot + " coups !");
-                    Menu.endMenuRechercheDuel();
+                    Menu.endMenuResearchDuel();
                 }
             }
         } catch (InputMismatchException e) {
             System.out.printf("%n");
             logger.fatal("InputMismatchException catchée : Saisie incorrect, redémarrage du jeu");
             System.out.println("Saisie incorrecte, les lettres et les chiffres inférieurs à 1 sont interdits !");
-            RechercheDuel.rechercheDuel();
+            ResearchDuel.researchDuel();
         }
     }
 }
