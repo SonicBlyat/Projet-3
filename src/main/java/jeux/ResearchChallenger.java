@@ -17,103 +17,103 @@ public class ResearchChallenger {
         ResourceBundle bundle = ResourceBundle.getBundle("config");
         Logger logger = LogManager.getLogger();
 
-        int coups = 0;
-        int coupsMax = Integer.parseInt(bundle.getString("coupsMaxRechercheChallenger")); // NOMBRE DE COUPS (CONFIGURABLE)
-        int fourchette = Integer.parseInt(bundle.getString("chiffreMax"));       // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
-        int max = Integer.parseInt(bundle.getString("tailleCode"));              // TAILLE DU CODE (CONFIGURABLE)
-        boolean modeDev = Boolean.parseBoolean(bundle.getString("modeDev"));
+        int userTry = 0;                                                                  // CURRENT TRY
+        int maxTry = Integer.parseInt(bundle.getString("maxTryResearchChallenger"));  // NUMBER OF TRY ALLOWED
+        int maxNumber = Integer.parseInt(bundle.getString("maxNumber"));              // USE DIGITS BETWEEN 1 AND ...
+        int codeSize = Integer.parseInt(bundle.getString("codeSize"));                // CODE SIZE
+        boolean devMode = Boolean.parseBoolean(bundle.getString("devMode"));          // DEVELOPER MODE
 
         logger.info("LANCEMENT DU JEU : RECHERCHE CHALLENGER");
-        logger.trace(coupsMax + " coups maximum");
-        logger.trace("Chiffres entre 1 et " + fourchette);
-        logger.trace("Taille du code : " + max + " chiffres");
-        logger.trace("Mode développeur : " + modeDev);
+        logger.trace(maxTry + " coups maximum");
+        logger.trace("Chiffres entre 1 et " + maxNumber);
+        logger.trace("Taille du code : " + codeSize + " chiffres");
+        logger.trace("Mode développeur : " + devMode);
 
         System.out.printf("%n");
-        System.out.println("RECHERCHE +/- : CHALLENGER");
-        System.out.println("Trouvez le code secret en 10 coups maximum !");
+        System.out.println("RESEARCH +/- : CHALLENGER MODE");
+        System.out.println("Find the secret code, you have " + maxTry  + " try !");
 
-        // GENERATION DU CODE SECRET
-        int[] code = new int[max];
-        for (int i = 0; i < max; i++) {
-            code[i] = r.nextInt(fourchette) + 1;
+        // RANDOM SECRET CODE
+        int[] code = new int[codeSize];
+        for (int i = 0; i < codeSize; i++) {
+            code[i] = r.nextInt(maxNumber) + 1;
         }
         logger.info("Code secret généré par l'ordinateur");
 
-        if (modeDev == true) {
+        if (devMode) {
             System.out.printf("%n");
-            System.out.println("SOLUTION : " + Arrays.toString(code));
+            System.out.println("[DEV MODE] CODE : " + Arrays.toString(code));
         }
 
-        while (coups < coupsMax) {
+        while (userTry < maxTry) {
 
+            // USER INPUT
             try {
-                // SAISIE UTILISATEUR
-                int[] saisie = new int[max];
+                int[] input = new int[codeSize];
                 System.out.printf("%n");
-                int inputSaisie = sc.nextInt();
-                for (int i = 0; i < max; i++) {
-                    saisie[i] = (int) (inputSaisie / (Math.pow(10, (max - i - 1)))) % 10;
-                    if (saisie[i] < 1) {
+                int inputScanner = sc.nextInt();
+                for (int i = 0; i < codeSize; i++) {
+                    input[i] = (int) (inputScanner / (Math.pow(10, (codeSize - i - 1)))) % 10;
+                    if (input[i] < 1) {
                         System.out.printf("%n");
-                        System.out.println("Saisie incorrect : " + max + " chiffres maximum composés de chiffres entre 1 et " + fourchette);
-                        System.out.println("Veuillez entrer une nouvelle saisie ci-dessous :");
+                        System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                        System.out.println("Please enter a valid input below :");
                         logger.error("Saisie incorrect");
-                        inputSaisie = sc.nextInt();
+                        inputScanner = sc.nextInt();
                     }
-                    if (saisie[i] > fourchette) {
+                    if (input[i] > maxNumber) {
                         System.out.printf("%n");
-                        System.out.println("Saisie incorrect : " + max + " chiffres maximum composés de chiffres entre 1 et " + fourchette);
-                        System.out.println("Veuillez entrer une nouvelle saisie ci-dessous :");
+                        System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                        System.out.println("Please enter a valid input below :");
                         logger.error("Saisie incorrect");
-                        inputSaisie = sc.nextInt();
+                        inputScanner = sc.nextInt();
                     }
                 }
                 logger.info("L'utilisateur vient d'entrer sa saisie");
 
-                // RESULTAT DE LA SAISIE UTILISATEUR
-                String resultat = "";
-                for (int i = 0; i < max; i++) {
-                    boolean bonChiffre = saisie[i] == code[i];
-                    boolean inferieurChiffre = saisie[i] < code[i];
-                    boolean superieurChiffre = saisie[i] > code[i];
-                    if (bonChiffre) {
-                        resultat = resultat + "=";
+                // RESULT FOR USER INPUT
+                String result = "";
+                for (int i = 0; i < codeSize; i++) {
+                    boolean correctDigit = input[i] == code[i];
+                    boolean inferiorDigit = input[i] < code[i];
+                    boolean superiorDigit = input[i] > code[i];
+                    if (correctDigit) {
+                        result = result + "=";
                     }
-                    if (inferieurChiffre) {
-                        resultat += "+";
+                    if (inferiorDigit) {
+                        result += "+";
                     }
-                    if (superieurChiffre) {
-                        resultat = resultat + "-";
+                    if (superiorDigit) {
+                        result = result + "-";
                     }
                 }
                 logger.info("Traitement de la saisie utilisateur..");
 
-                // INDICES
-                System.out.println(resultat);
-                int numberOfCorrectUser = StringUtils.countMatches(resultat, "="); // COMPTE LE NOMBRE DE "="
-                coups++;
+                // CLUES
+                System.out.println(result);
+                int numberOfCorrectUser = StringUtils.countMatches(result, "="); // COMPTE LE NOMBRE DE "="
+                userTry++;
                 logger.info("Les indices ont été envoyés à l'utilisateur");
-                logger.trace("Coups : " + coups);
+                logger.trace("Coups : " + userTry);
 
-                if (coups == coupsMax) {
+                if (userTry == maxTry) {
                     System.out.printf("%n");
                     logger.info("La partie est terminée (Défaite, coups maximum atteint)");
-                    System.out.println("Le code secret était " + Arrays.toString(code));
-                    System.out.println("Défaite, vous avez atteint les 10 coups autorisés");
+                    System.out.println("The secret code was " + Arrays.toString(code));
+                    System.out.println("Defeat, you have reached the " + maxTry + " allowed try");
                     Menu.endMenuResearchChallenger();
                 }
-                if (numberOfCorrectUser == max) {
+                if (numberOfCorrectUser == codeSize) {
                     System.out.printf("%n");
                     logger.info("La partie est terminée (Victoire, code trouvé)");
-                    System.out.println("Victoire en seulement " + coups + " coups !");
+                    System.out.println("Victory in only " + userTry + " try !");
                     Menu.endMenuResearchChallenger();
                 }
             } catch (InputMismatchException e) {
                 System.out.printf("%n");
                 logger.fatal("InputMismatchException catchée : Saisie incorrect, redémarrage du jeu");
-                System.out.println("Saisie incorrecte, les lettres et les chiffres inférieurs à 1 sont interdits !");
-                System.out.println("Un nouveau code a été généré..");
+                System.out.println("Invalid input, letters and digits less than 1 are forbidden !");
+                System.out.println("A new secret code has been generated..");
                 ResearchChallenger.researchChallenger();
             }
         }

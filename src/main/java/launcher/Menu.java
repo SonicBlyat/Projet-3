@@ -17,6 +17,7 @@ public class Menu {
         int selection2 = 0;
 
         logger.trace("Affichage du menu principal");
+        System.out.println("------------------------------------------");
         System.out.println("MAIN MENU");
         System.out.println("Enter a number to choose a game");
         System.out.println("------------------------------------------");

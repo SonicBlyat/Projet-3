@@ -17,10 +17,10 @@ public class MastermindDefender {
         ResourceBundle bundle = ResourceBundle.getBundle("config");
         Logger logger = LogManager.getLogger();
 
-        int botTry = 0;                                                                      // CURRENT TRY
-        int maxTry = Integer.parseInt(bundle.getString("coupsMaxMastermindChallenger")); // NUMBER OF TRY ALLOWED
-        int maxNumber = Integer.parseInt(bundle.getString("chiffreMax"));                // USE DIGITS BETWEEN 1 AND ...
-        int codeSize = Integer.parseInt(bundle.getString("tailleCode"));                 // CODE SIZE
+        int botTry = 0;                                                                   // CURRENT TRY
+        int maxTry = Integer.parseInt(bundle.getString("maxTryMastermindDefender"));  // NUMBER OF TRY ALLOWED
+        int maxNumber = Integer.parseInt(bundle.getString("maxNumber"));              // USE DIGITS BETWEEN 1 AND ...
+        int codeSize = Integer.parseInt(bundle.getString("codeSize"));                // CODE SIZE
 
         logger.info("LANCEMENT DU JEU : MASTERMIND DEFENSEUR");
         logger.trace(maxTry + " coups maximum");

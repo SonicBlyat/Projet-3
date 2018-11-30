@@ -1,0 +1,3 @@
+2018-11-30 10:57:40.595 [main] INFO  launcher.Main - LANCEMENT DE L'APPLICATION..
+2018-11-30 10:57:40.598 [main] TRACE launcher.Menu - Affichage du menu principal
+2018-11-30 10:57:43.279 [main] TRACE launcher.Menu - ARRÊT DE L'APPLICATION

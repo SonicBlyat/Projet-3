@@ -17,38 +17,38 @@ public class ResearchDefender {
         ResourceBundle bundle = ResourceBundle.getBundle("config");
         Logger logger = LogManager.getLogger();
 
-        int coups = 0;
-        int coupsMax = Integer.parseInt(bundle.getString("coupsMaxRechercheDefenseur")); // NOMBRE DE COUPS (CONFIGURABLE)
-        int fourchette = Integer.parseInt(bundle.getString("chiffreMax"));       // UTILISER DES CHIFFRES ENTRE 1 ET ... (CONFIGURABLE)
-        int max = Integer.parseInt(bundle.getString("tailleCode"));              // TAILLE DU CODE (CONFIGURABLE)
+        int botTry = 0;                                                                 // CURRENT TRY
+        int maxTry = Integer.parseInt(bundle.getString("maxTryResearchDefender"));  // NUMBER OF TRY ALLOWED
+        int maxNumber = Integer.parseInt(bundle.getString("maxNumber"));            // USE DIGITS BETWEEN 1 AND ...
+        int codeSize = Integer.parseInt(bundle.getString("codeSize"));              // CODE SIZE
 
         logger.info("LANCEMENT DU JEU : RECHERCHE DEFENSEUR");
-        logger.trace(coupsMax + " coups maximum");
-        logger.trace("Chiffres entre 1 et " + fourchette);
-        logger.trace("Taille du code : " + max + " chiffres");
+        logger.trace(maxTry + " coups maximum");
+        logger.trace("Chiffres entre 1 et " + maxNumber);
+        logger.trace("Taille du code : " + codeSize + " chiffres");
 
         System.out.printf("%n");
-        System.out.println("RECHERCHE : DEFENSEUR");
-        System.out.println("Choisissez une combinaison !");
+        System.out.println("RESEARCH +/- : DEFENDER MODE");
+        System.out.println("Enter a secret code !");
         System.out.printf("%n");
 
-        // GENERATION DU CODE PAR L'UTILISATEUR
+        // USER CREATE THE SECRET CODE
         try {
-            int[] code = new int[max];
+            int[] code = new int[codeSize];
             int inputCode = sc.nextInt();
-            for (int i = 0; i < max; i++) {
-                code[i] = (int) (inputCode / (Math.pow(10, (max - i - 1)))) % 10;
+            for (int i = 0; i < codeSize; i++) {
+                code[i] = (int) (inputCode / (Math.pow(10, (codeSize - i - 1)))) % 10;
                 if (code[i] < 1) {
                     System.out.printf("%n");
-                    System.out.println("Saisie incorrect : " + max + " chiffres maximum composés de chiffres entre 1 et " + fourchette);
-                    System.out.println("Veuillez entrer une nouvelle saisie ci-dessous :");
+                    System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                    System.out.println("Please enter a valid input below :");
                     logger.error("Saisie incorrect");
                     inputCode = sc.nextInt();
                 }
-                if (code[i] > fourchette) {
+                if (code[i] > maxNumber) {
                     System.out.printf("%n");
-                    System.out.println("Saisie incorrect : " + max + " chiffres maximum composés de chiffres entre 1 et " + fourchette);
-                    System.out.println("Veuillez entrer une nouvelle saisie ci-dessous :");
+                    System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                    System.out.println("Please enter a valid input :");
                     logger.error("Saisie incorrect");
                     inputCode = sc.nextInt();
                 }
@@ -57,21 +57,21 @@ public class ResearchDefender {
 
             // PREMIER ESSAI DU BOT
             ArrayList<Integer> TryBot = new ArrayList<Integer>();
-            for (int i = 0; i < max; i++) {
-                TryBot.add(r.nextInt(fourchette) + 1);
+            for (int i = 0; i < codeSize; i++) {
+                TryBot.add(r.nextInt(maxNumber) + 1);
             }
             logger.info("L'ordinateur vient d'entrer sa saisie");
 
-            while (coups < coupsMax) {
-                for (int i = 0; i < max; i++) {
+            while (botTry < maxTry) {
+                for (int i = 0; i < codeSize; i++) {
                     System.out.printf("%n");
-                    System.out.println("Ordinateur : " + StringUtils.join(TryBot, ""));
+                    System.out.println("Bot : " + StringUtils.join(TryBot, ""));
                     logger.info("Affichage de la saisie ordinateur");
                     System.out.printf("%n");
-                    System.out.print("Donnez des indices : ");
-                    String[] reponse = new String[max];
+                    System.out.print("Give some clues : ");
+                    String[] reponse = new String[codeSize];
                     String inputReponse = sc.next();
-                    for (i = 0; i < max; i++) {
+                    for (i = 0; i < codeSize; i++) {
                         reponse[i] = (inputReponse.charAt(i) + "");
                     }
                     logger.info("Indices donnés par l'utilisateur");
@@ -84,28 +84,28 @@ public class ResearchDefender {
                         } else if (reponse[i].equals("-")) {
                             TryBot.set(i, TryBot.get(i) - 1);
                         }
-                        if (TryBot.get(i) < 1) { // EMPECHE D'ARRIVER A 0
+                        if (TryBot.get(i) < 1) {         // EMPECHE D'ARRIVER A 0
                             TryBot.set(i, 1);
                         }
-                        if (TryBot.get(i) > fourchette) { // EMPECHE DE DEPASSER FOURCHETTE
-                            TryBot.set(i, fourchette);
+                        if (TryBot.get(i) > maxNumber) { // EMPECHE DE DEPASSER FOURCHETTE
+                            TryBot.set(i, maxNumber);
                         }
                     }
                     logger.info("Traitement des indices par l'ordinateur");
                     int numberOfCorrectBot = StringUtils.countMatches(inputReponse, "="); // COMPTE LE NOMBRE DE "="
-                    coups++;
-                    logger.trace("Coups : " + coups);
+                    botTry++;
+                    logger.trace("Coups : " + botTry);
 
-                    if (coups == coupsMax) {
+                    if (botTry == maxTry) {
                         System.out.printf("%n");
                         logger.info("La partie est terminée (Victoire, l'ordinateur n'a pas trouvé le code)");
-                        System.out.println("Victoire, l'ordinateur a atteint les " + coupsMax + " coups autorisés");
+                        System.out.println("Victory, the bot have reached the " + maxTry + " allowed try");
                         Menu.endMenuResearchDefender();
                     }
-                    if (numberOfCorrectBot == max) {
+                    if (numberOfCorrectBot == codeSize) {
                         System.out.printf("%n");
                         logger.info("La partie est terminée (Défaite, l'ordinateur a trouvé le code)");
-                        System.out.println("Défaite, l'ordinateur a trouvé le code en seulement " + coups + " coups !");
+                        System.out.println("Defeat, the bot have found your secret code in only " + botTry + " try !");
                         Menu.endMenuResearchDefender();
                     }
                 }
@@ -113,7 +113,7 @@ public class ResearchDefender {
         } catch (InputMismatchException e) {
             System.out.printf("%n");
             logger.fatal("InputMismatchException catchée : Saisie incorrect, redémarrage du jeu");
-            System.out.println("Saisie incorrecte, les lettres et les chiffres inférieurs à 1 sont interdits !");
+            System.out.println("Invalid input, letters and digits less than 1 are forbidden !");
             ResearchDefender.researchDefender();
         }
     }
