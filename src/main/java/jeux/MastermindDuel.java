@@ -114,12 +114,13 @@ public class MastermindDuel {
 
                 for (int i = 0; i < userCode.length; i++) {
                     for (int j = 0; j < inputBot.size(); j++) {
-                        boolean test = userCode[i] != inputBot.get(i);
-                        if (userCode[i] == inputBot.get(i)) {
+                        boolean correct = userCode[i] == inputBot.get(i);
+                        boolean present = !userCodeUsed[i] && !inputBotUsed[j] && userCode[i] == inputBot.get(j);
+                        if (correct) {
                             inputBot.get(i);                            // IF i IS CORRECT, KEEP i ON THIS INDEX
-                        } else if (!userCodeUsed[i] && !inputBotUsed[j] && userCode[i] == inputBot.get(j)) {
+                        } else if (present) {
                             for (j = 0; j < inputBot.size(); j++) {
-                                if (inputBot.indexOf(test) == j) {      // IF i IS PRESENT AND NO CORRECT DIGIT ON INDEX j
+                                if (inputBot.indexOf(!correct) == j) {  // IF i IS PRESENT AND NO CORRECT DIGIT ON INDEX j
                                     inputBot.set(j, i);                 // MOVE i TO INDEX j TO TRY IF i IS CORRECT
                                 }
                             }
