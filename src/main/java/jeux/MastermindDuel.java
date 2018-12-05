@@ -44,14 +44,14 @@ public class MastermindDuel {
                 userCode[i] = (int) (userCodeScanner / (Math.pow(10, (codeSize - i - 1)))) % 10;
                 if (userCode[i] < 1) {
                     System.out.printf("%n");
-                    System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                    System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
                     System.out.println("Please enter a valid input below :");
                     logger.error("Saisie incorrect");
                     userCodeScanner = sc.nextInt();
                 }
                 if (userCode[i] > maxNumber) {
                     System.out.printf("%n");
-                    System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                    System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
                     System.out.println("Please enter a valid input below :");
                     logger.error("Saisie incorrect");
                     userCodeScanner = sc.nextInt();
@@ -159,14 +159,14 @@ public class MastermindDuel {
                     userInput[i] = (int) (userInputScanner / (Math.pow(10, (codeSize - i - 1)))) % 10;
                     if (userInput[i] < 1) {
                         System.out.printf("%n");
-                        System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                        System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
                         System.out.println("Please enter a valid input below :");
                         logger.error("Saisie incorrect");
                         userInputScanner = sc.nextInt();
                     }
                     if (userInput[i] > maxNumber) {
                         System.out.printf("%n");
-                        System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                        System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
                         System.out.println("Please enter a valid input below :");
                         logger.error("Saisie incorrect");
                         userInputScanner = sc.nextInt();

@@ -44,14 +44,14 @@ public class ResearchDuel {
                 userCode[i] = (int) (inputUserCode / (Math.pow(10, (codeSize - i - 1)))) % 10;
                 if (userCode[i] < 1) {
                     System.out.printf("%n");
-                    System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                    System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
                     System.out.println("Please enter a valid input below :");
                     logger.error("Saisie incorrect");
                     inputUserCode = sc.nextInt();
                 }
                 if (userCode[i] > maxNumber) {
                     System.out.printf("%n");
-                    System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                    System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
                     System.out.println("Please enter a valid input below :");
                     logger.error("Saisie incorrect");
                     inputUserCode = sc.nextInt();
@@ -140,14 +140,14 @@ public class ResearchDuel {
                     inputUser[i] = (int) (scannerUser / (Math.pow(10, (codeSize - i - 1)))) % 10;
                     if (inputUser[i] < 1) {
                         System.out.printf("%n");
-                        System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                        System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
                         System.out.println("Please enter a valid input below :");
                         logger.error("Saisie incorrect");
                         scannerUser = sc.nextInt();
                     }
                     if (inputUser[i] > maxNumber) {
                         System.out.printf("%n");
-                        System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                        System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
                         System.out.println("Please enter a valid input below :");
                         logger.error("Saisie incorrect");
                         scannerUser = sc.nextInt();

@@ -40,14 +40,14 @@ public class MastermindDefender {
                 code[i] = (int) (codeScanner / (Math.pow(10, (codeSize - i - 1)))) % 10;
                 if (code[i] < 1) {
                     System.out.printf("%n");
-                    System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                    System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
                     System.out.println("Please enter a valid input below :");
                     logger.error("Saisie incorrect");
                     codeScanner = sc.nextInt();
                 }
                 if (code[i] > maxNumber) {
                     System.out.printf("%n");
-                    System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                    System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
                     System.out.println("Please enter a valid input below :");
                     logger.error("Saisie incorrect");
                     codeScanner = sc.nextInt();

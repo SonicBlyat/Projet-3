@@ -56,14 +56,14 @@ public class ResearchChallenger {
                     input[i] = (int) (inputScanner / (Math.pow(10, (codeSize - i - 1)))) % 10;
                     if (input[i] < 1) {
                         System.out.printf("%n");
-                        System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                        System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
                         System.out.println("Please enter a valid input below :");
                         logger.error("Saisie incorrect");
                         inputScanner = sc.nextInt();
                     }
                     if (input[i] > maxNumber) {
                         System.out.printf("%n");
-                        System.out.println("Invalid input : " + codeSize + " digits maximum between 1 and " + maxNumber);
+                        System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
                         System.out.println("Please enter a valid input below :");
                         logger.error("Saisie incorrect");
                         inputScanner = sc.nextInt();
