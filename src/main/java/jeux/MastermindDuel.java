@@ -10,7 +10,7 @@ import java.util.*;
 
 public class MastermindDuel {
 
-    public static void mastermindDuel() throws FileNotFoundException {
+    public static void mastermindDuel() throws Exception {
 
         Scanner sc = new Scanner(System.in);
         Random r = new Random();
@@ -141,14 +141,16 @@ public class MastermindDuel {
                     System.out.printf("%n");
                     logger.info("La partie est terminée (Victoire, l'ordinateur a utilisé ses coups)");
                     System.out.println("Victory, the bot have reached the " + maxBotTry + " allowed try");
-                    Menu.endMenuMastermindDuel();
+                    Menu menu = new Menu();
+                    menu.endMenuMastermindDuel();
                 }
                 if (numberOfCorrectBot == codeSize) {
                     System.out.printf("%n");
                     logger.info("La partie est terminée (Défaite, l'ordinateur a trouvé le code)");
                     System.out.println("Le code secret adverse était " + Arrays.toString(botCode));
                     System.out.println("Defeat, the bot have found your secret code in only " + botTry + " try !");
-                    Menu.endMenuMastermindDuel();
+                    Menu menu = new Menu();
+                    menu.endMenuMastermindDuel();
                 }
 
                 // USER INPUT
@@ -209,13 +211,15 @@ public class MastermindDuel {
                     logger.info("La partie est terminée (Défaite, coups maximum atteint)");
                     System.out.println("The secret code was " + Arrays.toString(botCode));
                     System.out.println("Defeat, you have reached the " + maxUserTry + " allowed try");
-                    Menu.endMenuMastermindDuel();
+                    Menu menu = new Menu();
+                    menu.endMenuMastermindDuel();
                 }
                 if (numberOfCorrectUser == codeSize) {
                     System.out.printf("%n");
                     logger.info("La partie est terminée (Victoire, code trouvé)");
                     System.out.println("Victory in only " + userTry + " try !");
-                    Menu.endMenuMastermindDuel();
+                    Menu menu = new Menu();
+                    menu.endMenuMastermindDuel();
                 }
             }
         } catch (InputMismatchException e) {

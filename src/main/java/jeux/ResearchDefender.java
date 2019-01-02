@@ -10,7 +10,7 @@ import java.util.*;
 
 public class ResearchDefender {
 
-    public static void researchDefender() throws FileNotFoundException {
+    public static void researchDefender() throws Exception {
 
         Scanner sc = new Scanner(System.in);
         Random r = new Random();
@@ -100,13 +100,15 @@ public class ResearchDefender {
                         System.out.printf("%n");
                         logger.info("La partie est terminée (Victoire, l'ordinateur n'a pas trouvé le code)");
                         System.out.println("Victory, the bot have reached the " + maxTry + " allowed try");
-                        Menu.endMenuResearchDefender();
+                        Menu menu = new Menu();
+                        menu.endMenuResearchDefender();
                     }
                     if (numberOfCorrectBot == codeSize) {
                         System.out.printf("%n");
                         logger.info("La partie est terminée (Défaite, l'ordinateur a trouvé le code)");
                         System.out.println("Defeat, the bot have found your secret code in only " + botTry + " try !");
-                        Menu.endMenuResearchDefender();
+                        Menu menu = new Menu();
+                        menu.endMenuResearchDefender();
                     }
                 }
             }

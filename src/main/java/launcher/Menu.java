@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Menu {
 
-    public static void mainMenu() throws FileNotFoundException {
+    public void mainMenu() throws Exception {
 
         Logger logger = LogManager.getLogger();
         Scanner choix = new Scanner(System.in);
@@ -62,7 +62,8 @@ public class Menu {
 
                 if (selection2 == 1) {
                     logger.trace("Sélection du mode : CHALLENGER");
-                    ResearchChallenger.researchChallenger();
+                    ResearchChallenger researchChallenger = new ResearchChallenger();
+                    researchChallenger.researchChallenger();
                 }
 
                 if (selection2 == 2) {
@@ -135,7 +136,7 @@ public class Menu {
         }
     }
 
-    public static void endMenuMastermindChallenger() throws FileNotFoundException {
+    public void endMenuMastermindChallenger() throws Exception {
         Logger logger = LogManager.getLogger();
         logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
@@ -174,7 +175,7 @@ public class Menu {
         }
     }
 
-    public static void endMenuMastermindDefender() throws FileNotFoundException {
+    public void endMenuMastermindDefender() throws Exception {
         Logger logger = LogManager.getLogger();
         logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
@@ -213,7 +214,7 @@ public class Menu {
         }
     }
 
-    public static void endMenuResearchChallenger() throws FileNotFoundException {
+    public void endMenuResearchChallenger() throws Exception {
         Logger logger = LogManager.getLogger();
         logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
@@ -236,7 +237,8 @@ public class Menu {
             System.out.printf("%n");
             if (selection3 == 1) {
                 logger.trace("L'utilisateur souhaite rejouer");
-                ResearchChallenger.researchChallenger();
+                ResearchChallenger researchChallenger = new ResearchChallenger();
+                researchChallenger.researchChallenger();
             }
             if (selection3 == 2) {
                 logger.trace("L'utilisateur souhaite retourner au menu principal");
@@ -252,7 +254,7 @@ public class Menu {
         }
     }
 
-    public static void endMenuResearchDefender() throws FileNotFoundException {
+    public void endMenuResearchDefender() throws Exception {
         Logger logger = LogManager.getLogger();
         logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
@@ -292,7 +294,7 @@ public class Menu {
         }
     }
 
-    public static void endMenuResearchDuel() throws FileNotFoundException {
+    public void endMenuResearchDuel() throws Exception {
         Logger logger = LogManager.getLogger();
         logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);
@@ -331,7 +333,7 @@ public class Menu {
         }
     }
 
-    public static void endMenuMastermindDuel() throws FileNotFoundException {
+    public void endMenuMastermindDuel() throws Exception {
         Logger logger = LogManager.getLogger();
         logger.trace("Affichage du menu de fin");
         Scanner sc = new Scanner(System.in);

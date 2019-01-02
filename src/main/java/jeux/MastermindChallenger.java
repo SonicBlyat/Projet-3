@@ -10,7 +10,7 @@ import java.util.*;
 
 public class MastermindChallenger {
 
-    public static void mastermindChallenger() throws FileNotFoundException {
+    public static void mastermindChallenger() throws Exception {
 
         Scanner sc = new Scanner(System.in);
         Random r = new Random();
@@ -107,12 +107,14 @@ public class MastermindChallenger {
                     logger.info("La partie est terminée (Défaite, coups maximum atteint)");
                     System.out.println("The secret code was " + StringUtils.join(code, ""));
                     System.out.println("Defeat, you have reached the " + maxTry + " allowed try");
-                    Menu.endMenuMastermindChallenger();
+                    Menu menu = new Menu();
+                    menu.endMenuMastermindChallenger();
                 }
                 if (numberOfCorrect == codeSize) {
                     logger.info("La partie est terminée (Victoire, code trouvé)");
                     System.out.println("Victory in only " + userTry + " try !");
-                    Menu.endMenuMastermindChallenger();
+                    Menu menu = new Menu();
+                    menu.endMenuMastermindChallenger();
                 }
             } catch (InputMismatchException e) {
                 System.out.printf("%n");

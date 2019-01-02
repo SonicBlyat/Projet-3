@@ -10,7 +10,7 @@ import java.util.*;
 
 public class ResearchDuel {
 
-    public static void researchDuel() throws FileNotFoundException {
+    public static void researchDuel() throws Exception {
 
         Scanner sc = new Scanner(System.in);
         Random r = new Random();
@@ -122,14 +122,16 @@ public class ResearchDuel {
                     System.out.printf("%n");
                     logger.info("La partie est terminée (Victoire, l'ordinateur a utilisé ses coups)");
                     System.out.println("Victory, the bot have reached the " + maxBotTry + " allowed try");
-                    Menu.endMenuResearchDuel();
+                    Menu menu = new Menu();
+                    menu.endMenuResearchDuel();
                 }
                 if (numberOfCorrectBot == codeSize) {
                     System.out.printf("%n");
                     logger.info("La partie est terminée (Défaite, l'ordinateur a trouvé le code)");
                     System.out.println("Le code secret adverse était " + Arrays.toString(botCode));
                     System.out.println("Defeat, the bot have found your secret code in only " + botTry + " try !");
-                    Menu.endMenuResearchDuel();
+                    Menu menu = new Menu();
+                    menu.endMenuResearchDuel();
                 }
 
                 // USER INPUT
@@ -184,13 +186,15 @@ public class ResearchDuel {
                     logger.info("La partie est terminée (Défaite, coups maximum atteint)");
                     System.out.println("The secret code was " + Arrays.toString(botCode));
                     System.out.println("Defeat, you have reached the " + maxUserTry + " allowed try");
-                    Menu.endMenuResearchDuel();
+                    Menu menu = new Menu();
+                    menu.endMenuResearchDuel();
                 }
                 if (numberOfCorrectUser == codeSize) {
                     System.out.printf("%n");
                     logger.info("La partie est terminée (Victoire, code trouvé)");
                     System.out.println("Victory in only " + userTry + " try !");
-                    Menu.endMenuResearchDuel();
+                    Menu menu = new Menu();
+                    menu.endMenuResearchDuel();
                 }
             }
         } catch (InputMismatchException e) {

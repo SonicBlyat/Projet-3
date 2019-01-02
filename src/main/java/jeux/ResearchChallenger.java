@@ -1,5 +1,6 @@
 package jeux;
 
+import code.RandomCode;
 import launcher.Menu;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -10,18 +11,28 @@ import java.util.*;
 
 public class ResearchChallenger {
 
-    public static void researchChallenger() throws FileNotFoundException {
+    private Scanner sc = new Scanner(System.in);
+    private Random r = new Random();
+    private ResourceBundle bundle = ResourceBundle.getBundle("config");
+    private Logger logger = LogManager.getLogger();
 
-        Scanner sc = new Scanner(System.in);
-        Random r = new Random();
-        ResourceBundle bundle = ResourceBundle.getBundle("config");
-        Logger logger = LogManager.getLogger();
+    private int userTry = 0;                                                                  // CURRENT TRY
+    private int maxTry; // NUMBER OF TRY ALLOWED
+    private int maxNumber;           // USE DIGITS BETWEEN 1 AND ...
+    private int codeSize;            // CODE SIZE
+    private boolean devMode;        // DEVELOPER MODE
+    RandomCode randomCode;
+    int[] codeArray;
 
-        int userTry = 0;                                                                  // CURRENT TRY
-        int maxTry = Integer.parseInt(bundle.getString("maxTryResearchChallenger"));  // NUMBER OF TRY ALLOWED
-        int maxNumber = Integer.parseInt(bundle.getString("maxNumber"));              // USE DIGITS BETWEEN 1 AND ...
-        int codeSize = Integer.parseInt(bundle.getString("codeSize"));                // CODE SIZE
-        boolean devMode = Boolean.parseBoolean(bundle.getString("devMode"));          // DEVELOPER MODE
+    public ResearchChallenger() {
+        this.maxTry = Integer.parseInt(bundle.getString("maxTryResearchChallenger")); // NUMBER OF TRY ALLOWED
+        this.maxNumber = Integer.parseInt(bundle.getString("maxNumber"));             // USE DIGITS BETWEEN 1 AND ...
+        this.codeSize = Integer.parseInt(bundle.getString("codeSize"));               // CODE SIZE
+        this.devMode = Boolean.parseBoolean(bundle.getString("devMode"));         // DEVELOPER MODE
+        randomCode = new RandomCode(maxNumber, codeSize);
+    }
+
+    public void researchChallenger() throws Exception {
 
         logger.info("LANCEMENT DU JEU : RECHERCHE CHALLENGER");
         logger.trace(maxTry + " coups maximum");
@@ -34,15 +45,12 @@ public class ResearchChallenger {
         System.out.println("Find the secret code, you have " + maxTry  + " try !");
 
         // RANDOM SECRET CODE
-        int[] code = new int[codeSize];
-        for (int i = 0; i < codeSize; i++) {
-            code[i] = r.nextInt(maxNumber) + 1;
-        }
+        codeArray = randomCode.randomCode();
         logger.info("Code secret généré par l'ordinateur");
 
         if (devMode) {
             System.out.printf("%n");
-            System.out.println("[DEV MODE] CODE : " + Arrays.toString(code));
+            System.out.println("[DEV MODE] CODE : " + Arrays.toString(codeArray));
         }
 
         while (userTry < maxTry) {
@@ -74,9 +82,9 @@ public class ResearchChallenger {
                 // RESULT FOR USER INPUT
                 String result = "";
                 for (int i = 0; i < codeSize; i++) {
-                    boolean correctDigit = input[i] == code[i];
-                    boolean inferiorDigit = input[i] < code[i];
-                    boolean superiorDigit = input[i] > code[i];
+                    boolean correctDigit = input[i] == codeArray[i];
+                    boolean inferiorDigit = input[i] < codeArray[i];
+                    boolean superiorDigit = input[i] > codeArray[i];
                     if (correctDigit) {
                         result = result + "=";
                     }
@@ -97,25 +105,35 @@ public class ResearchChallenger {
                 logger.trace("Coups : " + userTry);
 
                 if (userTry == maxTry) {
-                    System.out.printf("%n");
-                    logger.info("La partie est terminée (Défaite, coups maximum atteint)");
-                    System.out.println("The secret code was " + Arrays.toString(code));
-                    System.out.println("Defeat, you have reached the " + maxTry + " allowed try");
-                    Menu.endMenuResearchChallenger();
+                    endGameDefeat();
                 }
                 if (numberOfCorrectUser == codeSize) {
-                    System.out.printf("%n");
-                    logger.info("La partie est terminée (Victoire, code trouvé)");
-                    System.out.println("Victory in only " + userTry + " try !");
-                    Menu.endMenuResearchChallenger();
+                    endGameVictory();
                 }
             } catch (InputMismatchException e) {
                 System.out.printf("%n");
                 logger.fatal("InputMismatchException catchée : Saisie incorrect, redémarrage du jeu");
                 System.out.println("Invalid input, letters and digits less than 1 are forbidden !");
                 System.out.println("A new secret code has been generated..");
-                ResearchChallenger.researchChallenger();
+                researchChallenger();
             }
         }
+    }
+
+    public void endGameDefeat() throws Exception {
+        System.out.printf("%n");
+        logger.info("La partie est terminée (Défaite, coups maximum atteint)");
+        System.out.println("The secret code was " + Arrays.toString(codeArray));
+        System.out.println("Defeat, you have reached the " + maxTry + " allowed try");
+        Menu menu = new Menu();
+        menu.endMenuResearchChallenger();
+    }
+
+    public void endGameVictory() throws Exception {
+        System.out.printf("%n");
+        logger.info("La partie est terminée (Victoire, code trouvé)");
+        System.out.println("Victory in only " + userTry + " try !");
+        Menu menu = new Menu();
+        menu.endMenuResearchChallenger();
     }
 }
