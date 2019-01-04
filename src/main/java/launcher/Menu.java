@@ -63,12 +63,13 @@ public class Menu {
                 if (selection2 == 1) {
                     logger.trace("Sélection du mode : CHALLENGER");
                     ResearchChallenger researchChallenger = new ResearchChallenger();
-                    researchChallenger.researchChallenger();
+                    researchChallenger.main();
                 }
 
                 if (selection2 == 2) {
                     logger.trace("Sélection du mode : DEFENSEUR");
-                    ResearchDefender.researchDefender();
+                    ResearchDefender researchDefender = new ResearchDefender();
+                    researchDefender.main();
                 }
 
                 if (selection2 == 3) {
@@ -238,7 +239,7 @@ public class Menu {
             if (selection3 == 1) {
                 logger.trace("L'utilisateur souhaite rejouer");
                 ResearchChallenger researchChallenger = new ResearchChallenger();
-                researchChallenger.researchChallenger();
+                researchChallenger.main();
             }
             if (selection3 == 2) {
                 logger.trace("L'utilisateur souhaite retourner au menu principal");
@@ -277,7 +278,8 @@ public class Menu {
             System.out.printf("%n");
             if (selection3 == 1) {
                 logger.trace("L'utilisateur souhaite rejouer");
-                ResearchDefender.researchDefender();
+                ResearchDefender researchDefender = new ResearchDefender();
+                researchDefender.main();
             }
             if (selection3 == 2) {
                 logger.trace("L'utilisateur souhaite retourner au menu principal");

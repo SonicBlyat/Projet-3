@@ -1,77 +1,50 @@
-2019-01-02 18:41:58.488 [main] INFO  launcher.Main - LANCEMENT DE L'APPLICATION..
-2019-01-02 18:41:58.563 [main] TRACE launcher.Menu - Affichage du menu principal
-2019-01-02 18:42:01.612 [main] TRACE launcher.Menu - Sélection du jeu : MASTERMIND
-2019-01-02 18:42:03.387 [main] TRACE launcher.Menu - Sélection du mode : DEFENSEUR
-2019-01-02 18:42:03.396 [main] INFO  jeux.MastermindDefender - LANCEMENT DU JEU : MASTERMIND DEFENSEUR
-2019-01-02 18:42:03.397 [main] TRACE jeux.MastermindDefender - 10 coups maximum
-2019-01-02 18:42:03.397 [main] TRACE jeux.MastermindDefender - Chiffres entre 1 et 4
-2019-01-02 18:42:03.398 [main] TRACE jeux.MastermindDefender - Taille du code : 4 chiffres
-2019-01-02 18:42:07.495 [main] INFO  jeux.MastermindDefender - Code secret généré par l'utilisateur
-2019-01-02 18:42:07.496 [main] INFO  jeux.MastermindDefender - L'ordinateur vient d'entrer sa saisie
-2019-01-02 18:42:07.507 [main] INFO  jeux.MastermindDefender - Affichage de la saisie ordinateur
-2019-01-02 18:42:07.509 [main] INFO  jeux.MastermindDefender - Traitement des indices par l'ordinateur
-2019-01-02 18:42:07.510 [main] TRACE jeux.MastermindDefender - Coups : 1
-2019-01-02 18:42:07.511 [main] INFO  jeux.MastermindDefender - Affichage de la saisie ordinateur
-2019-01-02 18:42:07.511 [main] INFO  jeux.MastermindDefender - Traitement des indices par l'ordinateur
-2019-01-02 18:42:07.512 [main] TRACE jeux.MastermindDefender - Coups : 2
-2019-01-02 18:42:07.512 [main] INFO  jeux.MastermindDefender - Affichage de la saisie ordinateur
-2019-01-02 18:42:07.512 [main] INFO  jeux.MastermindDefender - Traitement des indices par l'ordinateur
-2019-01-02 18:42:07.513 [main] TRACE jeux.MastermindDefender - Coups : 3
-2019-01-02 18:42:07.514 [main] INFO  jeux.MastermindDefender - Affichage de la saisie ordinateur
-2019-01-02 18:42:07.514 [main] INFO  jeux.MastermindDefender - Traitement des indices par l'ordinateur
-2019-01-02 18:42:07.515 [main] TRACE jeux.MastermindDefender - Coups : 4
-2019-01-02 18:42:07.516 [main] INFO  jeux.MastermindDefender - La partie est terminée (Défaite, l'ordinateur a trouvé le code)
-2019-01-02 18:42:07.517 [main] TRACE launcher.Menu - Affichage du menu de fin
-2019-01-02 18:43:29.287 [main] TRACE launcher.Menu - L'utilisateur souhaite retourner au menu principal
-2019-01-02 18:43:29.288 [main] TRACE launcher.Menu - Affichage du menu principal
-2019-01-02 18:43:31.140 [main] TRACE launcher.Menu - Sélection du jeu : MASTERMIND
-2019-01-02 18:43:32.525 [main] TRACE launcher.Menu - Sélection du mode : CHALLENGER
-2019-01-02 18:43:32.529 [main] INFO  jeux.MastermindChallenger - LANCEMENT DU JEU : MASTERMIND CHALLENGER
-2019-01-02 18:43:32.530 [main] TRACE jeux.MastermindChallenger - 10 coups maximum
-2019-01-02 18:43:32.530 [main] TRACE jeux.MastermindChallenger - Chiffres entre 1 et 4
-2019-01-02 18:43:32.530 [main] TRACE jeux.MastermindChallenger - Taille du code : 4 chiffres
-2019-01-02 18:43:32.530 [main] TRACE jeux.MastermindChallenger - Mode développeur : false
-2019-01-02 18:43:32.533 [main] INFO  jeux.MastermindChallenger - Code secret généré par l'ordinateur
-2019-01-02 18:43:38.520 [main] INFO  jeux.MastermindChallenger - L'utilisateur vient d'entrer sa saisie
-2019-01-02 18:43:38.521 [main] INFO  jeux.MastermindChallenger - Traitement de la saisie utilisateur..
-2019-01-02 18:43:38.521 [main] INFO  jeux.MastermindChallenger - Les indices ont été envoyés à l'utilisateur
-2019-01-02 18:43:38.521 [main] TRACE jeux.MastermindChallenger - Coups : 1
-2019-01-02 18:43:50.437 [main] INFO  jeux.MastermindChallenger - L'utilisateur vient d'entrer sa saisie
-2019-01-02 18:43:50.437 [main] INFO  jeux.MastermindChallenger - Traitement de la saisie utilisateur..
-2019-01-02 18:43:50.438 [main] INFO  jeux.MastermindChallenger - Les indices ont été envoyés à l'utilisateur
-2019-01-02 18:43:50.439 [main] TRACE jeux.MastermindChallenger - Coups : 2
-2019-01-02 18:44:01.234 [main] INFO  jeux.MastermindChallenger - L'utilisateur vient d'entrer sa saisie
-2019-01-02 18:44:01.235 [main] INFO  jeux.MastermindChallenger - Traitement de la saisie utilisateur..
-2019-01-02 18:44:01.235 [main] INFO  jeux.MastermindChallenger - Les indices ont été envoyés à l'utilisateur
-2019-01-02 18:44:01.235 [main] TRACE jeux.MastermindChallenger - Coups : 3
-2019-01-02 18:44:13.341 [main] INFO  jeux.MastermindChallenger - L'utilisateur vient d'entrer sa saisie
-2019-01-02 18:44:13.341 [main] INFO  jeux.MastermindChallenger - Traitement de la saisie utilisateur..
-2019-01-02 18:44:13.343 [main] INFO  jeux.MastermindChallenger - Les indices ont été envoyés à l'utilisateur
-2019-01-02 18:44:13.343 [main] TRACE jeux.MastermindChallenger - Coups : 4
-2019-01-02 18:44:53.083 [main] INFO  jeux.MastermindChallenger - L'utilisateur vient d'entrer sa saisie
-2019-01-02 18:44:53.083 [main] INFO  jeux.MastermindChallenger - Traitement de la saisie utilisateur..
-2019-01-02 18:44:53.083 [main] INFO  jeux.MastermindChallenger - Les indices ont été envoyés à l'utilisateur
-2019-01-02 18:44:53.084 [main] TRACE jeux.MastermindChallenger - Coups : 5
-2019-01-02 18:45:00.321 [main] INFO  jeux.MastermindChallenger - L'utilisateur vient d'entrer sa saisie
-2019-01-02 18:45:00.322 [main] INFO  jeux.MastermindChallenger - Traitement de la saisie utilisateur..
-2019-01-02 18:45:00.322 [main] INFO  jeux.MastermindChallenger - Les indices ont été envoyés à l'utilisateur
-2019-01-02 18:45:00.322 [main] TRACE jeux.MastermindChallenger - Coups : 6
-2019-01-02 18:45:06.096 [main] INFO  jeux.MastermindChallenger - L'utilisateur vient d'entrer sa saisie
-2019-01-02 18:45:06.096 [main] INFO  jeux.MastermindChallenger - Traitement de la saisie utilisateur..
-2019-01-02 18:45:06.096 [main] INFO  jeux.MastermindChallenger - Les indices ont été envoyés à l'utilisateur
-2019-01-02 18:45:06.096 [main] TRACE jeux.MastermindChallenger - Coups : 7
-2019-01-02 18:45:13.569 [main] INFO  jeux.MastermindChallenger - L'utilisateur vient d'entrer sa saisie
-2019-01-02 18:45:13.569 [main] INFO  jeux.MastermindChallenger - Traitement de la saisie utilisateur..
-2019-01-02 18:45:13.569 [main] INFO  jeux.MastermindChallenger - Les indices ont été envoyés à l'utilisateur
-2019-01-02 18:45:13.570 [main] TRACE jeux.MastermindChallenger - Coups : 8
-2019-01-02 18:45:19.299 [main] INFO  jeux.MastermindChallenger - L'utilisateur vient d'entrer sa saisie
-2019-01-02 18:45:19.300 [main] INFO  jeux.MastermindChallenger - Traitement de la saisie utilisateur..
-2019-01-02 18:45:19.300 [main] INFO  jeux.MastermindChallenger - Les indices ont été envoyés à l'utilisateur
-2019-01-02 18:45:19.300 [main] TRACE jeux.MastermindChallenger - Coups : 9
-2019-01-02 18:45:21.482 [main] INFO  jeux.MastermindChallenger - L'utilisateur vient d'entrer sa saisie
-2019-01-02 18:45:21.483 [main] INFO  jeux.MastermindChallenger - Traitement de la saisie utilisateur..
-2019-01-02 18:45:21.483 [main] INFO  jeux.MastermindChallenger - Les indices ont été envoyés à l'utilisateur
-2019-01-02 18:45:21.483 [main] TRACE jeux.MastermindChallenger - Coups : 10
-2019-01-02 18:45:21.483 [main] INFO  jeux.MastermindChallenger - La partie est terminée (Défaite, coups maximum atteint)
-2019-01-02 18:45:21.484 [main] TRACE launcher.Menu - Affichage du menu de fin
-2019-01-02 18:49:05.130 [main] TRACE launcher.Menu - ARRÊT DE L'APPLICATION
+2019-01-04 01:14:28.096 [main] INFO  launcher.Main - LANCEMENT DE L'APPLICATION..
+2019-01-04 01:14:28.155 [main] TRACE launcher.Menu - Affichage du menu principal
+2019-01-04 01:14:33.890 [main] TRACE launcher.Menu - Sélection du jeu : RECHERCHE +/-
+2019-01-04 01:14:34.854 [main] TRACE launcher.Menu - Sélection du mode : DEFENSEUR
+2019-01-04 01:14:34.862 [main] INFO  jeux.ResearchDefender - LANCEMENT DU JEU : RECHERCHE DEFENSEUR
+2019-01-04 01:14:34.863 [main] TRACE jeux.ResearchDefender - 10 coups maximum
+2019-01-04 01:14:34.863 [main] TRACE jeux.ResearchDefender - Chiffres entre 1 et 4
+2019-01-04 01:14:34.863 [main] TRACE jeux.ResearchDefender - Taille du code : 4 chiffres
+2019-01-04 01:14:36.215 [main] INFO  jeux.ResearchDefender - Code secret généré par l'utilisateur
+2019-01-04 01:14:36.216 [main] INFO  jeux.ResearchDefender - L'ordinateur vient d'entrer sa saisie
+2019-01-04 01:14:36.225 [main] INFO  jeux.ResearchDefender - Affichage de la saisie ordinateur
+2019-01-04 01:14:43.440 [main] INFO  jeux.ResearchDefender - Indices donnés par l'utilisateur
+2019-01-04 01:14:43.441 [main] INFO  jeux.ResearchDefender - Traitement des indices par l'ordinateur
+2019-01-04 01:14:43.441 [main] TRACE jeux.ResearchDefender - Coups : 1
+2019-01-04 01:14:43.442 [main] INFO  jeux.ResearchDefender - Affichage de la saisie ordinateur
+2019-01-04 01:14:50.191 [main] INFO  jeux.ResearchDefender - Indices donnés par l'utilisateur
+2019-01-04 01:14:50.191 [main] INFO  jeux.ResearchDefender - Traitement des indices par l'ordinateur
+2019-01-04 01:14:50.191 [main] TRACE jeux.ResearchDefender - Coups : 2
+2019-01-04 01:14:50.191 [main] INFO  jeux.ResearchDefender - Affichage de la saisie ordinateur
+2019-01-04 01:14:53.483 [main] INFO  jeux.ResearchDefender - Indices donnés par l'utilisateur
+2019-01-04 01:14:53.483 [main] INFO  jeux.ResearchDefender - Traitement des indices par l'ordinateur
+2019-01-04 01:14:53.483 [main] TRACE jeux.ResearchDefender - Coups : 3
+2019-01-04 01:14:53.483 [main] INFO  jeux.ResearchDefender - Affichage de la saisie ordinateur
+2019-01-04 01:14:55.586 [main] INFO  jeux.ResearchDefender - Indices donnés par l'utilisateur
+2019-01-04 01:14:55.587 [main] INFO  jeux.ResearchDefender - Traitement des indices par l'ordinateur
+2019-01-04 01:14:55.587 [main] TRACE jeux.ResearchDefender - Coups : 4
+2019-01-04 01:14:55.587 [main] INFO  jeux.ResearchDefender - La partie est terminée (Défaite, l'ordinateur a trouvé le code)
+2019-01-04 01:14:55.587 [main] TRACE launcher.Menu - Affichage du menu de fin
+2019-01-04 01:15:04.457 [main] TRACE launcher.Menu - L'utilisateur souhaite rejouer
+2019-01-04 01:15:04.457 [main] INFO  jeux.ResearchDefender - LANCEMENT DU JEU : RECHERCHE DEFENSEUR
+2019-01-04 01:15:04.457 [main] TRACE jeux.ResearchDefender - 10 coups maximum
+2019-01-04 01:15:04.457 [main] TRACE jeux.ResearchDefender - Chiffres entre 1 et 4
+2019-01-04 01:15:04.457 [main] TRACE jeux.ResearchDefender - Taille du code : 4 chiffres
+2019-01-04 01:15:09.894 [main] INFO  jeux.ResearchDefender - Code secret généré par l'utilisateur
+2019-01-04 01:15:09.894 [main] INFO  jeux.ResearchDefender - L'ordinateur vient d'entrer sa saisie
+2019-01-04 01:15:09.894 [main] INFO  jeux.ResearchDefender - Affichage de la saisie ordinateur
+2019-01-04 01:15:18.522 [main] INFO  jeux.ResearchDefender - Indices donnés par l'utilisateur
+2019-01-04 01:15:18.522 [main] INFO  jeux.ResearchDefender - Traitement des indices par l'ordinateur
+2019-01-04 01:15:18.522 [main] TRACE jeux.ResearchDefender - Coups : 1
+2019-01-04 01:15:18.522 [main] INFO  jeux.ResearchDefender - Affichage de la saisie ordinateur
+2019-01-04 01:15:23.504 [main] INFO  jeux.ResearchDefender - Indices donnés par l'utilisateur
+2019-01-04 01:15:23.505 [main] INFO  jeux.ResearchDefender - Traitement des indices par l'ordinateur
+2019-01-04 01:15:23.505 [main] TRACE jeux.ResearchDefender - Coups : 2
+2019-01-04 01:15:23.505 [main] INFO  jeux.ResearchDefender - Affichage de la saisie ordinateur
+2019-01-04 01:15:26.447 [main] INFO  jeux.ResearchDefender - Indices donnés par l'utilisateur
+2019-01-04 01:15:26.448 [main] INFO  jeux.ResearchDefender - Traitement des indices par l'ordinateur
+2019-01-04 01:15:26.456 [main] TRACE jeux.ResearchDefender - Coups : 3
+2019-01-04 01:15:26.456 [main] INFO  jeux.ResearchDefender - La partie est terminée (Défaite, l'ordinateur a trouvé le code)
+2019-01-04 01:15:26.457 [main] TRACE launcher.Menu - Affichage du menu de fin
+2019-01-04 01:15:32.588 [main] TRACE launcher.Menu - ARRÊT DE L'APPLICATION
