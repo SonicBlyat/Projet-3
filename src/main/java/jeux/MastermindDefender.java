@@ -5,22 +5,34 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.FileNotFoundException;
 import java.util.*;
 
 public class MastermindDefender {
 
-    public static void mastermindDefender() throws Exception {
+    private Scanner sc = new Scanner(System.in);
+    private Random r = new Random();
+    private ResourceBundle bundle;
+    private Logger logger = LogManager.getLogger();
+    private int botTry = 0;
+    private int maxTry;
+    private int maxNumber;
+    private int codeSize;
+    private int[] code;
+    private int codeScanner;
+    private List<Integer> inputBot;
+    private boolean[] codeUsed;
+    private boolean[] inputBotUsed;
+    private int numberOfCorrect;
+    private int numberOfPresent;
 
-        Scanner sc = new Scanner(System.in);
-        Random r = new Random();
-        ResourceBundle bundle = ResourceBundle.getBundle("config");
-        Logger logger = LogManager.getLogger();
+    public MastermindDefender() {
+        this.bundle = ResourceBundle.getBundle("config");
+        this.maxTry = Integer.parseInt(bundle.getString("maxTryMastermindDefender"));
+        this.maxNumber = Integer.parseInt(bundle.getString("maxNumber"));
+        this.codeSize = Integer.parseInt(bundle.getString("codeSize"));
+    }
 
-        int botTry = 0;                                                                   // CURRENT TRY
-        int maxTry = Integer.parseInt(bundle.getString("maxTryMastermindDefender"));  // NUMBER OF TRY ALLOWED
-        int maxNumber = Integer.parseInt(bundle.getString("maxNumber"));              // USE DIGITS BETWEEN 1 AND ...
-        int codeSize = Integer.parseInt(bundle.getString("codeSize"));                // CODE SIZE
+    public void main() throws Exception {
 
         logger.info("LANCEMENT DU JEU : MASTERMIND DEFENSEUR");
         logger.trace(maxTry + " coups maximum");
@@ -32,86 +44,37 @@ public class MastermindDefender {
         System.out.println("Enter a secret code !");
         System.out.printf("%n");
 
-        // USER CREATE THE SECRET CODE
         try {
-            int[] code = new int[codeSize];
-            int codeScanner = sc.nextInt();
-            for (int i = 0; i < codeSize; i++) {
-                code[i] = (int) (codeScanner / (Math.pow(10, (codeSize - i - 1)))) % 10;
-                if (code[i] < 1) {
-                    System.out.printf("%n");
-                    System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
-                    System.out.println("Please enter a valid input below :");
-                    logger.error("Saisie incorrect");
-                    codeScanner = sc.nextInt();
-                }
-                if (code[i] > maxNumber) {
-                    System.out.printf("%n");
-                    System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
-                    System.out.println("Please enter a valid input below :");
-                    logger.error("Saisie incorrect");
-                    codeScanner = sc.nextInt();
-                }
-            }
+
+            // USER CREATE THE SECRET CODE
+            createCode();
             logger.info("Code secret généré par l'utilisateur");
 
             // FIRST BOT INPUT
-            ArrayList<Integer> inputBot = new ArrayList<Integer>();
-            for (int i = 0; i < codeSize; i++) {
-                inputBot.add(r.nextInt(maxNumber) + 1);
-            }
+            firstBotInput();
             logger.info("L'ordinateur vient d'entrer sa saisie");
 
             while (botTry < maxTry) {
 
-                boolean[] codeUsed = new boolean[code.length];
-                boolean[] inputBotUsed = new boolean[inputBot.size()];
-                int numberOfCorrect = 0;
-                int numberOfPresent = 0;
+                codeUsed = new boolean[code.length];
+                inputBotUsed = new boolean[inputBot.size()];
+                numberOfCorrect = 0;
+                numberOfPresent = 0;
+
                 System.out.println("Proposition de l'ordinateur : " + StringUtils.join(inputBot, ""));
                 logger.info("Affichage de la saisie ordinateur");
 
-                // RESULT FOR BOT INPUT
-                for (int i = 0; i < code.length; i++) {
-                    if (code[i] == inputBot.get(i)) {
-                        numberOfCorrect++;
-                        codeUsed[i] = inputBotUsed[i] = true;
-                    }
-                }
+                giveClues();
 
-                for (int i = 0; i < code.length; i++) {
-                    for (int j = 0; j < inputBot.size(); j++) {
-                        if (!codeUsed[i] && !inputBotUsed[j] && code[i] == inputBot.get(j)) {
-                            numberOfPresent++;
-                            codeUsed[i] = inputBotUsed[j] = true;
-                            break;
-                        }
-                    }
-                }
-
-                for (int i = 0; i < code.length; i++) {
-                    for (int j = 0; j < inputBot.size(); j++) {
-                        boolean correct = code[i] == inputBot.get(i);
-                        boolean present = !codeUsed[i] && !inputBotUsed[j] && code[i] == inputBot.get(j);
-                        if (correct) {
-                            inputBot.get(i);                            // IF i IS CORRECT, KEEP i ON THIS INDEX
-                        } else if (present) {
-                            for (j = 0; j < inputBot.size(); j++) {
-                                if (inputBot.indexOf(!correct) == j) {  // IF i IS PRESENT AND NO CORRECT DIGIT ON INDEX j
-                                    inputBot.set(j, i);                 // MOVE i TO INDEX j TO TRY IF i IS CORRECT
-                                }
-                            }
-                        } else {
-                            inputBot.set(i, r.nextInt(maxNumber) + 1);  // IF !CORRECT && !PRESENT = NEW DIGIT
-                        }
-                    }
-                }
+                nextBotInput();
                 logger.info("Traitement des indices par l'ordinateur");
 
                 // CLUES
                 System.out.println(numberOfCorrect + " Correct");
                 System.out.println(numberOfPresent + " Present but wrong position");
+
                 System.out.printf("%n");
+
                 botTry++;
                 logger.trace("Coups : " + botTry);
 
@@ -134,7 +97,89 @@ public class MastermindDefender {
             System.out.printf("%n");
             logger.fatal("InputMismatchException catchée : Saisie incorrect, redémarrage du jeu");
             System.out.println("Invalid input, letters and digits less than 1 are forbidden !");
-            MastermindDefender.mastermindDefender();
+            main();
+        }
+    }
+
+    /**
+     * L'utilisateur genere le code que l'ordinateur doit trouver
+     */
+    private void createCode() {
+        code = new int[codeSize];
+        codeScanner = sc.nextInt();
+        for (int i = 0; i < codeSize; i++) {
+            code[i] = (int) (codeScanner / (Math.pow(10, (codeSize - i - 1)))) % 10;
+            if (code[i] < 1) {
+                System.out.printf("%n");
+                System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
+                System.out.println("Please enter a valid input below :");
+                logger.error("Saisie incorrect");
+                codeScanner = sc.nextInt();
+            }
+            if (code[i] > maxNumber) {
+                System.out.printf("%n");
+                System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
+                System.out.println("Please enter a valid input below :");
+                logger.error("Saisie incorrect");
+                codeScanner = sc.nextInt();
+            }
+        }
+    }
+
+    /**
+     * L'ordinateur prend une combinaison aleatoire dans la liste
+     */
+    private void firstBotInput() {
+        inputBot = new ArrayList<Integer>();
+        for (int i = 0; i < codeSize; i++) {
+            inputBot.add(r.nextInt(maxNumber) + 1);
+        }
+    }
+
+    /**
+     * Compare le code secret et la saisie de l'ordinateur puis traite les indices
+     */
+    private void giveClues() {
+        // RESULT FOR BOT INPUT
+        for (int i = 0; i < code.length; i++) {
+            if (code[i] == inputBot.get(i)) {
+                numberOfCorrect++;
+                codeUsed[i] = inputBotUsed[i] = true;
+            }
+        }
+
+        for (int i = 0; i < code.length; i++) {
+            for (int j = 0; j < inputBot.size(); j++) {
+                if (!codeUsed[i] && !inputBotUsed[j] && code[i] == inputBot.get(j)) {
+                    numberOfPresent++;
+                    codeUsed[i] = inputBotUsed[j] = true;
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * Retire de la liste les combinaisons ayant les meme indices que la précédente
+     * Permet d'affiner la liste et de reduire le nombre de possibilites
+     */
+    private void nextBotInput() {
+        for (int i = 0; i < code.length; i++) {
+            for (int j = 0; j < inputBot.size(); j++) {
+                boolean correct = code[i] == inputBot.get(i);
+                boolean present = !codeUsed[i] && !inputBotUsed[j] && code[i] == inputBot.get(j);
+                if (correct) {
+                    inputBot.get(i);                            // IF i IS CORRECT, KEEP i ON THIS INDEX
+                } else if (present) {
+                    for (j = 0; j < inputBot.size(); j++) {
+                        if (inputBot.indexOf(!correct) == j) {  // IF i IS PRESENT AND NO CORRECT DIGIT ON INDEX j
+                            inputBot.set(j, i);                 // MOVE i TO INDEX j TO TRY IF i IS CORRECT
+                        }
+                    }
+                } else {
+                    inputBot.set(i, r.nextInt(maxNumber) + 1);  // IF !CORRECT && !PRESENT = NEW DIGIT
+                }
+            }
         }
     }
 }

@@ -74,7 +74,8 @@ public class Menu {
 
                 if (selection2 == 3) {
                     logger.trace("Sélection du mode : DUEL");
-                    ResearchDuel.researchDuel();
+                    ResearchDuel researchDuel = new ResearchDuel();
+                    researchDuel.main();
                 }
 
                 if (selection2 == 4) {
@@ -107,12 +108,14 @@ public class Menu {
 
                 if (selection2 == 1) {
                     logger.trace("Sélection du mode : CHALLENGER");
-                    MastermindChallenger.mastermindChallenger();
+                    MastermindChallenger mastermindChallenger = new MastermindChallenger();
+                    mastermindChallenger.main();
                 }
 
                 if (selection2 == 2) {
                     logger.trace("Sélection du mode : DEFENSEUR");
-                    MastermindDefender.mastermindDefender();
+                    MastermindDefender mastermindDefender = new MastermindDefender();
+                    mastermindDefender.main();
                 }
 
                 if (selection2 == 3) {
@@ -160,7 +163,8 @@ public class Menu {
             System.out.printf("%n");
             if (selection3 == 1) {
                 logger.trace("L'utilisateur souhaite rejouer");
-                MastermindChallenger.mastermindChallenger();
+                MastermindChallenger mastermindChallenger = new MastermindChallenger();
+                mastermindChallenger.main();
             }
             if (selection3 == 2) {
                 logger.trace("L'utilisateur souhaite retourner au menu principal");
@@ -199,7 +203,8 @@ public class Menu {
             System.out.printf("%n");
             if (selection3 == 1) {
                 logger.trace("L'utilisateur souhaite rejouer");
-                MastermindDefender.mastermindDefender();
+                MastermindDefender mastermindDefender = new MastermindDefender();
+                mastermindDefender.main();
             }
             if (selection3 == 2) {
                 logger.trace("L'utilisateur souhaite retourner au menu principal");
@@ -319,7 +324,8 @@ public class Menu {
             System.out.printf("%n");
             if (selection3 == 1) {
                 logger.trace("L'utilisateur souhaite rejouer");
-                ResearchDuel.researchDuel();
+                ResearchDuel researchDuel = new ResearchDuel();
+                researchDuel.main();
             }
             if (selection3 == 2) {
                 logger.trace("L'utilisateur souhaite retourner au menu principal");

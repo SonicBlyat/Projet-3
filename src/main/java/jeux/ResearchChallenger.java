@@ -79,6 +79,10 @@ public class ResearchChallenger {
         }
     }
 
+    /**
+     * Recupere la saisie de l'utilisateur dans un tableau de type entier
+     * @throws InputMismatchException (Interdit les lettres et les chiffres inferieurs à 1)
+     */
     private void getUserInput() throws Exception {
         try {
             input = new int[codeSize];
@@ -110,6 +114,9 @@ public class ResearchChallenger {
         }
     }
 
+    /**
+     * Compare le code secret et la saisie utilisateur puis genere les indices
+      */
     private void compare() {
         StringBuilder total = new StringBuilder();
         for (int i = 0; i < codeSize; i++) {
@@ -129,6 +136,9 @@ public class ResearchChallenger {
         result = total.toString();
     }
 
+    /**
+     * Affiche la solution puis le menu de fin en cas de defaite de l'utilisateur
+     */
     private void endGameDefeat() throws Exception {
         System.out.printf("%n");
         logger.info("La partie est terminée (Défaite, coups maximum atteint)");
@@ -138,6 +148,9 @@ public class ResearchChallenger {
         menu.endMenuResearchChallenger();
     }
 
+    /**
+     * Affiche le compteur de coups puis le menu de fin en cas de victoire de l'utilisateur
+     */
     private void endGameVictory() throws Exception {
         System.out.printf("%n");
         logger.info("La partie est terminée (Victoire, code trouvé)");

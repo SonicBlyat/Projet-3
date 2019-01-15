@@ -4,6 +4,12 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Classe principale qui permet le lancement de l'application
+ * Modification du fichier de configuration en cas de passage d'un argument dev
+ *
+ * @Author Axel Allain
+ */
 public class Main {
 
     public static void main(String[] args) throws Exception {

@@ -74,7 +74,10 @@ public class ResearchDefender {
         }
     }
 
-    private void createCode() {
+    /**
+     * L'utilisateur genere le code que l'ordinateur doit trouver
+     */
+    public void createCode() {
         int[] code = new int[codeSize];
         int inputCode = sc.nextInt();
         for (int i = 0; i < codeSize; i++) {
@@ -96,6 +99,10 @@ public class ResearchDefender {
         }
     }
 
+    /**
+     * Affichage de la saisie de l'ordinateur
+     * Recupere les indices entres par l'utilisateur
+     */
     private void getClues() {
         for (int i = 0; i < codeSize; i++) {
             System.out.printf("%n");
@@ -111,6 +118,10 @@ public class ResearchDefender {
         }
     }
 
+    /**
+     * L'ordinateur compare sa saisie aux indices qui lui ont ete donnes
+     * Prepare la prochaine saisie de l'ordinateur
+     */
     private void compare() {
         for (int i = 0; i < reponse.length; i++) {
             if (reponse[i].equals("=")) {
@@ -129,13 +140,21 @@ public class ResearchDefender {
         }
     }
 
-    private void firstBotInput() {
+    /**
+     * Premier essai de l'ordinateur
+     * Il est genere aléatoirement d'une taille codeSize et de chiffres allant de 1 à maxNumber
+     */
+    public void firstBotInput() {
         tryBot = new ArrayList<Integer>();
         for (int i = 0; i < codeSize; i++) {
             tryBot.add(r.nextInt(maxNumber) + 1);
         }
     }
 
+    /**
+     * Affichage du menu de defaite en cas de victoire de l'ordinateur
+     * Affiche le compteur de coups de l'ordinateur
+     */
     private void endGameDefeat () throws Exception {
         System.out.printf("%n");
         logger.info("La partie est terminée (Défaite, l'ordinateur a trouvé le code)");
@@ -144,6 +163,9 @@ public class ResearchDefender {
         menu.endMenuResearchDefender();
     }
 
+    /**
+     * Affichage du menu de victoire en cas de defaite de l'ordinateur
+     */
     private void endGameVictory () throws Exception {
         System.out.printf("%n");
         logger.info("La partie est terminée (Victoire, l'ordinateur n'a pas trouvé le code)");

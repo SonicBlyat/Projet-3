@@ -1,5 +1,6 @@
 package jeux;
 
+import code.RandomCode;
 import launcher.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -10,18 +11,31 @@ import java.util.*;
 
 public class MastermindChallenger {
 
-    public static void mastermindChallenger() throws Exception {
+    private Scanner sc = new Scanner(System.in);
+    private Random r = new Random();
+    private ResourceBundle bundle = ResourceBundle.getBundle("config");
+    private Logger logger = LogManager.getLogger();
+    private int userTry = 0;
+    private int maxTry;
+    private int maxNumber;
+    private int codeSize;
+    private boolean devMode;
+    private RandomCode randomCode;
+    private int[] code;
+    private int[] input;
+    private int inputScanner;
+    private int numberOfCorrect;
+    private int numberOfPresent;
 
-        Scanner sc = new Scanner(System.in);
-        Random r = new Random();
-        ResourceBundle bundle = ResourceBundle.getBundle("config");
-        Logger logger = LogManager.getLogger();
+    public MastermindChallenger() {
+        this.maxTry = Integer.parseInt(bundle.getString("maxTryMastermindChallenger")); // NUMBER OF TRY ALLOWED
+        this.maxNumber = Integer.parseInt(bundle.getString("maxNumber")); // USE DIGITS BETWEEN 1 AND..
+        this.codeSize = Integer.parseInt(bundle.getString("codeSize")); // CODE SIZE
+        this.devMode = Boolean.parseBoolean(bundle.getString("devMode")); // DEVELOPER MODE
+        this.randomCode = new RandomCode(maxNumber, codeSize);
+    }
 
-        int userTry = 0;                                                                    // CURRENT TRY
-        int maxTry = Integer.parseInt(bundle.getString("maxTryMastermindChallenger"));  // NUMBER OF TRY ALLOWED
-        int maxNumber = Integer.parseInt(bundle.getString("maxNumber"));                // USE DIGITS BETWEEN 1 AND ...
-        int codeSize = Integer.parseInt(bundle.getString("codeSize"));                  // CODE SIZE
-        boolean devMode = Boolean.parseBoolean(bundle.getString("devMode"));            // DEVELOPER MODE
+    public void main() throws Exception {
 
         logger.info("LANCEMENT DU JEU : MASTERMIND CHALLENGER");
         logger.trace(maxTry + " coups maximum");
@@ -35,14 +49,11 @@ public class MastermindChallenger {
         System.out.printf("%n");
 
         // RANDOM SECRET CODE
-        ArrayList<Integer> code = new ArrayList<Integer>();
-        for (int i = 0; i < codeSize; i++) {
-            code.add(r.nextInt(maxNumber) + 1);
-        }
+        code = randomCode.randomCode();
         logger.info("Code secret généré par l'ordinateur");
 
         if (devMode) {
-            System.out.println("[DEV MODE] CODE : " + code);
+            System.out.println("[DEV MODE] CODE : " + Arrays.toString(code));
             System.out.printf("%n");
         }
 
@@ -50,55 +61,19 @@ public class MastermindChallenger {
 
             try {
                 // USER INPUT
-                int[] input = new int[codeSize];
-                int inputScanner = sc.nextInt();
-                for (int i = 0; i < codeSize; i++) {
-                    input[i] = (int) (inputScanner / (Math.pow(10, (codeSize - i - 1)))) % 10;
-                    if (input[i] < 1) {
-                        System.out.printf("%n");
-                        System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
-                        System.out.println("Please enter a valid input below :");
-                        logger.error("Saisie incorrect");
-                        inputScanner = sc.nextInt();
-                    }
-                    if (input[i] > maxNumber) {
-                        System.out.printf("%n");
-                        System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
-                        System.out.println("Please enter a valid input below :");
-                        logger.error("Saisie incorrect");
-                        inputScanner = sc.nextInt();
-                    }
-                }
+                userInput();
                 logger.info("L'utilisateur vient d'entrer sa saisie");
 
                 // RESULT FOR USER INPUT
-                boolean[] codeUsed = new boolean[code.size()];
-                boolean[] inputUsed = new boolean[input.length];
-                int numberOfCorrect = 0;
-                int numberOfPresent = 0;
-
-                for (int i = 0; i < code.size(); i++) {
-                    if (code.get(i) == input[i]) {
-                        numberOfCorrect++;
-                        codeUsed[i] = inputUsed[i] = true;
-                    }
-                }
-
-                for (int i = 0; i < code.size(); i++) {
-                    for (int j = 0; j < input.length; j++) {
-                        if (!codeUsed[i] && !inputUsed[j] && code.get(i) == input[j]) {
-                            numberOfPresent++;
-                            codeUsed[i] = inputUsed[j] = true;
-                            break;
-                        }
-                    }
-                }
+                compare();
                 logger.info("Traitement de la saisie utilisateur..");
 
                 // CLUES
                 System.out.println(numberOfCorrect + " Correct");
                 System.out.println(numberOfPresent + " Present but wrong position");
+
                 System.out.printf("%n");
+
                 userTry++;
                 logger.info("Les indices ont été envoyés à l'utilisateur");
                 logger.trace("Coups : " + userTry);
@@ -121,7 +96,63 @@ public class MastermindChallenger {
                 logger.fatal("InputMismatchException catchée : Saisie incorrect, redémarrage du jeu");
                 System.out.println("Invalid input, letters and digits less than 1 are forbidden !");
                 System.out.println("A new secret code has been generated..");
-                MastermindChallenger.mastermindChallenger();
+                main();
+            }
+        }
+    }
+
+    /**
+     * Recupere la saisie de l'utilisateur dans un tableau de type entier
+     */
+    private void userInput() {
+        input = new int[codeSize];
+        inputScanner = sc.nextInt();
+        for (int i = 0; i < codeSize; i++) {
+            input[i] = (int) (inputScanner / (Math.pow(10, (codeSize - i - 1)))) % 10;
+            if (input[i] < 1) {
+                System.out.printf("%n");
+                System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
+                System.out.println("Please enter a valid input below :");
+                logger.error("Saisie incorrect");
+                inputScanner = sc.nextInt();
+            }
+            if (input[i] > maxNumber) {
+                System.out.printf("%n");
+                System.out.println("Invalid input : Enter " + codeSize + " digits between 1 and " + maxNumber);
+                System.out.println("Please enter a valid input below :");
+                logger.error("Saisie incorrect");
+                inputScanner = sc.nextInt();
+            }
+        }
+    }
+
+    /**
+     * Compare le code secret et la saisie de l'utilisateur
+     * Stockage des bien places dans numberOfCorrect
+     * Stockage des presents dans numberOfPresent
+     *
+     * Les tableaux de type boolean permettent d'eviter les doublons et de traiter chaque chiffre un à un
+     */
+    private void compare() {
+        boolean[] codeUsed = new boolean[code.length];
+        boolean[] inputUsed = new boolean[input.length];
+        numberOfCorrect = 0;
+        numberOfPresent = 0;
+
+        for (int i = 0; i < code.length; i++) {
+            if (code[i] == input[i]) {
+                numberOfCorrect++;
+                codeUsed[i] = inputUsed[i] = true;
+            }
+        }
+
+        for (int i = 0; i < code.length; i++) {
+            for (int j = 0; j < input.length; j++) {
+                if (!codeUsed[i] && !inputUsed[j] && code[i] == input[j]) {
+                    numberOfPresent++;
+                    codeUsed[i] = inputUsed[j] = true;
+                    break;
+                }
             }
         }
     }
