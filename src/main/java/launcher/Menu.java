@@ -120,7 +120,8 @@ public class Menu {
 
                 if (selection2 == 3) {
                     logger.trace("Sélection du mode : DUEL");
-                    MastermindDuel.mastermindDuel();
+                    MastermindDuel mastermindDuel = new MastermindDuel();
+                    mastermindDuel.main();
                 }
 
                 if (selection2 == 4) {
@@ -364,7 +365,8 @@ public class Menu {
             System.out.printf("%n");
             if (selection3 == 1) {
                 logger.trace("L'utilisateur souhaite rejouer");
-                MastermindDuel.mastermindDuel();
+                MastermindDuel mastermindDuel = new MastermindDuel();
+                mastermindDuel.main();
             }
             if (selection3 == 2) {
                 logger.trace("L'utilisateur souhaite retourner au menu principal");
