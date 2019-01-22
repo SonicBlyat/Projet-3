@@ -80,7 +80,7 @@ public class MastermindChallenger {
 
                 if (userTry == maxTry) {
                     logger.info("La partie est terminée (Défaite, coups maximum atteint)");
-                    System.out.println("The secret code was " + StringUtils.join(code, ""));
+                    System.out.println("The secret code was " + Arrays.toString(code));
                     System.out.println("Defeat, you have reached the " + maxTry + " allowed try");
                     Menu menu = new Menu();
                     menu.endMenuMastermindChallenger();
